@@ -45,9 +45,9 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
-img, video { display: block; max-width: 100%; }
+img, video { display: block; max-width: 100%; height: auto; }
 h1, h2, h3, p, ul, figure { margin: 0; }
-ul { padding: 0; list-style: none; }
+ul, ol { padding: 0; list-style: none; }
 a { color: inherit; }
 ::selection { background: var(--accent); color: #fff; }
 :focus-visible { outline: 3px solid var(--accent-hi); outline-offset: 3px; }

@@ -29,9 +29,11 @@ window.DRAKO_MAQUINAS = [
   { id: "3610", nome: "Simulador de escada", grupo: "cardio", musculos: "Cardio, glúteos e panturrilhas",
     texto: "Degraus que não acabam. Pouco tempo, muito gasto calórico.", destaque: false, confirmar: true },
   { id: "3625", nome: "Halteres Elite Drako", grupo: "pesos", musculos: "Corpo todo",
-    texto: "Halteres redondos com o dragão da casa estampado, em pares até 40 kg.", destaque: true, confirmar: false },
+    texto: "Halteres redondos com o dragão da casa estampado. No salão há pares de 35, 40 e 45 kg.", destaque: true, confirmar: false },
   { id: "3573", nome: "Anilhas de 20 kg", grupo: "pesos", musculos: "Corpo todo",
     texto: "Anilhas de borracha vermelhas e pretas, com pegada vazada, organizadas em árvores pelo salão.", destaque: false, confirmar: false },
+  { id: "3598", nome: "Barras e puxadores", grupo: "pesos", musculos: "Costas, braços e ombros",
+    texto: "Barra W, puxadores de remada e pegadores de triângulo: os acessórios para polia e barra livre.", destaque: false, confirmar: false },
   { id: "3626", nome: "Suporte de barras", grupo: "pesos", musculos: "Corpo todo",
     texto: "Barras retas, W e de pegada neutra, todas à mão num só lugar.", destaque: false, confirmar: false }
 ];
