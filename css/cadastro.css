@@ -19,7 +19,7 @@
 .mat__lead { margin-top: 20px; max-width: 46ch; font-size: var(--step-lead); line-height: 1.4; color: var(--ink); }
 
 /* ---------- tipo: controle segmentado (botões com aria-pressed) ---------- */
-.mat__tipos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: 32px; padding: 6px; background: var(--surface); }
+.mat__tipos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin-top: 32px; padding: 6px; background: var(--surface); }
 .mat__tipos[hidden] { display: none; }
 .mat__tipos button {
   --c: 12px; min-height: 52px; padding: 0 12px; border: 0; cursor: pointer;
@@ -160,7 +160,7 @@
   .mat-espaco__item--grande img { --c: 24px; aspect-ratio: 4 / 3; height: auto; min-height: 0; }
 }
 @media (max-width: 560px) {
-  .mat__tipos { gap: 4px; padding: 4px; }
+  .mat__tipos { gap: 4px; padding: 4px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .mat__tipos button { --c: 9px; padding: 0 6px; font-size: var(--step-small); min-height: 50px; }
   .mat__plano { padding: 20px 16px; }
   .campos { grid-template-columns: 1fr; }

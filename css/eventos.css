@@ -85,7 +85,13 @@
 .ev-cap__videos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: var(--g); margin-top: 48px; }
 
 .ev-arte { max-width: 380px; margin-left: auto; }
-.ev-arte .ev-gal__btn { --c: 26px; aspect-ratio: 9 / 16; }
+.ev-arte .ev-gal__btn { --c: 26px; aspect-ratio: var(--ar, 9 / 16); }
+/* graphic arts carry text to the edges: frame them inside the hexagon instead of cropping */
+.ev-arte .ev-gal__btn, .ev-gal--artes .ev-gal__btn { aspect-ratio: auto; height: auto; padding: 12px calc(var(--c) + 4px); background: var(--surface-2); }
+.ev-arte .ev-gal__btn img, .ev-gal--artes .ev-gal__btn img { height: auto; aspect-ratio: var(--ar, auto); object-fit: contain; }
+.ev-arte .ev-gal__btn:hover img, .ev-gal--artes .ev-gal__btn:hover img { transform: none; }
+.ev-gal--artes .ev-gal__item { height: auto; }
+.ev-gal--artes .ev-gal__btn img { aspect-ratio: var(--r, 0.8); }
 .ev-arte figcaption { margin-top: 12px; font-size: var(--step-small); color: var(--muted); text-align: center; }
 
 /* ---------- photo story ---------- */

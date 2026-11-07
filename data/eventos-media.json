@@ -41,7 +41,7 @@
       "titulo": "Drako 30: o primeiro rugido",
       "data": "2026-08-30",
       "status": "realizado",
-      "resumo": "Manhã de desafios, sorteios e experiência na Elite Drako Gym, no domingo 30 de agosto, a partir das 8h30. Alunos e convidados participaram em duplas, com desafios separados por nível (iniciante, intermediário e avançado), agachamentos e prancha, e terminaram no pódio Drako 30. O sorteio teve três prêmios: um mês de consultoria online, um kit Drako e um mês de academia grátis.",
+      "resumo": "Manhã de desafios no domingo, 30 de agosto, a partir das 8h30. Alunos e convidados encararam os desafios em dupla, separados por nível, e terminaram no pódio Drako 30. Teve sorteio com prêmios no final.",
       "fotos": [
         {
           "src": "assets/img/eventos/drako-30/02-aquecimento-turma.jpg",
@@ -127,13 +127,47 @@
     {
       "id": "novembro-azul",
       "titulo": "Novembro Azul",
-      "data": "2026-11",
+      "data": "2026-11-15",
       "status": "em-breve",
-      "resumo": "Ação do Novembro Azul, mês de cuidado com a saúde do homem. Data e programação a confirmar com a academia.",
-      "fotos": [],
+      "resumo": "Domingo, 15 de novembro, a Elite Drako abre as portas para o Novembro Azul, o mês de cuidado com a saúde do homem. Tem café da manhã, palestra com o médico Dr. Jailton Campos e campeonato com categorias e premiações.",
+      "fotos": [
+        {
+          "src": "assets/img/eventos/novembro-azul/02-programacao.jpg",
+          "alt": "Programação do dia 15/11: café da manhã, palestra com o médico Dr. Jailton Campos e campeonato com categorias e premiações",
+          "w": 1080,
+          "h": 1350
+        },
+        {
+          "src": "assets/img/eventos/novembro-azul/03-promo-59-90.jpg",
+          "alt": "Preço promocional: 1 mês por R$ 59,90, válido para quem estiver presente no dia do evento, 15/11",
+          "w": 1080,
+          "h": 1350
+        },
+        {
+          "src": "assets/img/eventos/novembro-azul/04-save-the-date.jpg",
+          "alt": "Save the date em forma de ingresso: Novembro Azul, 15.11.26, evento aberto ao público",
+          "w": 1080,
+          "h": 1350
+        },
+        {
+          "src": "assets/img/eventos/novembro-azul/05-salve-a-data.jpg",
+          "alt": "Salve a data: 15/11, Novembro Azul, Treinar. Cuidar. Viver.",
+          "w": 1080,
+          "h": 1350
+        }
+      ],
       "videos": [],
-      "fonte_drive": [],
-      "confirmar": "Data, formato e público do evento."
+      "fonte_drive": [
+        "Artes enviadas pelo cliente no chat em 07/11/2026"
+      ],
+      "arte": {
+        "src": "assets/img/eventos/novembro-azul/01-treinar-cuidar-viver.jpg",
+        "alt": "Arte do Novembro Azul: Treinar. Cuidar. Viver. 15 de novembro, evento aberto ao público, sobre foto azulada de uma máquina do salão",
+        "w": 1080,
+        "h": 1350,
+        "tipo": "divulgacao"
+      },
+      "confirmar_horario": "Horário de início não informado."
     }
   ]
 }

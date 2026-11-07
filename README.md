@@ -1,7 +1,7 @@
 # Elite Drako Gym — site
 
 Site da Elite Drako Gym (Valente-BA): home cinematográfica com tour 3D, loja com carrinho,
-cadastros (matrícula, visita, Drako 30) e painel da equipe. HTML, CSS e JavaScript puros,
+cadastros (matrícula, visita, Drako 30, Novembro Azul) e painel da equipe. HTML, CSS e JavaScript puros,
 sem etapa de build: funciona em qualquer hospedagem estática (GitHub Pages, Vercel, Netlify).
 
 ## Páginas
@@ -10,16 +10,17 @@ sem etapa de build: funciona em qualquer hospedagem estática (GitHub Pages, Ver
 | --- | --- |
 | `index.html` | Abertura em tela cheia, a história (galpão → academia) com o comparador projeto 3D × realidade, tour 3D com as fotos de outubro, salão em panorâmica giratória, o arsenal de máquinas animadas, anilha 3D, horários, vitrine, planos, Drako 30, dúvidas |
 | `historia.html` | Linha do tempo completa: prédio, galpão vazio, projeto 3D, chegada das máquinas, montagem, inauguração, Drako 30 e a academia em outubro |
-| `maquinas.html` | Todas as máquinas recortadas e tratadas, filtro por grupo muscular e ficha de cada uma com a foto no salão |
+| `maquinas.html` | Todas as máquinas recortadas e tratadas, um texto curto sobre a Cimerian (marca da maioria das máquinas), filtro por grupo muscular e ficha de cada uma com a foto no salão |
 | `loja.html` | Catálogo com filtros (planos, serviços, roupas, eventos), carrinho e envio do pedido |
-| `cadastro.html` | Matrícula, visita guiada ou lista do Drako 30, num formulário só |
+| `cadastro.html` | Matrícula, visita guiada, lista do Drako 30 ou do Novembro Azul, num formulário só |
 | `admin.html` | Painel da equipe: login, cadastros e pedidos, mudança de status, busca e exportação em planilha (CSV) |
 
 ## Arquivos que você edita
 
 - **`config.js`** — WhatsApp, Instagram, endereço e as chaves do Supabase. É o único arquivo obrigatório.
 - **`data/produtos.js`** — produtos, preços, fotos e categorias da loja.
-- **`data/maquinas.js`** — nome, grupo muscular e descrição de cada máquina.
+- **`data/maquinas.js`** — nome, grupo muscular, descrição e, quando o logotipo aparece na foto, a marca (`marca: "Cimerian"`) de cada máquina.
+- **`data/eventos-media.json`** e **`data/eventos.js`** — datas, fotos e programação dos eventos.
 
 ## Como os pedidos e cadastros funcionam
 
@@ -61,9 +62,20 @@ anilha vira foto. As legendas de cada lugar estão no próprio `index.html` (blo
 - **Datas da linha do tempo**: fevereiro (obra/projeto), junho (chegada), julho (montagem e
   inauguração em 18/07), 30/08 (Drako 30) e outubro (fotos atuais). Confirmar o mês da chegada.
 - **Visita guiada grátis**: confirmar se a academia oferece.
-- **WhatsApp e endereço**: preencher em `config.js`.
+- **WhatsApp**: preencher em `config.js`. O endereço já está lá: Rodovia BA-120, 601, 1º andar,
+  Antônio Lopes, Valente-BA, CEP 48891-080 (cadastro da Receita Federal e post de inauguração).
+  O pino do mapa e a rota usam o GPS -11.412894, -39.458506; vale conferir se ele cai na entrada do prédio.
 - **Data da próxima edição do Drako 30**.
+- **Horário do Novembro Azul** (domingo, 15/11/2026): o site diz que o horário sai no Instagram.
 - **Fotos de pessoas**: o atleta e a equipe aparecem no site; confirme que todos autorizaram o uso de imagem.
+
+## Máquinas e marcas
+
+A maioria das máquinas é Cimerian (fabricante brasileira de Londrina-PR, fundada em 2018), com
+alguns aparelhos de outras marcas. Os fatos sobre a Cimerian em `maquinas.html` vêm do site e do
+catálogo da própria marca (cimerianofficial.com) e do cadastro da empresa; frases como "maior
+fabricante" ficaram de fora por não terem fonte independente. No balcão a academia vende produtos
+BOLD e de outras marcas; a loja só cita isso em texto, sem foto de produto de terceiros.
 
 ## Origem das imagens
 

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Matrícula e visita · Elite Drako Gym</title>
-<meta name="description" content="Faça sua matrícula na Elite Drako Gym, agende uma visita guiada ou entre na lista do próximo Drako 30.">
+<meta name="description" content="Faça sua matrícula na Elite Drako Gym, agende uma visita guiada, entre na lista do próximo Drako 30 ou participe do Novembro Azul, no domingo, 15 de novembro.">
 <meta name="theme-color" content="#0b0b0b">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -111,6 +111,7 @@
       <button type="button" data-tipo="matricula" aria-pressed="true">Matrícula</button>
       <button type="button" data-tipo="visita" aria-pressed="false">Visita guiada</button>
       <button type="button" data-tipo="drako30" aria-pressed="false">Drako 30</button>
+      <button type="button" data-tipo="novembro-azul" aria-pressed="false">Novembro Azul</button>
     </div>
 
     <section class="mat__plano rise" aria-label="Resumo do que você está pedindo" data-plano aria-live="polite"></section>
@@ -156,7 +157,7 @@
         <fieldset class="passo" data-passo="2" hidden>
           <legend class="passo__titulo" tabindex="-1" data-titulo-passo2>Seu treino</legend>
           <div class="campos">
-            <div class="campo" data-so="matricula visita">
+            <div class="campo" data-so="matricula visita novembro-azul">
               <label for="c-obj">Objetivo</label>
               <select id="c-obj" name="objetivo" aria-describedby="e-obj">
                 <option value="">Escolha</option>
@@ -249,7 +250,7 @@
       </div>
       <div>
         <h2>Onde</h2>
-        <p data-endereco-curto>Rua Eraldo Lopes, Valente, Bahia</p>
+        <p data-endereco-curto>Rodovia BA-120, 601, 1º andar, Antônio Lopes, Valente-BA</p>
         <p><a href="./#como-chegar">Como chegar</a></p>
       </div>
       <div>
@@ -264,7 +265,7 @@
   <h2 id="espaco-title" class="reveal">O que te espera</h2>
   <ul class="mat-espaco__fotos" role="list">
     <li class="mat-espaco__item mat-espaco__item--grande reveal"><img src="assets/img/tour/salao.jpg" alt="Salão de musculação com o neon branco e vermelho em hexágonos no teto" width="2000" height="1500" loading="lazy"><p>O salão inteiro sob o neon, aberto das 5h à meia-noite</p></li>
-    <li class="mat-espaco__item reveal"><img src="assets/img/maquinas/f3560.jpg" alt="Máquina articulada vermelha da Rotha Fitness no salão" width="1050" height="1400" loading="lazy"><p>Máquinas Rotha Fitness</p></li>
+    <li class="mat-espaco__item reveal"><img src="assets/img/maquinas/f3560.jpg" alt="Remada articulada vermelha no salão" width="1050" height="1400" loading="lazy"><p>Maioria das máquinas Cimerian</p></li>
     <li class="mat-espaco__item reveal"><img src="assets/img/tour/halteres.jpg" alt="Halteres de 35 e 40 quilos com a marca Elite Drako no suporte" width="1125" height="1500" loading="lazy"><p>Halteres com a marca da casa</p></li>
     <li class="mat-espaco__item reveal"><img src="assets/img/tour/avaliacao.jpg" alt="Porta da sala de avaliação com placa em neon" width="1125" height="1500" loading="lazy"><p>Sala de avaliação</p></li>
     <li class="mat-espaco__item reveal"><img src="assets/img/estrutura/recepcao-equipe.jpg" alt="Equipe atendendo no balcão da recepção" width="1050" height="1400" loading="lazy"><p>A recepção que confirma seu cadastro</p></li>
@@ -303,12 +304,12 @@
     </div>
     <div>
       <h3>Onde</h3>
-      <p data-endereco-curto>Valente, Bahia</p>
+      <p data-endereco-curto>Rodovia BA-120, 601, 1º andar, Antônio Lopes, Valente-BA</p>
       <p><a href="https://www.instagram.com/elite_drakogym/" target="_blank" rel="noopener">Instagram @elite_drakogym</a></p>
     </div>
   </div>
   <div class="foot__last">
-    <p>© <span data-year>2026</span> Elite Drako Gym · <span data-endereco-curto>Valente, Bahia</span> · <a href="https://www.instagram.com/elite_drakogym/" target="_blank" rel="noopener">@elite_drakogym</a></p>
+    <p>© <span data-year>2026</span> Elite Drako Gym · <span data-endereco-curto>Rodovia BA-120, 601, 1º andar, Antônio Lopes, Valente-BA</span> · <a href="https://www.instagram.com/elite_drakogym/" target="_blank" rel="noopener">@elite_drakogym</a></p>
     <a class="btn btn--ghost btn--sm" href="admin.html">Área da equipe</a>
   </div>
 </footer>
@@ -345,7 +346,7 @@
       botao: "Agendar visita", passo2: "Sua visita", turno: "Melhor turno para a visita",
       img: "assets/img/tour/entrada.jpg", w: 1125, h: 1500, foco: "50% 6%",
       alt: "Entrada da Elite Drako Gym com a fachada vermelha e as portas de vidro",
-      legenda: "A entrada da Elite Drako, na Rua Eraldo Lopes",
+      legenda: "A entrada da Elite Drako, na Rodovia BA-120, 601",
       obrig: ["nome", "telefone", "turno"],
       produto: null,
       proximos: ["A equipe chama você no WhatsApp para marcar o dia.", "No turno escolhido, alguém te mostra o salão, as máquinas e o vestiário.", "Gostou? A matrícula pode ser feita ali mesmo, na recepção."]
@@ -360,6 +361,17 @@
       obrig: ["nome", "telefone", "nivel", "convidado"],
       produto: "drako30-ingresso",
       proximos: ["Seu nome e o do convidado entram na lista.", "Quando a data sair, a equipe avisa vocês dois primeiro pelo WhatsApp.", "A inscrição da dupla é confirmada com a equipe."]
+    },
+    "novembro-azul": {
+      nome: "lista do Novembro Azul", titulo: "Novembro Azul",
+      lead: "Domingo, 15 de novembro, aqui na academia. Deixe seu nome e a equipe confirma a sua participação pelo WhatsApp.",
+      botao: "Quero participar", passo2: "Sobre você", turno: "Turno",
+      img: "assets/img/eventos/novembro-azul/01-treinar-cuidar-viver.jpg", w: 1080, h: 1350, foco: "50% 40%",
+      alt: "Arte do Novembro Azul: Treinar. Cuidar. Viver. 15 de novembro, evento aberto ao público",
+      legenda: "Novembro Azul na Elite Drako, domingo, 15 de novembro",
+      obrig: ["nome", "telefone"],
+      produto: null,
+      proximos: ["Seu nome entra na lista do Novembro Azul.", "A equipe confirma pelo WhatsApp e avisa o horário, que também sai no Instagram.", "No domingo, 15 de novembro, é só chegar na academia."]
     }
   };
   var ROTULOS = { nome: "Nome", telefone: "WhatsApp", email: "E-mail", nascimento: "Nascimento", objetivo: "Objetivo", turno: "Turno", nivel: "Nível", convidado: "Convidado", convidado_telefone: "WhatsApp do convidado", observacoes: "Observações" };
@@ -524,9 +536,19 @@
   /* ---------- tipo de cadastro (botões com aria-pressed, ?tipo= no endereço) ---------- */
   function plano(c) {
     var el = $("[data-plano]"), p = c.produto && prod(c.produto), mensal = prod("plano-mensal");
+    if (tipo === "novembro-azul") {
+      el.hidden = false;
+      el.innerHTML = '<div class="plano__topo"><h2>Novembro Azul</h2><p class="plano__preco">Domingo, 15/11</p></div>' +
+        "<p>Mês de cuidado com a saúde do homem. Evento aberto ao público: traga quem você ama. A programação tem:</p>" +
+        '<ul class="plano__lista" role="list"><li>Café da manhã</li><li>Palestra com o médico Dr. Jailton Campos</li><li>Campeonato com categorias e premiações</li></ul>' +
+        '<p>Quem estiver presente no dia leva 1 mês de academia por <strong>R$ 59,90</strong>.</p>' +
+        '<p class="plano__nota">O horário é divulgado no Instagram <a href="https://www.instagram.com/elite_drakogym/" target="_blank" rel="noopener">@elite_drakogym</a>.</p>';
+      return;
+    }
     if (tipo === "visita") {
+      el.hidden = false;
       el.innerHTML = '<div class="plano__topo"><h2>Visita guiada</h2><p class="plano__preco">Sem compromisso</p></div>' +
-        "<p>Você conhece o salão, as máquinas Rotha Fitness e o vestiário antes de decidir.</p>" +
+        "<p>Você conhece o salão, as máquinas (a maioria Cimerian) e o vestiário antes de decidir.</p>" +
         (mensal ? '<p class="plano__nota">Se quiser ficar, o plano mensal é ' + brl(mensal.preco) + " " + esc(mensal.unidade) + (mensal.confirmar ? " (valor a confirmar com a equipe)" : "") + ".</p>" : "");
       return;
     }
@@ -608,7 +630,7 @@
       enviando = false; btn.disabled = false; btn.textContent = c.botao;
       form.hidden = true; grupo.hidden = true; $("[data-passos]").hidden = true; $("[data-contagem]").hidden = true;
       var primeiro = d.nome.split(" ")[0];
-      $("[data-pronto-titulo]").textContent = (tipo === "drako30" ? "Você está na lista, " : tipo === "visita" ? "Visita pedida, " : "Matrícula recebida, ") + primeiro;
+      $("[data-pronto-titulo]").textContent = (tipo === "drako30" ? "Você está na lista, " : tipo === "novembro-azul" ? "Presença anotada, " : tipo === "visita" ? "Visita pedida, " : "Matrícula recebida, ") + primeiro;
       $("[data-pronto-txt]").textContent = r.salvo
         ? "Seus dados já estão com a equipe. Se quiser agilizar, mande a confirmação pela conversa."
         : "Falta um toque: envie a confirmação pela conversa, a mensagem já vai pronta com seus dados.";

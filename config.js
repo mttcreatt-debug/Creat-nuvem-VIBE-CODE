@@ -10,8 +10,9 @@ window.DRAKO_CONFIG = {
 
   instagram: "elite_drakogym",
 
-  // Endereço completo (aparece no rodapé, na página de cadastro e no mapa).
-  endereco: "Rua Eraldo Lopes, Valente, Bahia",
+  // Endereço completo (aparece no rodapé e na página de cadastro).
+  // Fonte: cadastro da Receita Federal (CNPJ 62.441.242/0001-78) e o post de inauguração; CEP 48891-080.
+  endereco: "Rodovia BA-120, 601, 1º andar, Antônio Lopes, Valente-BA",
 
   // Supabase: crie o projeto em supabase.com, rode o arquivo supabase/schema.sql
   // no SQL Editor e cole aqui a URL e a chave "anon public" (Settings → API).

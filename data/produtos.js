@@ -13,7 +13,7 @@
    Quando um suplemento ou acessório chegar: troque status para "venda", coloque preco,
    unidade e uma foto própria (assets/img/...). Nada de foto de catálogo de marca. */
 window.DRAKO_PRODUTOS = [
-  /* ---------- suplementos (a academia ainda vai cadastrar marcas e preços) ---------- */
+  /* ---------- suplementos (o balcão vende BOLD e outras marcas; preços ainda não cadastrados) ---------- */
   {
     id: "whey-protein", categoria: "suplementos", nome: "Whey protein",
     status: "em-breve", icone: "whey",
@@ -120,7 +120,7 @@ window.DRAKO_PRODUTOS = [
     id: "drako30-ingresso", categoria: "eventos", nome: "Drako 30 · próxima edição",
     preco: 30.00, unidade: "por dupla",
     foto: "assets/img/produto-drako30.jpg",
-    resumo: "Desafio em dupla: 1 aluno + 1 convidado, com prêmios e sorteios.",
+    resumo: "Desafio em dupla, com pódio, prêmios e sorteios.",
     detalhes: "Níveis iniciante, intermediário e avançado. Data da próxima edição a anunciar.",
     confirmar: true
   }
@@ -134,7 +134,7 @@ window.DRAKO_CATEGORIAS = [
   {
     id: "suplementos", nome: "Suplementos", ancora: "suplementos",
     titulo: "Suplementos",
-    texto: "Os suplementos vão ser vendidos no balcão da academia. Marcas e preços ainda estão sendo fechados: deixe seu contato e a equipe avisa quando chegarem."
+    texto: "No balcão você encontra produtos BOLD e outras marcas. Pelo site eles ainda não têm preço: peça para ser avisado ou pergunte sabores e valores na recepção."
   },
   {
     id: "acessorios", nome: "Acessórios", ancora: "acessorios",
@@ -154,6 +154,6 @@ window.DRAKO_CATEGORIAS = [
   {
     id: "eventos", nome: "Ingressos", ancora: "ingressos", apelidos: ["eventos"],
     titulo: "Eventos e ingressos",
-    texto: "Ingressos dos eventos da casa. O próximo Drako 30 ainda não tem data: garanta a vaga da dupla e a academia confirma o dia."
+    texto: "Ingressos dos eventos da casa. O Novembro Azul é no domingo, 15 de novembro: para participar, entre na lista pelo cadastro do site. O próximo Drako 30 ainda não tem data: garanta a vaga da dupla e a academia confirma o dia."
   }
 ];

@@ -63,7 +63,7 @@
   var sb = window.supabase.createClient(CFG.supabaseUrl, CFG.supabaseAnonKey);
   var aba = "cadastros", dados = [];
   var STATUS = { cadastros: ["novo", "contatado", "matriculado", "cancelado"], pedidos: ["novo", "pago", "entregue", "cancelado"] };
-  var TIPO = { matricula: "Matrícula", visita: "Visita", drako30: "Drako 30" };
+  var TIPO = { matricula: "Matrícula", visita: "Visita", drako30: "Drako 30", "novembro-azul": "Novembro Azul", interesse: "Avise-me" };
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function data(s) { return new Date(s).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" }); }
   function brl(v) { return Number(v).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }); }
@@ -88,7 +88,7 @@
   function opcoesFiltro() {
     var sel = $("[data-filtro]");
     var ops = aba === "cadastros"
-      ? [["", "Todos os tipos"], ["matricula", "Matrículas"], ["visita", "Visitas"], ["drako30", "Drako 30"]]
+      ? [["", "Todos os tipos"], ["matricula", "Matrículas"], ["visita", "Visitas"], ["drako30", "Drako 30"], ["novembro-azul", "Novembro Azul"], ["interesse", "Avise-me"]]
       : [["", "Todos os status"]].concat(STATUS.pedidos.map(function (s) { return [s, s]; }));
     sel.innerHTML = ops.map(function (o) { return '<option value="' + o[0] + '">' + o[1] + "</option>"; }).join("");
   }

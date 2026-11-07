@@ -59,7 +59,7 @@
       '<figure class="ficha-mq__cut"><img src="assets/img/maquinas/m' + m.id + '.webp" alt="' + m.nome + ', recortada" width="800" height="800"></figure>' +
       '<div class="ficha-mq__txt"><p class="ficha-mq__grupo">' + nomeGrupo(m.grupo) + '</p><h2>' + m.nome + '</h2>' +
       '<p class="ficha-mq__musc">' + m.musculos + '</p><p>' + m.texto + '</p>' +
-      '<figure class="ficha-mq__foto"><img src="assets/img/maquinas/f' + m.id + '.jpg" alt="' + m.nome + ' no salão da Elite Drako" loading="lazy"><figcaption>No salão, em outubro</figcaption></figure>' +
+      '<figure class="ficha-mq__foto"><img src="assets/img/maquinas/f' + m.id + '.jpg" alt="' + m.nome + ' no salão da Elite Drako" loading="lazy"><figcaption>No salão, em outubro' + (m.marca ? ' · marca ' + m.marca : '') + '</figcaption></figure>' +
       '<div class="ficha-mq__nav"><button type="button" class="btn btn--ghost btn--sm" data-mq="' + prev.id + '">‹ ' + prev.nome + '</button>' +
       '<button type="button" class="btn btn--ghost btn--sm" data-mq="' + next.id + '">' + next.nome + ' ›</button></div>' +
       '<a class="btn" href="cadastro.html?tipo=visita">Quero treinar nela</a></div>' +

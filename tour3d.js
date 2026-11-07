@@ -598,7 +598,7 @@ function initMapa() {
 
     // labels for landmarks and the start/end
     const marks = d.pois.map((p, i) => ({ n: i === 0 ? "Partida · " + p.n : p.n, v: new THREE.Vector3(p.p[0] * S, 6, p.p[1] * S), cls: i === 0 ? "is-inicio" : "" }));
-    marks.push({ n: "Elite Drako Gym · Rua Eraldo Lopes", v: new THREE.Vector3(tx, 120, tz), cls: "is-alvo" });
+    marks.push({ n: "Elite Drako Gym · BA-120, 601", v: new THREE.Vector3(tx, 120, tz), cls: "is-alvo" });
     labelsEl.innerHTML = marks.map((m) => '<span class="mapa__lbl ' + m.cls + '">' + m.n + "</span>").join("");
     const lblEls = Array.from(labelsEl.children);
 

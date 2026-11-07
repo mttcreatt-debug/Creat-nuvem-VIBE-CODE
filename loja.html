@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Loja Drako · Elite Drako Gym</title>
-<meta name="description" content="Loja da Elite Drako Gym: camiseta oficial, planos, avaliação física, ingresso do Drako 30 e, em breve, suplementos e acessórios. Monte o pedido e combine o pagamento com a academia.">
+<meta name="description" content="Loja da Elite Drako Gym: camiseta oficial, planos, avaliação física, ingresso do Drako 30, suplementos no balcão e, em breve, acessórios. Monte o pedido e combine o pagamento com a academia.">
 <meta name="theme-color" content="#0b0b0b">
 <meta property="og:title" content="Loja Drako · Elite Drako Gym">
 <meta property="og:image" content="assets/img/atleta-retrato.jpg">
@@ -103,7 +103,7 @@
   <section class="loja-hero" aria-labelledby="loja-title">
     <div class="loja-hero__copy">
       <h1 id="loja-title" class="rise">Loja Drako</h1>
-      <p class="rise">A camiseta da casa, os planos, a avaliação física e o ingresso do próximo Drako 30. Suplementos e acessórios estão chegando. Você monta o pedido aqui e combina o pagamento com a academia.</p>
+      <p class="rise">A camiseta da casa, os planos, a avaliação física e o ingresso do próximo Drako 30. Suplementos no balcão, acessórios a caminho. Você monta o pedido aqui e combina o pagamento com a academia.</p>
       <a class="btn rise" href="#produtos">Ver produtos</a>
     </div>
     <figure class="loja-hero__pic rise">
@@ -171,7 +171,7 @@
     </div>
     <div>
       <h3>Onde</h3>
-      <p data-endereco-curto>Valente, Bahia</p>
+      <p data-endereco-curto>Rodovia BA-120, 601, 1º andar, Antônio Lopes, Valente-BA</p>
       <p><a href="https://www.instagram.com/elite_drakogym/" target="_blank" rel="noopener">Instagram @elite_drakogym</a></p>
     </div>
   </div>
@@ -222,7 +222,7 @@
       var li = el.querySelector(".prod"), p0 = lista[0];
       var buy = li && li.querySelector(".prod__buy");
       if (buy && p0.detalhes) buy.insertAdjacentHTML("beforebegin", '<p class="prod__det">' + esc(p0.detalhes) + "</p>");
-      if (buy && c.id === "eventos") buy.insertAdjacentHTML("afterend", '<p class="prod__link"><a href="eventos.html">Ver todos os eventos da academia</a></p>');
+      if (buy && c.id === "eventos") buy.insertAdjacentHTML("afterend", '<p class="prod__link"><a href="cadastro.html?tipo=novembro-azul">Participar do Novembro Azul, dia 15/11</a></p><p class="prod__link"><a href="eventos.html">Ver todos os eventos da academia</a></p>');
     }
     secoes.push({ cat: c, el: el });
   });

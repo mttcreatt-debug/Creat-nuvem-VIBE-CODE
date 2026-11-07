@@ -22,21 +22,24 @@ window.DRAKO_EVENTOS = {
     },
     "drako-30": {
       tema: "Desafio",
-      publico: "Alunos e convidados, em duplas: cada aluno leva um convidado",
+      publico: "Alunos e convidados, em duplas",
       horarios: ["A partir das 8h30"],
-      programa: [
-        "Desafios separados por nível: iniciante, intermediário e avançado",
-        "Agachamentos e prancha",
-        "Pódio Drako 30 no final"
-      ],
+      programa: ["Desafios em dupla, por nível", "Pódio Drako 30 no final"],
       premios: ["Um mês de consultoria online", "Um kit Drako", "Um mês de academia grátis"],
       cta: [{ texto: "Entrar na lista da próxima", href: "cadastro.html?tipo=drako30" }]
     },
     "novembro-azul": {
       tema: "Saúde do homem",
+      publico: "Evento aberto ao público. Traga quem você ama.",
+      horarios: ["Divulgado no Instagram"],
+      programa: ["Café da manhã", "Palestra com o médico Dr. Jailton Campos", "Campeonato com categorias e premiações"],
+      premios_titulo: "Oferta do dia",
+      premios: ["1 mês de academia por R$ 59,90, só para quem estiver presente no dia 15/11"],
+      convite: "Treinar. Cuidar. Viver.",
+      fotos_titulo: "Artes do evento",
       cta: [
-        { texto: "Quero participar", href: "cadastro.html?tipo=visita" },
-        { texto: "Perguntar no Instagram", href: "https://www.instagram.com/elite_drakogym/" }
+        { texto: "Quero participar", href: "cadastro.html?tipo=novembro-azul" },
+        { texto: "Ver no Instagram", href: "https://www.instagram.com/elite_drakogym/" }
       ]
     }
   }

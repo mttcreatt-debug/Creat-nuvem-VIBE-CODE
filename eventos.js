@@ -21,7 +21,7 @@
   // "2026-10-24" -> {longa: "Sábado, 24 de outubro de 2026", curta: "24 out"}; "2026-11" -> mês só
   function data(str) {
     var p = String(str || "").split("-").map(Number);
-    if (!p[0] || !p[1]) return { longa: "Data a confirmar", curta: "A confirmar", iso: "" };
+    if (!p[0] || !p[1]) return { longa: "Data a anunciar", curta: "A anunciar", iso: "" };
     var mes = MESES[p[1] - 1];
     if (!p[2]) {
       var M = mes.charAt(0).toUpperCase() + mes.slice(1);
@@ -89,7 +89,7 @@
   function galeria(ev) {
     var fotos = ev.fotos || [];
     if (!fotos.length) return "";
-    return '<ul class="ev-gal" role="list" aria-label="Fotos do ' + esc(ev.titulo) + '">' + fotos.map(function (f, i) {
+    return '<ul class="ev-gal' + (ev.fotos_titulo ? " ev-gal--artes" : "") + '" role="list" aria-label="' + (ev.fotos_titulo ? "Artes do " : "Fotos do ") + esc(ev.titulo) + '">' + fotos.map(function (f, i) {
       var r = (f.w && f.h) ? f.w / f.h : 1.33;
       return '<li class="ev-gal__item" style="--r:' + r.toFixed(3) + '">' +
         '<button type="button" class="ev-gal__btn" data-lb-open="' + esc(ev.id) + '" data-lb-i="' + i + '" aria-label="Ampliar foto ' + (i + 1) + " de " + fotos.length + ": " + esc(f.alt) + '">' +
@@ -99,7 +99,7 @@
   function arte(ev) {
     var a = ev.arte;
     if (!a) return "";
-    return '<figure class="ev-arte"><button type="button" class="ev-gal__btn" data-lb-open="' + esc(ev.id) + '-arte" data-lb-i="0" aria-label="Ampliar a arte de divulgação: ' + esc(a.alt) + '">' +
+    return '<figure class="ev-arte" style="--ar:' + a.w + "/" + a.h + '"><button type="button" class="ev-gal__btn" data-lb-open="' + esc(ev.id) + '-arte" data-lb-i="0" aria-label="Ampliar a arte de divulgação: ' + esc(a.alt) + '">' +
       '<img src="' + esc(a.src) + '" alt="" width="' + a.w + '" height="' + a.h + '" loading="lazy" decoding="async"></button>' +
       "<figcaption>Arte de divulgação do evento</figcaption></figure>";
   }
@@ -112,7 +112,7 @@
       (ev.tema ? '<span class="ev-tag">' + esc(ev.tema) + "</span>" : "") +
       '<span class="ev-tag ' + (vem ? "ev-tag--breve" : "ev-tag--feito") + '">' + (vem ? "Em breve" : "Realizado") + "</span></p>";
 
-    var fatos = lista_("Horário", ev.horarios) + lista_("Programação", ev.programa, "ev-fato--wide") + lista_("Sorteio", ev.premios, "ev-fato--wide");
+    var fatos = lista_("Horário", ev.horarios) + lista_("Programação", ev.programa, "ev-fato--wide") + lista_(ev.premios_titulo || "Sorteio", ev.premios, "ev-fato--wide");
     var txt = '<div class="ev-cap__txt ev-up">' +
       "<h2 id=\"t-" + esc(ev.id) + '">' + esc(ev.titulo) + "</h2>" + meta +
       (ev.resumo ? '<p class="ev-cap__lead">' + esc(ev.resumo) + "</p>" : "") +
@@ -137,7 +137,7 @@
     var cls = "ev-cap" + (vem ? " ev-cap--breve" : "") + (lado ? "" : " ev-cap--solo");
     return '<section class="' + cls + '" id="' + esc(ev.id) + '" aria-labelledby="t-' + esc(ev.id) + '">' +
       '<div class="ev-cap__head">' + txt + (lado ? '<div class="ev-cap__lado ev-up">' + lado + "</div>" : "") + "</div>" +
-      (ev.fotos && ev.fotos.length ? '<div class="ev-cap__fotos ev-up"><h3 class="ev-cap__sub">Fotos do dia</h3>' + galeria(ev) + "</div>" : "") +
+      (ev.fotos && ev.fotos.length ? '<div class="ev-cap__fotos ev-up"><h3 class="ev-cap__sub">' + esc(ev.fotos_titulo || "Fotos do dia") + '</h3>' + galeria(ev) + "</div>" : "") +
       (resto.length ? '<div class="ev-cap__videos ev-up">' + resto.map(video).join("") + "</div>" : "") +
       "</section>";
   }

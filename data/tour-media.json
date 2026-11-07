@@ -14,7 +14,7 @@
     {
       "id": "recepcao",
       "titulo": "Recepção",
-      "legenda": "Logo na entrada fica o balcão de atendimento com a catraca de acesso, e a loja de suplementos já aparece à direita.",
+      "legenda": "Logo na entrada ficam o balcão de atendimento e a catraca com reconhecimento facial, e a loja de suplementos já aparece à direita.",
       "video": "assets/video/tour/recepcao.mp4",
       "poster": "assets/img/tour-vid/recepcao.jpg",
       "w": 1280,
