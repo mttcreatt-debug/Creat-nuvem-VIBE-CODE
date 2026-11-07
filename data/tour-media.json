@@ -1,0 +1,91 @@
+{
+  "aspect": "16:9",
+  "cenas": [
+    {
+      "id": "recepcao",
+      "titulo": "Recepção",
+      "legenda": "Logo na entrada fica o balcão de atendimento com a catraca de acesso, e a loja de suplementos já aparece à direita.",
+      "video": "assets/video/tour/recepcao.mp4",
+      "poster": "assets/img/tour-vid/recepcao.jpg",
+      "w": 1280,
+      "h": 720,
+      "dur": 4.63
+    },
+    {
+      "id": "loja",
+      "titulo": "Loja Drako",
+      "legenda": "Prateleiras de suplementos, geladeira de bebidas e mesas altas para o pós-treino, ao lado da recepção.",
+      "video": "assets/video/tour/loja.mp4",
+      "poster": "assets/img/tour-vid/loja.jpg",
+      "w": 1280,
+      "h": 720,
+      "dur": 7.07
+    },
+    {
+      "id": "escada",
+      "titulo": "Escada",
+      "legenda": "Escada com degraus iluminados e corrimão, no hall entre a recepção e as demais áreas.",
+      "video": "assets/video/tour/escada.mp4",
+      "poster": "assets/img/tour-vid/escada.jpg",
+      "w": 1280,
+      "h": 720,
+      "dur": 4.03
+    },
+    {
+      "id": "salao",
+      "titulo": "Salão de treino",
+      "legenda": "O salão sob o neon hexagonal do teto, com máquinas de carga guiada e anilhas espalhadas pelo piso emborrachado.",
+      "video": "assets/video/tour/salao.mp4",
+      "poster": "assets/img/tour-vid/salao.jpg",
+      "w": 1280,
+      "h": 720,
+      "dur": 4.4
+    },
+    {
+      "id": "pesos-livres",
+      "titulo": "Pesos livres",
+      "legenda": "Área de supinos, racks e anilhas, com espelhos na parede e relógio de treino à vista.",
+      "video": "assets/video/tour/pesos-livres.mp4",
+      "poster": "assets/img/tour-vid/pesos-livres.jpg",
+      "w": 1280,
+      "h": 720,
+      "dur": 4.9
+    },
+    {
+      "id": "banheiros",
+      "titulo": "Banheiros",
+      "legenda": "A sinalização indica o lado feminino e o lado masculino, com armários logo na entrada.",
+      "video": "assets/video/tour/banheiros.mp4",
+      "poster": "assets/img/tour-vid/banheiros.jpg",
+      "w": 1280,
+      "h": 720,
+      "dur": 7.0
+    },
+    {
+      "id": "vestiario-masculino",
+      "titulo": "Vestiário masculino",
+      "legenda": "Bancada de granito com cubas, espelho amplo e cabideiros, tudo limpo e bem iluminado.",
+      "video": "assets/video/tour/vestiario-masculino.mp4",
+      "poster": "assets/img/tour-vid/vestiario-masculino.jpg",
+      "w": 1280,
+      "h": 720,
+      "dur": 6.53
+    },
+    {
+      "id": "vestiario-feminino",
+      "titulo": "Vestiário feminino",
+      "legenda": "No vestiário feminino há bancada de granito, secador de cabelo e um kit de emergência feminina à disposição das alunas.",
+      "video": "assets/video/tour/vestiario-feminino.mp4",
+      "poster": "assets/img/tour-vid/vestiario-feminino.jpg",
+      "w": 1280,
+      "h": 720,
+      "dur": 6.07
+    }
+  ],
+  "filme": {
+    "video": "assets/video/tour/walk.mp4",
+    "poster": "assets/img/tour-vid/walk.jpg",
+    "dur": 41.83
+  },
+  "nota": "Fonte: vídeos de 29/10 (IMG_5122–5177, pasta VÍDEOS(SITE)/SITE(VIDEOS)). Faltam fachada, corredor longo e cardio: a caminhada principal em ProRes 4K (IMG_3543/3548/3549/3550) estava bloqueada no Drive (cota de download excedida). Confirmar com o cliente o que fica no andar de cima."
+}

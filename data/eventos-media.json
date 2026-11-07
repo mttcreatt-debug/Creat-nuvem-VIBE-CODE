@@ -1,0 +1,120 @@
+{
+  "eventos": [
+    {
+      "id": "coffee-pink-drako",
+      "titulo": "Coffee Break Pink",
+      "data": "2026-10-24",
+      "status": "realizado",
+      "resumo": "Coffee break do Outubro Rosa oferecido pela Elite Drako às alunas no dia 24 de outubro. Fotos e vídeos do evento serão publicados aqui assim que o material for liberado no Drive.",
+      "fotos": [],
+      "videos": [],
+      "fonte_drive": [],
+      "confirmar": "Fotos/vídeos não encontrados no Drive (ver relatório). Confirmar horário, local e texto com a academia."
+    },
+    {
+      "id": "drako-30",
+      "titulo": "Drako 30: o primeiro rugido",
+      "data": "2026-08-30",
+      "status": "realizado",
+      "resumo": "Manhã de desafios, sorteios e experiência na Elite Drako Gym, no domingo 30 de agosto, a partir das 8h30. Alunos e convidados participaram em duplas, com desafios separados por nível (iniciante, intermediário e avançado), agachamentos e prancha, e terminaram no pódio Drako 30. O sorteio teve três prêmios: um mês de consultoria online, um kit Drako e um mês de academia grátis.",
+      "fotos": [
+        {
+          "src": "assets/img/eventos/drako-30/01-desafio-agachamento.jpg",
+          "alt": "Participantes de número no peito fazem o desafio de agachamento no salão, com a equipe contando as repetições",
+          "w": 1600,
+          "h": 1011,
+          "destaque": true
+        },
+        {
+          "src": "assets/img/eventos/drako-30/02-aquecimento-turma.jpg",
+          "alt": "Turma de alunas reunida no salão sob o neon do teto durante a manhã do Drako 30",
+          "w": 1600,
+          "h": 900,
+          "destaque": false
+        },
+        {
+          "src": "assets/img/eventos/drako-30/03-podio-dupla.jpg",
+          "alt": "Dupla de participantes sorrindo em cima do pódio Drako 30, com os números 06 e 33",
+          "w": 1200,
+          "h": 1600,
+          "destaque": true
+        },
+        {
+          "src": "assets/img/eventos/drako-30/04-podio-participante.jpg",
+          "alt": "Participante sorridente posando no pódio Drako 30 em frente ao painel com o dragão da Elite Drako",
+          "w": 1061,
+          "h": 1600,
+          "destaque": false
+        },
+        {
+          "src": "assets/img/eventos/drako-30/05-podio-conquista.jpg",
+          "alt": "Participante comemora no pódio fazendo pose de força, com o logo Elite Drako ao fundo",
+          "w": 1174,
+          "h": 1600,
+          "destaque": false
+        },
+        {
+          "src": "assets/img/eventos/drako-30/06-equipe-recepcao.jpg",
+          "alt": "Três integrantes da equipe Elite Drako posam juntas diante do pódio do evento",
+          "w": 1395,
+          "h": 1600,
+          "destaque": false
+        },
+        {
+          "src": "assets/img/eventos/drako-30/07-equipe-drako.jpg",
+          "alt": "Equipe de professores da Elite Drako reunida no pódio Drako 30",
+          "w": 963,
+          "h": 1600,
+          "destaque": false
+        },
+        {
+          "src": "assets/img/eventos/drako-30/08-painel-drako30.jpg",
+          "alt": "Pódio com a arte Drako 30, o primeiro rugido: desafios, sorteios e experiência, com patrocinadores",
+          "w": 978,
+          "h": 1600,
+          "destaque": false
+        },
+        {
+          "src": "assets/img/eventos/drako-30/09-chegada-fachada.jpg",
+          "alt": "Alunos chegando à fachada vermelha da Elite Drako Gym na manhã do evento",
+          "w": 1080,
+          "h": 1382,
+          "destaque": false
+        }
+      ],
+      "videos": [
+        {
+          "src": "assets/video/eventos/drako-30-desafios.mp4",
+          "poster": "assets/video/eventos/drako-30-desafios.jpg",
+          "alt": "Participantes fazendo os desafios de agachamento no salão durante o Drako 30",
+          "w": 1280,
+          "h": 720
+        },
+        {
+          "src": "assets/video/eventos/drako-30-chegada.mp4",
+          "poster": "assets/video/eventos/drako-30-chegada.jpg",
+          "alt": "Chegada dos alunos à academia, recepção e o pódio Drako 30",
+          "w": 720,
+          "h": 1280
+        }
+      ],
+      "fonte_drive": [
+        "12S7IfBrYyGTxt56bddY2fzG0MjUfZjc7",
+        "1Zvq5EPaDcvhuAg7itghl97NEY7oTSsAs",
+        "1lKCGHGe1Ew61anjDHNb_LgvOUN2JADsg",
+        "1NoyEh3TzjvG0Ewr5pgU40z7tN98Axgct"
+      ]
+    },
+    {
+      "id": "novembro-azul",
+      "titulo": "Novembro Azul",
+      "data": "2026-11",
+      "status": "em-breve",
+      "resumo": "Ação do Novembro Azul, mês de cuidado com a saúde do homem. Data e programação a confirmar com a academia.",
+      "fotos": [],
+      "videos": [],
+      "fonte_drive": [],
+      "confirmar": "Data, formato e público do evento."
+    }
+  ]
+}
