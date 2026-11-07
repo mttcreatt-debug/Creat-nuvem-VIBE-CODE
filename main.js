@@ -152,6 +152,14 @@
     });
   }
 
+  /* ---------- vitrine: four products from the catalogue ---------- */
+  var vit = document.querySelector("[data-vitrine]");
+  if (vit && window.Drako && window.DRAKO_PRODUTOS) {
+    vit.innerHTML = ["camiseta-drako", "kit-drako", "plano-mensal", "energetico"].map(function (id) {
+      return window.Drako.cartao(window.Drako.produto(id));
+    }).join("");
+  }
+
   /* ---------- entrances: heading, then text, then picture ---------- */
   var groups = document.querySelectorAll(".reveal");
   // stagger the hero arrival even before the observer exists

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loja Drako · Elite Drako Gym</title>
+<meta name="description" content="Loja da Elite Drako Gym: camiseta oficial, Kit Drako com whey e creatina, energético, planos e ingresso do Drako 30. Monte o pedido e combine o pagamento com a academia.">
+<meta name="theme-color" content="#0b0b0b">
+<meta property="og:title" content="Loja Drako · Elite Drako Gym">
+<meta property="og:image" content="assets/img/atleta-retrato.jpg">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="bar" id="topo">
+  <a class="bar__mark" href="index.html" aria-label="Elite Drako Gym, início">
+    <img src="assets/img/marca-dragao.png" alt="" width="40" height="40">
+    <span>Elite Drako Gym</span>
+  </a>
+  <nav class="bar__nav" aria-label="Principal">
+    <a href="index.html#tour">Tour 3D</a>
+    <a href="index.html#horarios">Horários</a>
+    <a href="loja.html" aria-current="page">Loja</a>
+    <a href="cadastro.html">Cadastro</a>
+  </nav>
+  <button class="bar__cart" type="button" data-abrir-carrinho aria-label="Abrir carrinho">Carrinho <span class="bar__count" data-contador hidden>0</span></button>
+  <a class="btn btn--sm" href="cadastro.html">Matricule-se</a>
+</header>
+
+<main id="conteudo">
+  <section class="loja-hero" aria-labelledby="loja-title">
+    <div class="loja-hero__copy">
+      <h1 id="loja-title" class="rise">Loja Drako</h1>
+      <p class="rise">A camiseta da casa, os suplementos do balcão, os planos e o ingresso do próximo Drako 30. Você monta o pedido aqui e combina o pagamento com a academia.</p>
+      <a class="btn rise" href="#produtos">Ver produtos</a>
+    </div>
+    <figure class="loja-hero__pic rise">
+      <img src="assets/img/atleta-retrato.jpg" alt="Atleta vestindo a camiseta preta da Elite Drako com gola vermelha, no salão" width="1050" height="1400">
+    </figure>
+    <figure class="loja-hero__shirt rise">
+      <img src="assets/img/produto-camiseta.jpg" alt="Camiseta Elite Drako, preta com o dragão no peito" width="667" height="1000">
+    </figure>
+  </section>
+
+  <section class="catalogo" id="produtos" aria-labelledby="catalogo-title">
+    <div class="catalogo__top">
+      <h2 id="catalogo-title">Produtos</h2>
+      <div class="filtros" role="group" aria-label="Filtrar por categoria" data-filtros></div>
+    </div>
+    <ul class="catalogo__grid" role="list" data-catalogo aria-live="polite"></ul>
+  </section>
+
+  <section class="comofunciona" aria-labelledby="como-title">
+    <h2 id="como-title" class="reveal">Como comprar</h2>
+    <ul class="passos" role="list">
+      <li class="reveal"><h3>Você escolhe</h3><p>Adicione os produtos ao carrinho, com tamanho quando houver.</p></li>
+      <li class="reveal"><h3>O pedido chega pronto</h3><p>Ao enviar, a lista vai direto para a conversa com a academia, já com nomes, quantidades e total.</p></li>
+      <li class="reveal"><h3>Paga e retira</h3><p>Pix ou cartão, combinado na conversa. A retirada é no balcão, no horário que você treina.</p></li>
+    </ul>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="foot__mark reveal">
+    <img src="assets/img/logo-elite-drako-branco.png" alt="Elite Drako Gym" width="900" height="602" loading="lazy">
+    <h2>Um novo nível</h2>
+  </div>
+  <div class="foot__cols">
+    <nav aria-label="Rodapé">
+      <h3>Site</h3>
+      <a href="index.html">Início</a>
+      <a href="index.html#tour">Tour 3D</a>
+      <a href="cadastro.html">Cadastro</a>
+    </nav>
+    <div>
+      <h3>Horários</h3>
+      <p>Seg a sex · 05h às 00h</p>
+      <p>Sábado · 07h às 18h</p>
+      <p>Domingo · 08h às 15h</p>
+    </div>
+    <div>
+      <h3>Onde</h3>
+      <p data-endereco-curto>Valente, Bahia</p>
+      <p><a href="https://www.instagram.com/elite_drakogym/" target="_blank" rel="noopener">Instagram @elite_drakogym</a></p>
+    </div>
+  </div>
+  <div class="foot__last">
+    <p>© <span data-year>2026</span> Elite Drako Gym. Preços sujeitos a confirmação na academia.</p>
+    <a class="btn btn--sm" href="#topo">Voltar ao topo</a>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="data/produtos.js"></script>
+<script src="assets/vendor/supabase.js"></script>
+<script src="site.js"></script>
+<script>
+(function () {
+  var grid = document.querySelector("[data-catalogo]");
+  var filtros = document.querySelector("[data-filtros]");
+  var cats = window.DRAKO_CATEGORIAS, prods = window.DRAKO_PRODUTOS;
+  var atual = (location.hash || "").replace("#", "");
+  if (!cats.some(function (c) { return c.id === atual; })) atual = "todos";
+  filtros.innerHTML = cats.map(function (c) {
+    return '<button type="button" data-cat="' + c.id + '" aria-pressed="' + (c.id === atual) + '">' + c.nome + "</button>";
+  }).join("");
+  function render() {
+    var lista = prods.filter(function (p) { return atual === "todos" || p.categoria === atual; });
+    grid.innerHTML = lista.map(window.Drako.cartao).join("");
+    grid.querySelectorAll(".reveal").forEach(function (el, i) { el.style.setProperty("--d", (i % 6) * 70 + "ms"); requestAnimationFrame(function () { el.classList.add("is-in"); }); });
+    filtros.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.cat === atual)); });
+  }
+  filtros.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-cat]"); if (!b) return;
+    atual = b.dataset.cat; render();
+    history.replaceState(null, "", atual === "todos" ? location.pathname : "#" + atual);
+  });
+  render();
+  if (location.hash && atual !== "todos") document.getElementById("produtos").scrollIntoView();
+})();
+</script>
+<script src="main.js" defer></script>
+</body>
+</html>

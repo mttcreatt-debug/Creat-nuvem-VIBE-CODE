@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Painel da equipe · Elite Drako Gym</title>
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="adm">
+<header class="bar">
+  <a class="bar__mark" href="index.html" aria-label="Voltar ao site"><img src="assets/img/marca-dragao.png" alt="" width="40" height="40"><span>Painel da equipe</span></a>
+  <button class="btn btn--sm adm__sair" type="button" data-sair hidden>Sair</button>
+</header>
+
+<main class="adm__main" data-ui>
+  <section class="adm__aviso" data-sem-config hidden>
+    <h1>Falta ligar o banco de dados</h1>
+    <p>Abra o arquivo <code>config.js</code> e preencha <code>supabaseUrl</code> e <code>supabaseAnonKey</code>. O passo a passo está no README do projeto.</p>
+  </section>
+
+  <section class="adm__login" data-login hidden>
+    <h1>Entrar</h1>
+    <form data-form-login>
+      <div class="campo"><label for="a-email">E-mail</label><input id="a-email" name="email" type="email" autocomplete="username" required></div>
+      <div class="campo"><label for="a-senha">Senha</label><input id="a-senha" name="senha" type="password" autocomplete="current-password" required></div>
+      <p class="campos__erro" data-login-erro role="alert" hidden></p>
+      <button class="btn btn--full" type="submit">Entrar</button>
+    </form>
+  </section>
+
+  <section class="adm__painel" data-painel hidden>
+    <div class="adm__top">
+      <h1>Cadastros e pedidos</h1>
+      <div class="adm__resumo" data-resumo></div>
+    </div>
+    <div class="adm__ctrl">
+      <div class="filtros" role="tablist" aria-label="Tabela">
+        <button type="button" role="tab" data-tab-adm="cadastros" aria-selected="true">Cadastros</button>
+        <button type="button" role="tab" data-tab-adm="pedidos" aria-selected="false">Pedidos</button>
+      </div>
+      <label class="sr" for="a-filtro">Filtrar</label>
+      <select id="a-filtro" data-filtro></select>
+      <label class="sr" for="a-busca">Buscar</label>
+      <input id="a-busca" type="search" placeholder="Buscar por nome ou telefone" data-busca>
+      <button class="btn btn--sm btn--ghost" type="button" data-csv>Baixar planilha (CSV)</button>
+    </div>
+    <div class="adm__tabela"><table data-tabela></table></div>
+  </section>
+</main>
+
+<script src="config.js"></script>
+<script src="assets/vendor/supabase.js"></script>
+<script>
+(function () {
+  var CFG = window.DRAKO_CONFIG || {};
+  var $ = function (s) { return document.querySelector(s); };
+  if (!CFG.supabaseUrl || !CFG.supabaseAnonKey) { $("[data-sem-config]").hidden = false; return; }
+  var sb = window.supabase.createClient(CFG.supabaseUrl, CFG.supabaseAnonKey);
+  var aba = "cadastros", dados = [];
+  var STATUS = { cadastros: ["novo", "contatado", "matriculado", "cancelado"], pedidos: ["novo", "pago", "entregue", "cancelado"] };
+  var TIPO = { matricula: "Matrícula", visita: "Visita", drako30: "Drako 30" };
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function data(s) { return new Date(s).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" }); }
+  function brl(v) { return Number(v).toLocaleString("pt-BR", { style: "currency", currency: "BRL" }); }
+  function wa(t) { var n = String(t).replace(/\D/g, ""); if (n.length <= 11) n = "55" + n; return "https://wa.me/" + n; }
+
+  function tela(sessao) {
+    $("[data-login]").hidden = !!sessao; $("[data-painel]").hidden = !sessao; $("[data-sair]").hidden = !sessao;
+    if (sessao) carregar();
+  }
+  sb.auth.getSession().then(function (r) { tela(r.data.session); });
+  sb.auth.onAuthStateChange(function (_e, s) { tela(s); });
+
+  $("[data-form-login]").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var f = e.target, err = $("[data-login-erro]"); err.hidden = true;
+    sb.auth.signInWithPassword({ email: f.email.value, password: f.senha.value }).then(function (r) {
+      if (r.error) { err.textContent = "E-mail ou senha incorretos."; err.hidden = false; }
+    });
+  });
+  $("[data-sair]").addEventListener("click", function () { sb.auth.signOut(); });
+
+  function opcoesFiltro() {
+    var sel = $("[data-filtro]");
+    var ops = aba === "cadastros"
+      ? [["", "Todos os tipos"], ["matricula", "Matrículas"], ["visita", "Visitas"], ["drako30", "Drako 30"]]
+      : [["", "Todos os status"]].concat(STATUS.pedidos.map(function (s) { return [s, s]; }));
+    sel.innerHTML = ops.map(function (o) { return '<option value="' + o[0] + '">' + o[1] + "</option>"; }).join("");
+  }
+  function carregar() {
+    opcoesFiltro();
+    sb.from(aba).select("*").order("criado_em", { ascending: false }).limit(1000).then(function (r) {
+      if (r.error) { $("[data-tabela]").innerHTML = "<tr><td>Erro: " + esc(r.error.message) + "</td></tr>"; return; }
+      dados = r.data; desenhar();
+    });
+  }
+  function filtrados() {
+    var f = $("[data-filtro]").value, q = $("[data-busca]").value.toLowerCase().trim();
+    return dados.filter(function (d) {
+      if (f && (aba === "cadastros" ? d.tipo : d.status) !== f) return false;
+      if (q && (String(d.nome).toLowerCase().indexOf(q) < 0 && String(d.telefone).indexOf(q) < 0)) return false;
+      return true;
+    });
+  }
+  function desenhar() {
+    var rows = filtrados(), t = $("[data-tabela]");
+    var novos = dados.filter(function (d) { return d.status === "novo"; }).length;
+    $("[data-resumo]").textContent = dados.length + " no total · " + novos + " novos";
+    var sel = function (d) {
+      return '<select data-status="' + d.id + '" aria-label="Status de ' + esc(d.nome) + '">' + STATUS[aba].map(function (s) {
+        return "<option" + (s === d.status ? " selected" : "") + ">" + s + "</option>"; }).join("") + "</select>";
+    };
+    if (aba === "cadastros") {
+      t.innerHTML = "<thead><tr><th>Quando</th><th>Tipo</th><th>Nome</th><th>WhatsApp</th><th>Detalhes</th><th>Status</th></tr></thead><tbody>" +
+        rows.map(function (d) {
+          var det = [d.objetivo, d.turno, d.nivel, d.convidado && "convidado: " + d.convidado, d.nascimento && "nasc. " + d.nascimento, d.observacoes].filter(Boolean).map(esc).join(" · ");
+          return "<tr><td>" + data(d.criado_em) + "</td><td>" + (TIPO[d.tipo] || d.tipo) + "</td><td>" + esc(d.nome) + (d.email ? "<br><small>" + esc(d.email) + "</small>" : "") +
+            '</td><td><a href="' + wa(d.telefone) + '" target="_blank" rel="noopener">' + esc(d.telefone) + "</a></td><td>" + det + "</td><td>" + sel(d) + "</td></tr>";
+        }).join("") + "</tbody>";
+    } else {
+      t.innerHTML = "<thead><tr><th>Quando</th><th>Nome</th><th>WhatsApp</th><th>Itens</th><th>Total</th><th>Status</th></tr></thead><tbody>" +
+        rows.map(function (d) {
+          var it = (d.itens || []).map(function (i) { return i.qtd + "× " + esc(i.nome) + (i.tamanho ? " (" + esc(i.tamanho) + ")" : ""); }).join("<br>");
+          return "<tr><td>" + data(d.criado_em) + "</td><td>" + esc(d.nome) + "<br><small>" + esc(d.entrega || "") + '</small></td><td><a href="' + wa(d.telefone) + '" target="_blank" rel="noopener">' + esc(d.telefone) +
+            "</a></td><td>" + it + "</td><td>" + brl(d.total) + "</td><td>" + sel(d) + "</td></tr>";
+        }).join("") + "</tbody>";
+    }
+    if (!rows.length) t.innerHTML += '<tbody><tr><td colspan="6">Nada por aqui ainda.</td></tr></tbody>';
+  }
+  document.addEventListener("change", function (e) {
+    var s = e.target.closest("[data-status]");
+    if (s) {
+      sb.from(aba).update({ status: s.value }).eq("id", Number(s.dataset.status)).then(function (r) {
+        if (r.error) alert("Não foi possível salvar: " + r.error.message);
+        else { dados.forEach(function (d) { if (d.id === Number(s.dataset.status)) d.status = s.value; }); desenhar(); }
+      });
+    }
+    if (e.target.matches("[data-filtro]")) desenhar();
+  });
+  $("[data-busca]").addEventListener("input", desenhar);
+  document.querySelectorAll("[data-tab-adm]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      aba = b.dataset.tabAdm;
+      document.querySelectorAll("[data-tab-adm]").forEach(function (x) { x.setAttribute("aria-selected", String(x === b)); });
+      carregar();
+    });
+  });
+  $("[data-csv]").addEventListener("click", function () {
+    var rows = filtrados(); if (!rows.length) return;
+    var cols = Object.keys(rows[0]);
+    var csv = [cols.join(";")].concat(rows.map(function (r) {
+      return cols.map(function (c) { var v = r[c]; if (typeof v === "object" && v) v = JSON.stringify(v); return '"' + String(v == null ? "" : v).replace(/"/g, '""') + '"'; }).join(";");
+    })).join("\n");
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8" }));
+    a.download = "drako-" + aba + "-" + new Date().toISOString().slice(0, 10) + ".csv"; a.click();
+  });
+})();
+</script>
+</body>
+</html>

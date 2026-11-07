@@ -4,24 +4,26 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Elite Drako Gym · Academia em Valente-BA</title>
-<meta name="description" content="Elite Drako Gym: academia de musculação em Valente-BA, com máquinas Rotha Fitness, salão climatizado e neon vermelho. Aberta das 5h à meia-noite de segunda a sexta.">
+<meta name="description" content="Elite Drako Gym: academia de musculação em Valente-BA. Tour 3D pelo salão, loja com camiseta, suplementos e planos, e matrícula online. Aberta das 5h à meia-noite.">
 <meta name="theme-color" content="#0b0b0b">
 <meta property="og:title" content="Elite Drako Gym · Valente-BA">
-<meta property="og:description" content="Um novo nível de treino em Valente. Aberta das 5h à meia-noite, sem pausa para o almoço.">
-<meta property="og:image" content="assets/img/salao-poster.jpg">
+<meta property="og:description" content="Ative o modo Drako. Tour 3D, loja e matrícula online.">
+<meta property="og:image" content="assets/img/salao-amplo.jpg">
 <meta property="og:locale" content="pt_BR">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="apple-touch-icon" href="assets/img/marca-dragao.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/img/salao-poster.jpg">
 <link rel="stylesheet" href="styles.css">
+<script type="importmap">{ "imports": { "three": "./assets/vendor/three.module.min.js" } }</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ExerciseGym",
   "name": "Elite Drako Gym",
-  "image": "assets/img/salao-poster.jpg",
+  "image": "assets/img/salao-amplo.jpg",
   "address": {"@type": "PostalAddress", "addressLocality": "Valente", "addressRegion": "BA", "addressCountry": "BR"},
   "sameAs": ["https://www.instagram.com/elite_drakogym/"],
   "openingHoursSpecification": [
@@ -36,105 +38,146 @@
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
 <header class="bar" id="topo">
-  <a class="bar__mark" href="#topo" aria-label="Elite Drako Gym, início">
+  <a class="bar__mark" href="index.html" aria-label="Elite Drako Gym, início">
     <img src="assets/img/marca-dragao.png" alt="" width="40" height="40">
     <span>Elite Drako Gym</span>
   </a>
   <nav class="bar__nav" aria-label="Principal">
-    <a href="#estrutura">Estrutura</a>
+    <a href="#tour">Tour 3D</a>
     <a href="#horarios">Horários</a>
-    <a href="#planos">Planos</a>
-    <a href="#duvidas">Dúvidas</a>
+    <a href="loja.html">Loja</a>
+    <a href="cadastro.html">Cadastro</a>
   </nav>
-  <a class="btn btn--sm" href="#visita">Agendar visita</a>
+  <button class="bar__cart" type="button" data-abrir-carrinho aria-label="Abrir carrinho">Carrinho <span class="bar__count" data-contador hidden>0</span></button>
+  <a class="btn btn--sm" href="cadastro.html">Matricule-se</a>
 </header>
 
 <main id="conteudo">
 
-  <!-- HERO: card beside the room -->
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="hero__room">
-      <video class="hero__video" autoplay muted loop playsinline preload="auto" poster="assets/img/salao-poster.jpg" aria-label="Máquina vermelha no salão de musculação da Elite Drako Gym, sob o neon do teto">
-        <source src="assets/video/drako-salao.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="hero__card">
-      <div class="hexband" aria-hidden="true"></div>
-      <div class="hero__body">
-        <img class="hero__logo rise" src="assets/img/logo-elite-drako-branco.png" alt="Elite Drako Gym" width="900" height="602">
-        <h1 id="hero-title" class="rise">Ative o modo Drako</h1>
-        <p class="hero__lead rise">Academia de musculação em Valente-BA, com máquinas Rotha Fitness, salão climatizado e neon vermelho do chão ao teto. Aberta das 5h à meia-noite.</p>
-        <div class="hero__actions rise">
-          <a class="btn" href="#visita">Agendar uma visita</a>
-          <p class="status" data-status aria-live="polite"><span class="status__dot" aria-hidden="true"></span><span data-status-text>Seg a sex, 5h às 0h · sáb 7h às 18h · dom 8h às 15h</span></p>
-        </div>
+  <!-- CINEMA: abertura -->
+  <section class="cine" aria-labelledby="cine-title">
+    <video class="cine__film" autoplay muted loop playsinline preload="auto" poster="assets/img/salao-poster.jpg" aria-label="Plano de detalhe de uma máquina vermelha no salão da Elite Drako Gym">
+      <source src="assets/video/drako-salao.mp4" type="video/mp4">
+    </video>
+    <div class="cine__scrim" aria-hidden="true"></div>
+    <div class="cine__copy">
+      <h1 id="cine-title" class="rise">Ative o modo Drako</h1>
+      <p class="cine__lead rise">Academia de musculação com máquinas Rotha Fitness, salão climatizado e neon do chão ao teto. Aberta das 5h à meia-noite.</p>
+      <div class="cine__actions rise">
+        <a class="btn" href="cadastro.html">Quero me matricular</a>
+        <a class="btn btn--ghost" href="#tour">Entrar no tour 3D</a>
+        <p class="status" data-status aria-live="polite"><span class="status__dot" aria-hidden="true"></span><span data-status-text>Seg a sex, 5h às 0h · sáb 7h às 18h · dom 8h às 15h</span></p>
       </div>
-      <nav class="hero__links" aria-label="Atalhos">
-        <a href="#horarios">Ver horários</a>
-        <a href="#planos">Plano mensal</a>
-        <a href="https://www.instagram.com/elite_drakogym/" target="_blank" rel="noopener">@elite_drakogym</a>
-      </nav>
     </div>
   </section>
 
-  <!-- INTRO: statement with inline thumbnails -->
-  <section class="intro" aria-label="Apresentação">
-    <p class="intro__text reveal">
-      Máquinas <span class="thumb"><img src="assets/img/maquina-pegadores.jpg" alt="" width="1280" height="720" loading="lazy"></span>,
-      anilhas <span class="thumb"><img src="assets/img/anilha-15kg.jpg" alt="" width="478" height="850" loading="lazy"></span>,
-      vestiário <span class="thumb"><img src="assets/img/vestiario-armarios.jpg" alt="" width="675" height="1200" loading="lazy"></span>
-      e neon do chão ao teto <span class="thumb"><img src="assets/img/treino-neon.jpg" alt="" width="1080" height="1920" loading="lazy"></span>.
-      O padrão mudou em Valente.
-    </p>
-  </section>
-
-  <!-- FEATURES: specimens on colour tiles -->
-  <section class="estrutura" id="estrutura" aria-labelledby="estrutura-title">
-    <div class="estrutura__head">
-      <h2 id="estrutura-title" class="reveal">A estrutura</h2>
-      <p class="reveal">Tudo foi montado peça por peça para a inauguração de 18 de julho. Estes são os espaços e os equipamentos que você usa no treino.</p>
+  <!-- TOUR 3D: cada lugar, uma cena -->
+  <section class="tour" id="tour" aria-labelledby="tour-title">
+    <div class="tour__head">
+      <h2 id="tour-title" class="tour__title reveal">Tour pelo salão</h2>
+      <p class="reveal">Oito lugares da academia, um de cada vez. Role a página para atravessar o neon do teto.</p>
     </div>
-    <ul class="tiles" role="list">
-      <li class="tile tile--wide reveal">
-        <figure class="tile__pic f-red"><img src="assets/img/maquina-pegadores.jpg" alt="Pegadores emborrachados de uma máquina vermelha articulada" width="1280" height="720" loading="lazy"></figure>
-        <h3>Máquinas Rotha Fitness</h3>
-        <p>Máquinas de placa articuladas, com pegadores emborrachados.</p>
+    <div class="tour__stage">
+      <canvas class="tour__canvas" data-tour-canvas aria-hidden="true"></canvas>
+      <div class="tour__hud">
+        <p class="tour__hint" data-tour-hint>Role para entrar.</p>
+      </div>
+      <div class="tour__caption" data-tour-caption aria-live="polite"></div>
+      <div class="tour__progress" aria-hidden="true"><span data-tour-bar></span></div>
+    </div>
+
+    <ol class="cenas" data-cenas>
+      <li class="cena" data-cena>
+        <img src="assets/img/salao-vespera.jpg" alt="Salão com caixas no chão e o neon do teto já aceso, na véspera da abertura" width="1800" height="1350" loading="lazy">
+        <div class="cena__txt">
+          <h3>A véspera</h3>
+          <p class="cena__plano">Plano aberto · luz do fim da tarde</p>
+          <p>Caixas no chão, plástico nas máquinas e o neon já aceso. É o retrato do dia em que a academia ainda estava nascendo.</p>
+        </div>
       </li>
-      <li class="tile reveal">
-        <figure class="tile__pic f-ink"><img src="assets/img/anilha-15kg.jpg" alt="Anilha vermelha e preta de 15 quilos ainda no plástico" width="478" height="850" loading="lazy" style="object-position:50% 40%"></figure>
-        <h3>Anilhas de 15 kg</h3>
-        <p>Revestidas de borracha, com pegada vazada.</p>
+      <li class="cena" data-cena>
+        <img src="assets/img/salao-amplo.jpg" alt="Salão de musculação amplo com colunas em fila e neon branco e vermelho no teto preto" width="2000" height="1500" loading="lazy">
+        <div class="cena__txt">
+          <h3>O salão</h3>
+          <p class="cena__plano">Grande angular · teto como protagonista</p>
+          <p>Colunas em fila e um teto preto riscado de branco e vermelho. É um teto feito para ser visto de baixo, deitado no banco.</p>
+        </div>
       </li>
-      <li class="tile reveal">
-        <figure class="tile__pic f-paper"><img src="assets/img/treino-neon.jpg" alt="Aluno treinando no salão com neon hexagonal no teto" width="1080" height="1920" loading="lazy" style="object-position:50% 30%"></figure>
-        <h3>Salão de musculação</h3>
-        <p>Piso emborrachado e neon em todo o teto.</p>
+      <li class="cena" data-cena>
+        <img src="assets/img/salao-corredor.jpg" alt="Corredor de máquinas alinhadas até o fundo do salão sob hexágonos de neon" width="2000" height="1500" loading="lazy">
+        <div class="cena__txt">
+          <h3>O corredor</h3>
+          <p class="cena__plano">Linha de fuga · máquinas em fila</p>
+          <p>As máquinas alinhadas puxam o olho até o fundo. É o caminho do treino, da primeira à última série.</p>
+        </div>
       </li>
-      <li class="tile reveal">
-        <figure class="tile__pic f-ink"><img src="assets/img/vestiario-armarios.jpg" alt="Armários pretos encostados na parede vermelha do vestiário" width="675" height="1200" loading="lazy" style="object-position:50% 70%"></figure>
-        <h3>Vestiário</h3>
-        <p>Armários para guardar as suas coisas durante o treino.</p>
+      <li class="cena" data-cena>
+        <img src="assets/img/maquina-pegadores.jpg" alt="Pegadores emborrachados de uma máquina vermelha Rotha Fitness" width="1280" height="720" loading="lazy">
+        <div class="cena__txt">
+          <h3>As máquinas</h3>
+          <p class="cena__plano">Close · vermelho de fábrica</p>
+          <p>Estrutura vermelha, pegador emborrachado. Equipamento Rotha Fitness, com o vermelho que a casa adotou como cor própria.</p>
+        </div>
       </li>
-      <li class="tile reveal">
-        <figure class="tile__pic f-red"><img src="assets/img/banheiro.jpg" alt="Banheiro revestido em pedra cinza" width="1400" height="788" loading="lazy"></figure>
-        <h3>Banheiros</h3>
-        <p>Novos, revestidos em pedra, ao lado do vestiário.</p>
+      <li class="cena" data-cena>
+        <img src="assets/img/atleta-anilha.jpg" alt="Atleta com a camiseta da Elite Drako segurando uma anilha vermelha de 20 quilos junto ao rosto" width="1050" height="1400" loading="lazy">
+        <div class="cena__txt">
+          <h3>A carga</h3>
+          <p class="cena__plano">Retrato · anilha de 20 kg</p>
+          <p>A anilha encostada no rosto: o peso como parte do corpo. É a camiseta da casa, a mesma que está na loja.</p>
+        </div>
       </li>
-      <li class="tile reveal">
-        <figure class="tile__pic f-paper"><img src="assets/img/maquina-base.jpg" alt="Base de uma máquina vermelha sobre o piso do salão" width="1280" height="720" loading="lazy"></figure>
-        <h3>Climatização</h3>
-        <p>Salão climatizado para treinar no calor do sertão.</p>
+      <li class="cena" data-cena>
+        <img src="assets/img/atleta-bike.jpg" alt="Atleta pedalando na bicicleta ergométrica do salão" width="1050" height="1400" loading="lazy">
+        <div class="cena__txt">
+          <h3>O cardio</h3>
+          <p class="cena__plano">Plano médio · movimento contínuo</p>
+          <p>Bicicletas para o aquecimento e para o fim do treino, sob a mesma luz do resto do salão.</p>
+        </div>
       </li>
-    </ul>
+      <li class="cena" data-cena>
+        <img src="assets/img/vestiario-armarios.jpg" alt="Armários pretos encostados na parede vermelha do vestiário" width="675" height="1200" loading="lazy">
+        <div class="cena__txt">
+          <h3>O vestiário</h3>
+          <p class="cena__plano">Plano fechado · parede vermelha</p>
+          <p>Parede vermelha e armários pretos: até o vestiário segue a paleta do dragão.</p>
+        </div>
+      </li>
+      <li class="cena" data-cena>
+        <img src="assets/img/equipe.jpg" alt="Três pessoas da equipe de braços cruzados no salão, sob o hexágono de neon" width="1050" height="1400" loading="lazy">
+        <div class="cena__txt">
+          <h3>A equipe</h3>
+          <p class="cena__plano">Plano de conjunto · sob o hexágono</p>
+          <p>Braços cruzados sob o hexágono de luz. São eles que te recebem na primeira visita.</p>
+        </div>
+      </li>
+    </ol>
   </section>
 
-  <!-- SHOWCASE: square plate, spare text -->
+  <!-- ANILHA 3D -->
+  <section class="peso" aria-labelledby="peso-title">
+    <div class="peso__copy">
+      <h2 id="peso-title" class="reveal">Peso de verdade</h2>
+      <p class="reveal">Anilhas revestidas de borracha, com pegada vazada, em 15 e 20 kg. Gire a peça com o dedo ou o mouse.</p>
+      <ul class="peso__specs reveal" role="list">
+        <li><strong>Borracha</strong><span>protege o piso e reduz o barulho</span></li>
+        <li><strong>Pegada vazada</strong><span>três aberturas para carregar com firmeza</span></li>
+        <li><strong>Miolo de aço</strong><span>encaixe justo na barra olímpica</span></li>
+      </ul>
+    </div>
+    <figure class="peso__stage reveal">
+      <canvas data-anilha-canvas aria-label="Anilha vermelha e preta em 3D. Arraste para girar." role="img"></canvas>
+      <img class="peso__fallback" src="assets/img/anilha-15kg.jpg" alt="Anilha vermelha e preta de 15 quilos" width="478" height="850" loading="lazy">
+    </figure>
+  </section>
+
+  <!-- OBRA -->
   <section class="obra" aria-labelledby="obra-title">
     <div class="obra__plate">
       <figure class="obra__frame">
         <img data-slide="0" class="is-on" src="assets/img/chegada-caminhao.jpg" alt="Caminhão carregado de equipamentos embalados chegando à academia" width="1050" height="1400" loading="lazy">
         <img data-slide="1" src="assets/img/montagem-salao.jpg" alt="Equipamentos desembalados espalhados pelo salão durante a montagem" width="1600" height="1200" loading="lazy">
-        <img data-slide="2" src="assets/img/salao-poster.jpg" alt="Salão pronto com máquinas vermelhas e o neon aceso" width="1600" height="900" loading="lazy">
+        <img data-slide="2" src="assets/img/salao-corredor.jpg" alt="Salão pronto com máquinas alinhadas e o neon aceso" width="2000" height="1500" loading="lazy">
       </figure>
     </div>
     <div class="obra__text">
@@ -149,29 +192,28 @@
       </div>
       <div class="obra__actions">
         <a class="cell cell--ink" href="https://www.instagram.com/elite_drakogym/" target="_blank" rel="noopener">Ver no Instagram</a>
-        <a class="cell cell--tone" href="#visita">Conhecer o salão</a>
+        <a class="cell cell--tone" href="cadastro.html?tipo=visita">Agendar uma visita</a>
       </div>
     </div>
   </section>
 
   <div class="hexstrip" aria-hidden="true"></div>
 
-  <!-- LIST: hours with the live status -->
+  <!-- HORÁRIOS -->
   <section class="horarios" id="horarios" aria-labelledby="horarios-title">
     <div class="horarios__top">
       <div class="horarios__now">
         <h2 id="horarios-title" class="reveal">Horários</h2>
         <p class="now reveal" data-now aria-live="polite">De segunda a sexta, das 5h à meia-noite.</p>
         <p class="now__sub reveal" data-now-sub>Sem pausa para o almoço. Sábado das 7h às 18h e domingo das 8h às 15h.</p>
-        <a class="btn reveal" href="#visita">Marcar meu horário</a>
+        <a class="btn reveal" href="cadastro.html?tipo=visita">Marcar meu horário</a>
       </div>
       <figure class="horarios__clip reveal">
-        <video autoplay muted loop playsinline preload="metadata" poster="assets/img/treino-neon.jpg" aria-label="Alunos treinando no salão da Elite Drako Gym">
+        <video autoplay muted loop playsinline preload="metadata" poster="assets/img/treino-neon.jpg" aria-label="Aluno treinando no salão da Elite Drako Gym">
           <source src="assets/video/drako-treino.mp4" type="video/mp4">
         </video>
       </figure>
     </div>
-
     <div class="week">
       <div class="week__group">
         <div class="week__head reveal"><h3>Durante a semana</h3><span>sem pausa no almoço</span></div>
@@ -193,7 +235,17 @@
     </div>
   </section>
 
-  <!-- PRICING: two plans, two fields -->
+  <!-- LOJA: vitrine -->
+  <section class="vitrine" aria-labelledby="vitrine-title">
+    <div class="vitrine__head">
+      <h2 id="vitrine-title" class="reveal">Loja Drako</h2>
+      <p class="reveal">Camiseta da casa, suplementos e planos. Você monta o pedido aqui e combina o pagamento com a academia.</p>
+      <a class="btn reveal" href="loja.html">Ver a loja inteira</a>
+    </div>
+    <ul class="vitrine__grid" role="list" data-vitrine></ul>
+  </section>
+
+  <!-- PLANOS -->
   <section class="planos" id="planos" aria-label="Planos">
     <article class="plan plan--main reveal">
       <h2>Plano mensal</h2>
@@ -201,7 +253,7 @@
       <p class="plan__inc">Inclui o salão de musculação, o vestiário e os eventos para alunos, como o Drako 30.</p>
       <div class="plan__foot">
         <p class="plan__price">R$ 119,90<span>por mês</span></p>
-        <a class="btn btn--ink" href="#visita" data-plan="Plano mensal">Quero me matricular</a>
+        <a class="btn btn--ink" href="cadastro.html?tipo=matricula">Fazer minha matrícula</a>
       </div>
     </article>
     <article class="plan plan--side reveal">
@@ -210,12 +262,26 @@
       <p class="plan__inc">Você escolhe o horário, alguém da equipe mostra o espaço e tira as suas dúvidas.</p>
       <div class="plan__foot">
         <p class="plan__price">Grátis<span>com agendamento</span></p>
-        <a class="btn" href="#visita" data-plan="Visita guiada">Agendar visita</a>
+        <a class="btn" href="cadastro.html?tipo=visita">Agendar visita</a>
       </div>
     </article>
   </section>
 
-  <!-- FAQ: tabbed index cards -->
+  <!-- DRAKO 30 -->
+  <section class="evento" aria-labelledby="evento-title">
+    <figure class="evento__pic reveal"><img src="assets/img/atleta-carga.jpg" alt="Atleta carregando uma anilha de 20 quilos pelo salão" width="1050" height="1400" loading="lazy"></figure>
+    <div class="evento__copy">
+      <h2 id="evento-title" class="reveal">Drako 30: o primeiro rugido</h2>
+      <p class="evento__lead reveal">Uma manhã de desafios em dupla, com premiações e sorteios. 30 duplas, 60 participantes: cada aluno leva um convidado.</p>
+      <p class="reveal">A primeira edição foi em 30 de agosto, com níveis iniciante, intermediário e avançado. Entre na lista da próxima e seja avisado primeiro.</p>
+      <div class="evento__actions reveal">
+        <a class="btn" href="cadastro.html?tipo=drako30">Entrar na lista</a>
+        <a class="btn btn--ghost" href="loja.html#eventos">Ver ingresso</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DÚVIDAS -->
   <section class="duvidas" id="duvidas" aria-labelledby="duvidas-title">
     <h2 id="duvidas-title" class="reveal">Perguntas frequentes</h2>
     <div class="drawer" data-drawer>
@@ -224,62 +290,40 @@
         <p>Não. De segunda a sexta a Elite Drako Gym funciona das 5h à meia-noite, sem pausa.</p>
       </details>
       <details class="card c2">
-        <summary><span class="card__tab">Iniciantes</span><span class="card__q">Nunca treinei. Posso começar?</span></summary>
-        <p>Pode. Os desafios da casa, como o Drako 30, já são separados por nível: iniciante, intermediário e avançado.</p>
+        <summary><span class="card__tab">Loja</span><span class="card__q">Como pago o que comprei na loja?</span></summary>
+        <p>Você monta o pedido no site e ele chega pronto para a academia. O pagamento, por Pix ou cartão, é combinado na conversa, e a retirada é no balcão.</p>
       </details>
       <details class="card c3">
-        <summary><span class="card__tab">Local</span><span class="card__q">Onde fica a academia?</span></summary>
-        <p>Em Valente, na Bahia. Para o endereço e como chegar, chame a equipe no Instagram @elite_drakogym.</p>
+        <summary><span class="card__tab">Iniciantes</span><span class="card__q">Nunca treinei. Posso começar?</span></summary>
+        <p>Pode. Os desafios da casa, como o Drako 30, já são separados por nível: iniciante, intermediário e avançado.</p>
       </details>
       <details class="card c1">
         <summary><span class="card__tab">Clima</span><span class="card__q">O salão é climatizado?</span></summary>
         <p>Sim. O salão de musculação tem climatização, então dá para treinar bem no meio da tarde.</p>
       </details>
       <details class="card c2">
-        <summary><span class="card__tab">Vestiário</span><span class="card__q">Onde guardo as minhas coisas?</span></summary>
-        <p>No vestiário há armários para mochila e roupas, ao lado dos banheiros.</p>
+        <summary><span class="card__tab">Cadastro</span><span class="card__q">O que acontece depois do cadastro?</span></summary>
+        <p>A equipe recebe os seus dados e entra em contato pelo WhatsApp para confirmar a matrícula ou o horário da visita.</p>
       </details>
       <details class="card c3">
-        <summary><span class="card__tab">Drako 30</span><span class="card__q">O que é o Drako 30?</span></summary>
-        <p>Uma manhã de desafios em dupla, com premiações e sorteios: 30 duplas, 60 participantes, cada aluno leva um convidado.</p>
+        <summary><span class="card__tab">Local</span><span class="card__q">Onde fica a academia?</span></summary>
+        <p data-endereco>Em Valente, na Bahia. Para o endereço e como chegar, chame a equipe no Instagram @elite_drakogym.</p>
       </details>
     </div>
   </section>
 
-  <!-- CONTACT: clip-out coupon -->
-  <section class="visita" id="visita" aria-labelledby="visita-title">
-    <form class="coupon" data-coupon action="https://ig.me/m/elite_drakogym" method="get" target="_blank">
-      <div class="coupon__stub">
-        <h2 id="visita-title">Vale uma visita</h2>
-        <p>Preencha e a mensagem vai pronta para o Instagram da academia. É só colar e enviar.</p>
+  <!-- CTA FINAL -->
+  <section class="final" aria-labelledby="final-title">
+    <img class="final__bg" src="assets/img/salao-corredor.jpg" alt="" width="2000" height="1500" loading="lazy">
+    <div class="final__scrim" aria-hidden="true"></div>
+    <div class="final__copy">
+      <h2 id="final-title" class="reveal">Seu novo nível</h2>
+      <p class="reveal">Matrícula em dois minutos. A equipe confirma pelo WhatsApp.</p>
+      <div class="final__actions reveal">
+        <a class="btn" href="cadastro.html?tipo=matricula">Fazer matrícula</a>
+        <a class="btn btn--ghost" href="cadastro.html?tipo=visita">Agendar visita</a>
       </div>
-      <div class="coupon__fields">
-        <label class="sr" for="f-nome">Seu nome</label>
-        <input id="f-nome" name="nome" type="text" autocomplete="name" placeholder="Seu nome" required>
-        <label class="sr" for="f-objetivo">Seu objetivo</label>
-        <select id="f-objetivo" name="objetivo">
-          <option value="">Seu objetivo</option>
-          <option>Ganhar massa muscular</option>
-          <option>Emagrecer</option>
-          <option>Melhorar o condicionamento</option>
-          <option>Voltar a treinar</option>
-        </select>
-        <label class="sr" for="f-turno">Melhor turno</label>
-        <select id="f-turno" name="turno">
-          <option value="">Melhor turno para a visita</option>
-          <option>Manhã</option>
-          <option>Tarde</option>
-          <option>Noite</option>
-        </select>
-        <label class="sr" for="f-plano">Interesse</label>
-        <select id="f-plano" name="plano">
-          <option>Visita guiada</option>
-          <option>Plano mensal</option>
-        </select>
-        <button class="coupon__submit" type="submit">Enviar pelo Instagram</button>
-        <p class="coupon__done" data-done hidden>Mensagem copiada. Cole no chat do Instagram que acabou de abrir.</p>
-      </div>
-    </form>
+    </div>
   </section>
 
 </main>
@@ -291,10 +335,10 @@
   </div>
   <div class="foot__cols">
     <nav aria-label="Rodapé">
-      <h3>Academia</h3>
-      <a href="#estrutura">Estrutura</a>
-      <a href="#horarios">Horários</a>
-      <a href="#planos">Planos</a>
+      <h3>Site</h3>
+      <a href="#tour">Tour 3D</a>
+      <a href="loja.html">Loja</a>
+      <a href="cadastro.html">Cadastro</a>
       <a href="#duvidas">Dúvidas</a>
     </nav>
     <div>
@@ -305,7 +349,7 @@
     </div>
     <div>
       <h3>Onde</h3>
-      <p>Valente, Bahia</p>
+      <p data-endereco-curto>Valente, Bahia</p>
       <p><a href="https://www.instagram.com/elite_drakogym/" target="_blank" rel="noopener">Instagram @elite_drakogym</a></p>
     </div>
   </div>
@@ -315,6 +359,11 @@
   </div>
 </footer>
 
+<script src="config.js"></script>
+<script src="data/produtos.js"></script>
+<script src="assets/vendor/supabase.js"></script>
+<script src="site.js"></script>
 <script src="main.js" defer></script>
+<script type="module" src="tour3d.js"></script>
 </body>
 </html>
