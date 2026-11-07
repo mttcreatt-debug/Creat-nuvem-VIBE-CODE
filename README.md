@@ -8,8 +8,10 @@ sem etapa de build: funciona em qualquer hospedagem estática (GitHub Pages, Ver
 
 | Página | O que tem |
 | --- | --- |
-| `index.html` | Abertura em tela cheia com o vídeo do salão, tour 3D pelos hexágonos de neon com a leitura de cada lugar, anilha 3D que gira com o dedo, horários com status "aberto agora", vitrine, planos, Drako 30, dúvidas |
-| `loja.html` | Catálogo com filtros (planos, roupas, suplementos, bebidas, eventos), carrinho e envio do pedido |
+| `index.html` | Abertura em tela cheia, a história (galpão → academia) com o comparador projeto 3D × realidade, tour 3D com as fotos de outubro, salão em panorâmica giratória, o arsenal de máquinas animadas, anilha 3D, horários, vitrine, planos, Drako 30, dúvidas |
+| `historia.html` | Linha do tempo completa: prédio, galpão vazio, projeto 3D, chegada das máquinas, montagem, inauguração, Drako 30 e a academia em outubro |
+| `maquinas.html` | Todas as máquinas recortadas e tratadas, filtro por grupo muscular e ficha de cada uma com a foto no salão |
+| `loja.html` | Catálogo com filtros (planos, serviços, roupas, eventos), carrinho e envio do pedido |
 | `cadastro.html` | Matrícula, visita guiada ou lista do Drako 30, num formulário só |
 | `admin.html` | Painel da equipe: login, cadastros e pedidos, mudança de status, busca e exportação em planilha (CSV) |
 
@@ -17,6 +19,7 @@ sem etapa de build: funciona em qualquer hospedagem estática (GitHub Pages, Ver
 
 - **`config.js`** — WhatsApp, Instagram, endereço e as chaves do Supabase. É o único arquivo obrigatório.
 - **`data/produtos.js`** — produtos, preços, fotos e categorias da loja.
+- **`data/maquinas.js`** — nome, grupo muscular e descrição de cada máquina.
 
 ## Como os pedidos e cadastros funcionam
 
@@ -52,8 +55,11 @@ anilha vira foto. As legendas de cada lugar estão no próprio `index.html` (blo
 ## O que confirmar antes de divulgar
 
 - **Preços de exemplo** (marcados `confirmar: true` em `data/produtos.js`): diária R$ 20,00,
-  camiseta R$ 79,90, Kit Drako R$ 249,90, whey R$ 149,90, creatina R$ 119,90, energético R$ 9,90,
-  ingresso Drako 30 R$ 30,00. O plano mensal (R$ 119,90) veio do flyer oficial.
+  avaliação física R$ 50,00, camiseta R$ 79,90, ingresso Drako 30 R$ 30,00. O plano mensal
+  (R$ 119,90) veio do flyer oficial.
+- **Nomes das máquinas** (marcados `confirmar: true` em `data/maquinas.js`): identificados pelas fotos.
+- **Datas da linha do tempo**: fevereiro (obra/projeto), junho (chegada), julho (montagem e
+  inauguração em 18/07), 30/08 (Drako 30) e outubro (fotos atuais). Confirmar o mês da chegada.
 - **Visita guiada grátis**: confirmar se a academia oferece.
 - **WhatsApp e endereço**: preencher em `config.js`.
 - **Data da próxima edição do Drako 30**.
@@ -61,5 +67,14 @@ anilha vira foto. As legendas de cada lugar estão no próprio `index.html` (blo
 
 ## Origem das imagens
 
-Todas do Google Drive da academia (ensaio "Fotos Cauã – Drako", SITE(FOTOS), Equipamentos,
-Identidade Visual e campanhas Drako 30). Fotos de produtos foram recortadas da arte do Kit Drako.
+Todas do Google Drive da creat.mtt, só fotos da própria academia: "Drako fotos" (outubro),
+Obras/Processo (fevereiro, com os renders do projeto), Equipamentos, ensaio "Fotos Cauã – Drako",
+SITE(FOTOS) e Identidade Visual. Nenhuma foto de produto de outra marca é usada.
+
+- **Panorâmica do salão** (`assets/img/tour/salao-panorama.jpg`): 5 fotos de outubro costuradas
+  com OpenCV. Cobre cerca de 190° do salão; uma volta completa de 360° precisa dos vídeos originais.
+- **Máquinas** (`assets/img/maquinas/`): fundo removido com IA (rembg, modelo isnet), cor
+  corrigida para tirar o alaranjado da luz. `m*.webp` é o recorte, `f*.jpg` é a foto no salão.
+- Fotos e vídeos acima de ~6 MB do Drive (HEIC de máxima qualidade e os MOV da academia vazia)
+  não passam pelo conector. Para usar esses originais, compartilhe a pasta por link por alguns
+  minutos ou exporte versões menores.

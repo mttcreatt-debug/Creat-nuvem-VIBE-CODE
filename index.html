@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Elite Drako Gym · Academia em Valente-BA</title>
-<meta name="description" content="Elite Drako Gym: academia de musculação em Valente-BA. Tour 3D pelo salão, loja com camiseta, suplementos e planos, e matrícula online. Aberta das 5h à meia-noite.">
+<meta name="description" content="Elite Drako Gym: academia de musculação em Valente-BA. A história do galpão ao salão, tour 3D, panorâmica do salão, todas as máquinas, loja e matrícula online. Aberta das 5h à meia-noite.">
 <meta name="theme-color" content="#0b0b0b">
 <meta property="og:title" content="Elite Drako Gym · Valente-BA">
 <meta property="og:description" content="Ative o modo Drako. Tour 3D, loja e matrícula online.">
-<meta property="og:image" content="assets/img/salao-amplo.jpg">
+<meta property="og:image" content="assets/img/tour/fachada.jpg">
 <meta property="og:locale" content="pt_BR">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="apple-touch-icon" href="assets/img/marca-dragao.png">
@@ -43,8 +43,9 @@
     <span>Elite Drako Gym</span>
   </a>
   <nav class="bar__nav" aria-label="Principal">
+    <a href="historia.html">História</a>
     <a href="#tour">Tour 3D</a>
-    <a href="#horarios">Horários</a>
+    <a href="maquinas.html">Máquinas</a>
     <a href="loja.html">Loja</a>
     <a href="cadastro.html">Cadastro</a>
   </nav>
@@ -75,7 +76,7 @@
   <section class="tour" id="tour" aria-labelledby="tour-title">
     <div class="tour__head">
       <h2 id="tour-title" class="tour__title reveal">Tour pelo salão</h2>
-      <p class="reveal">Oito lugares da academia, um de cada vez. Role a página para atravessar o neon do teto.</p>
+      <p class="reveal">A academia como está agora, em outubro: oito lugares, da calçada à sala de avaliação. Role a página para atravessar o neon do teto.</p>
     </div>
     <div class="tour__stage">
       <canvas class="tour__canvas" data-tour-canvas aria-hidden="true"></canvas>
@@ -88,67 +89,67 @@
 
     <ol class="cenas" data-cenas>
       <li class="cena" data-cena>
-        <img src="assets/img/salao-vespera.jpg" alt="Salão com caixas no chão e o neon do teto já aceso, na véspera da abertura" width="1800" height="1350" loading="lazy">
+        <img src="assets/img/tour/fachada.jpg" alt="Fachada iluminada da Elite Drako Gym à noite, com o nome em letras de luz branca" width="1800" height="1350" loading="lazy">
         <div class="cena__txt">
-          <h3>A véspera</h3>
-          <p class="cena__plano">Plano aberto · luz do fim da tarde</p>
-          <p>Caixas no chão, plástico nas máquinas e o neon já aceso. É o retrato do dia em que a academia ainda estava nascendo.</p>
+          <h3>A fachada</h3>
+          <p class="cena__plano">Plano aberto · noite</p>
+          <p>O nome em luz branca e o hexágono vermelho embaixo. À noite, a academia se vê do fim da rua.</p>
         </div>
       </li>
       <li class="cena" data-cena>
-        <img src="assets/img/salao-amplo.jpg" alt="Salão de musculação amplo com colunas em fila e neon branco e vermelho no teto preto" width="2000" height="1500" loading="lazy">
+        <img src="assets/img/tour/entrada.jpg" alt="Entrada da academia com moldura vermelha e porta de vidro" width="1125" height="1500" loading="lazy">
+        <div class="cena__txt">
+          <h3>A entrada</h3>
+          <p class="cena__plano">Plano frontal · moldura vermelha</p>
+          <p>Um portal vermelho na calçada. Quem passa já sabe onde fica a Drako.</p>
+        </div>
+      </li>
+      <li class="cena" data-cena>
+        <img src="assets/img/tour/recepcao.jpg" alt="Recepção com balcão, prateleiras e neon vermelho no teto" width="1800" height="1350" loading="lazy">
+        <div class="cena__txt">
+          <h3>A recepção</h3>
+          <p class="cena__plano">Grande angular · luz de boas-vindas</p>
+          <p>O primeiro ambiente depois da porta: balcão, atendimento e o neon que segue até o salão.</p>
+        </div>
+      </li>
+      <li class="cena" data-cena>
+        <img src="assets/img/tour/catraca.jpg" alt="Catraca de acesso com leitor digital ao lado de uma coluna" width="1050" height="1400" loading="lazy">
+        <div class="cena__txt">
+          <h3>O acesso</h3>
+          <p class="cena__plano">Detalhe · catraca digital</p>
+          <p>Entrada controlada por catraca: só aluno ativo passa, a qualquer hora entre 5h e meia-noite.</p>
+        </div>
+      </li>
+      <li class="cena" data-cena>
+        <img src="assets/img/tour/salao.jpg" alt="Salão de musculação amplo sob hexágonos de neon branco e vermelho, piso emborrachado" width="2000" height="1500" loading="lazy">
         <div class="cena__txt">
           <h3>O salão</h3>
-          <p class="cena__plano">Grande angular · teto como protagonista</p>
-          <p>Colunas em fila e um teto preto riscado de branco e vermelho. É um teto feito para ser visto de baixo, deitado no banco.</p>
+          <p class="cena__plano">Plano geral · teto como protagonista</p>
+          <p>Colunas em fila, piso emborrachado e um teto preto riscado de luz. Feito para ser visto deitado no banco.</p>
         </div>
       </li>
       <li class="cena" data-cena>
-        <img src="assets/img/salao-corredor.jpg" alt="Corredor de máquinas alinhadas até o fundo do salão sob hexágonos de neon" width="2000" height="1500" loading="lazy">
-        <div class="cena__txt">
-          <h3>O corredor</h3>
-          <p class="cena__plano">Linha de fuga · máquinas em fila</p>
-          <p>As máquinas alinhadas puxam o olho até o fundo. É o caminho do treino, da primeira à última série.</p>
-        </div>
-      </li>
-      <li class="cena" data-cena>
-        <img src="assets/img/maquina-pegadores.jpg" alt="Pegadores emborrachados de uma máquina vermelha Rotha Fitness" width="1280" height="720" loading="lazy">
-        <div class="cena__txt">
-          <h3>As máquinas</h3>
-          <p class="cena__plano">Close · vermelho de fábrica</p>
-          <p>Estrutura vermelha, pegador emborrachado. Equipamento Rotha Fitness, com o vermelho que a casa adotou como cor própria.</p>
-        </div>
-      </li>
-      <li class="cena" data-cena>
-        <img src="assets/img/atleta-anilha.jpg" alt="Atleta com a camiseta da Elite Drako segurando uma anilha vermelha de 20 quilos junto ao rosto" width="1050" height="1400" loading="lazy">
-        <div class="cena__txt">
-          <h3>A carga</h3>
-          <p class="cena__plano">Retrato · anilha de 20 kg</p>
-          <p>A anilha encostada no rosto: o peso como parte do corpo. É a camiseta da casa, a mesma que está na loja.</p>
-        </div>
-      </li>
-      <li class="cena" data-cena>
-        <img src="assets/img/atleta-bike.jpg" alt="Atleta pedalando na bicicleta ergométrica do salão" width="1050" height="1400" loading="lazy">
+        <img src="assets/img/tour/cardio.jpg" alt="Esteira curva sem motor no espaço de cardio" width="1125" height="1500" loading="lazy">
         <div class="cena__txt">
           <h3>O cardio</h3>
-          <p class="cena__plano">Plano médio · movimento contínuo</p>
-          <p>Bicicletas para o aquecimento e para o fim do treino, sob a mesma luz do resto do salão.</p>
+          <p class="cena__plano">Contra-plongée · esteira curva</p>
+          <p>Esteiras, inclusive a curva sem motor, em que é você quem faz a lona girar.</p>
         </div>
       </li>
       <li class="cena" data-cena>
-        <img src="assets/img/vestiario-armarios.jpg" alt="Armários pretos encostados na parede vermelha do vestiário" width="675" height="1200" loading="lazy">
+        <img src="assets/img/tour/halteres.jpg" alt="Halteres redondos com o logo da Elite Drako em vermelho, de 35 e 40 quilos" width="1125" height="1500" loading="lazy">
         <div class="cena__txt">
-          <h3>O vestiário</h3>
-          <p class="cena__plano">Plano fechado · parede vermelha</p>
-          <p>Parede vermelha e armários pretos: até o vestiário segue a paleta do dragão.</p>
+          <h3>Os halteres</h3>
+          <p class="cena__plano">Close · marca na peça</p>
+          <p>Até o peso leva o dragão: halteres com o logo da casa, até 40 kg.</p>
         </div>
       </li>
       <li class="cena" data-cena>
-        <img src="assets/img/equipe.jpg" alt="Três pessoas da equipe de braços cruzados no salão, sob o hexágono de neon" width="1050" height="1400" loading="lazy">
+        <img src="assets/img/tour/avaliacao.jpg" alt="Porta da sala de avaliação com placa em neon e teto de hexágonos" width="1125" height="1500" loading="lazy">
         <div class="cena__txt">
-          <h3>A equipe</h3>
-          <p class="cena__plano">Plano de conjunto · sob o hexágono</p>
-          <p>Braços cruzados sob o hexágono de luz. São eles que te recebem na primeira visita.</p>
+          <h3>A sala de avaliação</h3>
+          <p class="cena__plano">Plano fechado · placa em neon</p>
+          <p>Onde o treino começa: medidas, objetivos e o ponto de partida de cada aluno.</p>
         </div>
       </li>
     </ol>
@@ -171,30 +172,54 @@
     </figure>
   </section>
 
-  <!-- OBRA -->
-  <section class="obra" aria-labelledby="obra-title">
-    <div class="obra__plate">
-      <figure class="obra__frame">
-        <img data-slide="0" class="is-on" src="assets/img/chegada-caminhao.jpg" alt="Caminhão carregado de equipamentos embalados chegando à academia" width="1050" height="1400" loading="lazy">
-        <img data-slide="1" src="assets/img/montagem-salao.jpg" alt="Equipamentos desembalados espalhados pelo salão durante a montagem" width="1600" height="1200" loading="lazy">
-        <img data-slide="2" src="assets/img/salao-corredor.jpg" alt="Salão pronto com máquinas alinhadas e o neon aceso" width="2000" height="1500" loading="lazy">
-      </figure>
+  <!-- HISTÓRIA -->
+  <section class="historia" id="historia" aria-labelledby="historia-title">
+    <div class="historia__head">
+      <h2 id="historia-title" class="reveal">Do galpão ao dragão</h2>
+      <p class="reveal">Em fevereiro era um galpão vazio de chão de cimento. Em julho, abriu as portas. Arraste a linha para comparar o projeto em 3D com o salão de verdade.</p>
+      <a class="btn reveal" href="historia.html">Ver a linha do tempo</a>
     </div>
-    <div class="obra__text">
-      <div class="tabs" role="tablist" aria-label="Etapas da obra">
-        <button role="tab" id="tab-0" aria-selected="true" aria-controls="obra-panel" data-tab="0">Chegada</button>
-        <button role="tab" id="tab-1" aria-selected="false" aria-controls="obra-panel" data-tab="1" tabindex="-1">Montagem</button>
-        <button role="tab" id="tab-2" aria-selected="false" aria-controls="obra-panel" data-tab="2" tabindex="-1">Inauguração</button>
-      </div>
-      <div class="obra__copy" id="obra-panel" role="tabpanel" aria-labelledby="tab-0">
-        <h2 id="obra-title">Montada peça por peça</h2>
-        <p data-copy>Os equipamentos chegaram embalados, de caminhão e empilhadeira, e entraram pela porta da frente um a um.</p>
-      </div>
-      <div class="obra__actions">
-        <a class="cell cell--ink" href="https://www.instagram.com/elite_drakogym/" target="_blank" rel="noopener">Ver no Instagram</a>
-        <a class="cell cell--tone" href="cadastro.html?tipo=visita">Agendar uma visita</a>
+    <figure class="compara reveal" data-compara>
+      <img class="compara__a" src="assets/img/tour/salao-2.jpg" alt="Salão real em outubro, com neon no teto e piso emborrachado" width="2000" height="1500" loading="lazy">
+      <div class="compara__b"><img src="assets/img/linha/04-projeto-salao.jpg" alt="Render 3D do projeto do salão, feito antes da obra" width="1120" height="1400" loading="lazy"></div>
+      <span class="compara__tag compara__tag--b">Projeto 3D · fev</span>
+      <span class="compara__tag compara__tag--a">Realidade · out</span>
+      <label class="sr" for="compara-range">Comparar projeto e realidade</label>
+      <input id="compara-range" class="compara__range" type="range" min="0" max="100" value="50" data-compara-range>
+      <span class="compara__handle" aria-hidden="true"></span>
+    </figure>
+    <ol class="marcos" role="list">
+      <li class="reveal"><img src="assets/img/linha/02-galpao.jpg" alt="Galpão vazio com colunas brancas e chão de cimento" width="1400" height="1050" loading="lazy"><p class="marcos__quando">Fevereiro</p><h3>O galpão</h3></li>
+      <li class="reveal"><img src="assets/img/linha/03-projeto-fachada.jpg" alt="Render da fachada com o dragão em painel vermelho" width="1600" height="1200" loading="lazy"><p class="marcos__quando">Fevereiro</p><h3>O projeto</h3></li>
+      <li class="reveal"><img src="assets/img/linha/05-chegada.jpg" alt="Caminhão carregado de equipamentos embalados" width="1050" height="1400" loading="lazy"><p class="marcos__quando">Junho e julho</p><h3>As máquinas chegam</h3></li>
+      <li class="reveal"><img src="assets/img/linha/09-fachada-noite.jpg" alt="Fachada iluminada da academia à noite" width="1800" height="1350" loading="lazy"><p class="marcos__quando">Outubro</p><h3>A Drako hoje</h3></li>
+    </ol>
+  </section>
+
+  <!-- SALÃO 360 -->
+  <section class="giro" id="giro" aria-labelledby="giro-title">
+    <div class="giro__head">
+      <h2 id="giro-title" class="reveal">O salão inteiro, de uma vez</h2>
+      <p class="reveal">Cinco fotos de outubro costuradas numa só. Arraste para os lados para girar o olhar pelo salão.</p>
+    </div>
+    <div class="giro__stage reveal" data-giro>
+      <canvas data-giro-canvas aria-label="Panorâmica do salão de musculação. Arraste para girar." role="img"></canvas>
+      <img class="giro__fallback" src="assets/img/tour/salao-panorama.jpg" alt="Panorâmica do salão de musculação com esteiras à esquerda, bancos e halteres ao centro e espelhos à direita" width="6000" height="2207" loading="lazy">
+      <div class="giro__ui">
+        <button type="button" class="giro__btn" data-giro-dir="-1" aria-label="Girar para a esquerda">‹</button>
+        <button type="button" class="giro__btn" data-giro-dir="1" aria-label="Girar para a direita">›</button>
       </div>
     </div>
+  </section>
+
+  <!-- MÁQUINAS -->
+  <section class="maq" id="maquinas" aria-labelledby="maq-title">
+    <div class="maq__head">
+      <h2 id="maq-title" class="reveal">O arsenal</h2>
+      <p class="reveal">Cada máquina fotografada no salão, recortada e tratada. Passe o dedo ou o mouse para ver de perto.</p>
+      <a class="btn reveal" href="maquinas.html">Ver todas as máquinas</a>
+    </div>
+    <ul class="maq__grid" role="list" data-maq-destaque></ul>
   </section>
 
   <div class="hexstrip" aria-hidden="true"></div>
@@ -239,7 +264,7 @@
   <section class="vitrine" aria-labelledby="vitrine-title">
     <div class="vitrine__head">
       <h2 id="vitrine-title" class="reveal">Loja Drako</h2>
-      <p class="reveal">Camiseta da casa, suplementos e planos. Você monta o pedido aqui e combina o pagamento com a academia.</p>
+      <p class="reveal">Camiseta da casa, planos, avaliação física e o ingresso do Drako 30. Você monta o pedido aqui e combina o pagamento com a academia.</p>
       <a class="btn reveal" href="loja.html">Ver a loja inteira</a>
     </div>
     <ul class="vitrine__grid" role="list" data-vitrine></ul>
@@ -314,7 +339,7 @@
 
   <!-- CTA FINAL -->
   <section class="final" aria-labelledby="final-title">
-    <img class="final__bg" src="assets/img/salao-corredor.jpg" alt="" width="2000" height="1500" loading="lazy">
+    <img class="final__bg" src="assets/img/tour/salao.jpg" alt="" width="2000" height="1500" loading="lazy">
     <div class="final__scrim" aria-hidden="true"></div>
     <div class="final__copy">
       <h2 id="final-title" class="reveal">Seu novo nível</h2>
@@ -336,7 +361,9 @@
   <div class="foot__cols">
     <nav aria-label="Rodapé">
       <h3>Site</h3>
+      <a href="historia.html">História</a>
       <a href="#tour">Tour 3D</a>
+      <a href="maquinas.html">Máquinas</a>
       <a href="loja.html">Loja</a>
       <a href="cadastro.html">Cadastro</a>
       <a href="#duvidas">Dúvidas</a>
@@ -364,6 +391,8 @@
 <script src="assets/vendor/supabase.js"></script>
 <script src="site.js"></script>
 <script src="main.js" defer></script>
+<script src="maquinas.js" defer></script>
+<script src="data/maquinas.js"></script>
 <script type="module" src="tour3d.js"></script>
 </body>
 </html>

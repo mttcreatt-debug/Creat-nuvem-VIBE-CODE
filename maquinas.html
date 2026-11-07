@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Máquinas · Elite Drako Gym</title>
+<meta name="description" content="Todas as máquinas e equipamentos da Elite Drako Gym, fotografados no salão: pernas, costas, peito, core, pesos livres e cardio.">
+<meta name="theme-color" content="#0b0b0b">
+<meta property="og:title" content="O arsenal · Elite Drako Gym">
+<meta property="og:image" content="assets/img/maquinas/f3560.jpg">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+
+<header class="bar" id="topo">
+  <a class="bar__mark" href="index.html" aria-label="Elite Drako Gym, início">
+    <img src="assets/img/marca-dragao.png" alt="" width="40" height="40">
+    <span>Elite Drako Gym</span>
+  </a>
+  <nav class="bar__nav" aria-label="Principal">
+    <a href="historia.html">História</a>
+    <a href="index.html#tour">Tour 3D</a>
+    <a href="maquinas.html" aria-current="page">Máquinas</a>
+    <a href="loja.html">Loja</a>
+  </nav>
+  <button class="bar__cart" type="button" data-abrir-carrinho aria-label="Abrir carrinho">Carrinho <span class="bar__count" data-contador hidden>0</span></button>
+  <a class="btn btn--sm" href="cadastro.html">Matricule-se</a>
+</header>
+
+<main id="conteudo">
+  <section class="maq-hero" aria-labelledby="maqh-title">
+    <div class="maq-hero__copy">
+      <h1 id="maqh-title" class="rise">O arsenal</h1>
+      <p class="rise">Todas as máquinas fotografadas no próprio salão, recortadas e tratadas. Toque em uma para ver a ficha e a foto dela no lugar.</p>
+    </div>
+    <figure class="maq-hero__peca rise">
+      <span class="mq__glow" aria-hidden="true"></span>
+      <img src="assets/img/maquinas/m3560.webp" alt="Remada articulada vermelha, recortada" width="800" height="800">
+    </figure>
+  </section>
+
+  <section class="catalogo" aria-labelledby="cat-title">
+    <div class="catalogo__top">
+      <h2 id="cat-title">Por grupo</h2>
+      <div class="filtros" role="group" aria-label="Filtrar por grupo" data-maq-filtros></div>
+    </div>
+    <ul class="maq__grid maq__grid--full" role="list" data-maq-catalogo aria-live="polite"></ul>
+  </section>
+
+  <section class="final" aria-labelledby="final-title">
+    <img class="final__bg" src="assets/img/tour/salao.jpg" alt="" width="2000" height="1500" loading="lazy">
+    <div class="final__scrim" aria-hidden="true"></div>
+    <div class="final__copy">
+      <h2 id="final-title" class="reveal">Venha testar todas</h2>
+      <p class="reveal">Agende uma visita: a equipe mostra cada máquina e monta o seu começo.</p>
+      <div class="final__actions reveal">
+        <a class="btn" href="cadastro.html?tipo=visita">Agendar visita</a>
+        <a class="btn btn--ghost" href="cadastro.html?tipo=matricula">Fazer matrícula</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot foot--min">
+  <div class="foot__last">
+    <p>© <span data-year>2026</span> Elite Drako Gym · <span data-endereco-curto>Valente, Bahia</span> · <a href="https://www.instagram.com/elite_drakogym/" target="_blank" rel="noopener">@elite_drakogym</a></p>
+    <a class="btn btn--sm" href="#topo">Voltar ao topo</a>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="data/produtos.js"></script>
+<script src="data/maquinas.js"></script>
+<script src="assets/vendor/supabase.js"></script>
+<script src="site.js"></script>
+<script src="main.js" defer></script>
+<script src="maquinas.js" defer></script>
+</body>
+</html>

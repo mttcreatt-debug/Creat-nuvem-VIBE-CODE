@@ -240,6 +240,86 @@ function initTour() {
   caption(0);
 }
 
+
+/* ============================================================ SALÃO 360 */
+function initGiro() {
+  const stage = document.querySelector("[data-giro]");
+  if (!stage) return;
+  const canvas = stage.querySelector("[data-giro-canvas]");
+  const fallback = stage.querySelector(".giro__fallback");
+  if (!webglOK()) { stage.classList.add("giro--static"); return; }
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true }); }
+  catch (e) { stage.classList.add("giro--static"); return; }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(62, 1, 0.1, 100);
+
+  // the stitched photo covers about 190° of the room; wrap it on the inside of a cylinder
+  const ARC = THREE.MathUtils.degToRad(190);
+  const R = 10, aspect = 6000 / 2207;
+  const H = (R * ARC) / aspect;
+  const geo = new THREE.CylinderGeometry(R, R, H, 160, 1, true, Math.PI - ARC / 2, ARC);
+  geo.scale(-1, 1, 1);
+  const mat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+  const mesh = new THREE.Mesh(geo, mat);
+  scene.add(mesh);
+  new THREE.TextureLoader().load(fallback.currentSrc || fallback.src, (tex) => {
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+    mat.map = tex; mat.needsUpdate = true;
+    stage.classList.add("giro--3d");
+  });
+
+  function resize() {
+    const r = canvas.getBoundingClientRect();
+    renderer.setSize(Math.max(1, r.width), Math.max(1, r.height), false);
+    camera.aspect = r.width / Math.max(1, r.height);
+    // keep the photo's top and bottom edges out of view
+    const vfov = 2 * Math.atan((H * 0.46) / R);
+    camera.fov = THREE.MathUtils.radToDeg(Math.min(vfov, THREE.MathUtils.degToRad(70)));
+    camera.updateProjectionMatrix();
+  }
+  resize(); window.addEventListener("resize", resize);
+
+  const hfov = () => 2 * Math.atan(Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2) * camera.aspect);
+  const limit = () => Math.max(0, ARC / 2 - hfov() / 2);
+  let yaw = 0, vel = reduce ? 0 : 0.0016, drag = false, lx = 0, idle = 0, auto = !reduce;
+  canvas.addEventListener("pointerdown", (e) => { drag = true; auto = false; lx = e.clientX; canvas.setPointerCapture(e.pointerId); stage.classList.add("is-grab"); });
+  canvas.addEventListener("pointermove", (e) => { if (!drag) return; vel = -(e.clientX - lx) * 0.0028; lx = e.clientX; idle = 0; });
+  const end = () => { drag = false; stage.classList.remove("is-grab"); };
+  canvas.addEventListener("pointerup", end); canvas.addEventListener("pointercancel", end);
+  stage.querySelectorAll("[data-giro-dir]").forEach((b) => b.addEventListener("click", () => { auto = false; vel = Number(b.dataset.giroDir) * 0.05; idle = 0; }));
+  canvas.tabIndex = 0;
+  canvas.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") { auto = false; vel = -0.05; }
+    if (e.key === "ArrowRight") { auto = false; vel = 0.05; }
+  });
+
+  let raf = 0, on = false, dir = 1;
+  function frame() {
+    raf = requestAnimationFrame(frame);
+    idle++;
+    if (!drag) {
+      if (auto) vel = 0.0016 * dir; else vel *= 0.93;
+      if (!auto && idle > 360 && !reduce) auto = true;
+    }
+    yaw += vel;
+    const lim = limit();
+    if (yaw > lim) { yaw = lim; dir = -1; vel = 0; }
+    if (yaw < -lim) { yaw = -lim; dir = 1; vel = 0; }
+    camera.rotation.set(0, -yaw, 0);
+    renderer.render(scene, camera);
+  }
+  new IntersectionObserver((en) => {
+    en.forEach((x) => {
+      if (x.isIntersecting && !on) { on = true; raf = requestAnimationFrame(frame); }
+      else if (!x.isIntersecting && on) { on = false; cancelAnimationFrame(raf); }
+    });
+  }).observe(stage);
+}
+
 /* ============================================================ ANILHA */
 function initAnilha() {
   const canvas = document.querySelector("[data-anilha-canvas]");
@@ -369,3 +449,4 @@ function initAnilha() {
 
 initTour();
 initAnilha();
+initGiro();

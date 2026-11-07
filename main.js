@@ -155,7 +155,7 @@
   /* ---------- vitrine: four products from the catalogue ---------- */
   var vit = document.querySelector("[data-vitrine]");
   if (vit && window.Drako && window.DRAKO_PRODUTOS) {
-    vit.innerHTML = ["camiseta-drako", "kit-drako", "plano-mensal", "energetico"].map(function (id) {
+    vit.innerHTML = ["camiseta-drako", "plano-mensal", "avaliacao", "drako30-ingresso"].map(function (id) {
       return window.Drako.cartao(window.Drako.produto(id));
     }).join("");
   }

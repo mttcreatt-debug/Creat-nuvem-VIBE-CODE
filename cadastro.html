@@ -21,8 +21,9 @@
     <span>Elite Drako Gym</span>
   </a>
   <nav class="bar__nav" aria-label="Principal">
+    <a href="historia.html">História</a>
     <a href="index.html#tour">Tour 3D</a>
-    <a href="index.html#horarios">Horários</a>
+    <a href="maquinas.html">Máquinas</a>
     <a href="loja.html">Loja</a>
     <a href="cadastro.html" aria-current="page">Cadastro</a>
   </nav>
@@ -83,9 +84,9 @@
 <section class="espaco" aria-labelledby="espaco-title">
   <h2 id="espaco-title" class="reveal">O que te espera</h2>
   <ul class="espaco__fotos" role="list">
-    <li class="reveal"><img src="assets/img/salao-amplo.jpg" alt="Salão de musculação com neon branco e vermelho no teto" width="2000" height="1500" loading="lazy"><p>O salão, aberto das 5h à meia-noite</p></li>
-    <li class="reveal"><img src="assets/img/maquina-pegadores.jpg" alt="Pegadores de uma máquina vermelha Rotha Fitness" width="1280" height="720" loading="lazy"><p>Máquinas Rotha Fitness</p></li>
-    <li class="reveal"><img src="assets/img/vestiario-armarios.jpg" alt="Armários pretos no vestiário de parede vermelha" width="675" height="1200" loading="lazy"><p>Vestiário com armários</p></li>
+    <li class="reveal"><img src="assets/img/tour/salao.jpg" alt="Salão de musculação com neon branco e vermelho no teto" width="2000" height="1500" loading="lazy"><p>O salão, aberto das 5h à meia-noite</p></li>
+    <li class="reveal"><img src="assets/img/maquinas/f3560.jpg" alt="Máquina articulada vermelha no salão" width="1050" height="1400" loading="lazy"><p>Máquinas Rotha Fitness</p></li>
+    <li class="reveal"><img src="assets/img/tour/avaliacao.jpg" alt="Porta da sala de avaliação com placa em neon" width="1125" height="1500" loading="lazy"><p>Sala de avaliação</p></li>
     <li class="reveal"><img src="assets/img/equipe.jpg" alt="Equipe da Elite Drako no salão" width="1050" height="1400" loading="lazy"><p>A equipe que te recebe</p></li>
   </ul>
 </section>
@@ -105,7 +106,7 @@
 (function () {
   var TIPOS = {
     matricula: { titulo: "Faça sua matrícula", lead: "Preencha em dois minutos. A equipe confirma pelo WhatsApp e você já pode treinar.", botao: "Enviar matrícula", img: "assets/img/atleta-rack.jpg", alt: "Atleta com a camiseta da Elite Drako colocando uma anilha de 20 quilos no suporte" },
-    visita: { titulo: "Agende uma visita", lead: "Escolha o turno e alguém da equipe te mostra o salão e as máquinas, sem compromisso.", botao: "Agendar visita", img: "assets/img/salao-corredor.jpg", alt: "Corredor de máquinas sob o neon do salão" },
+    visita: { titulo: "Agende uma visita", lead: "Escolha o turno e alguém da equipe te mostra o salão e as máquinas, sem compromisso.", botao: "Agendar visita", img: "assets/img/tour/corredor.jpg", alt: "Corredor de máquinas sob o neon do salão" },
     drako30: { titulo: "Lista do Drako 30", lead: "Desafio em dupla: você e um convidado. Entre na lista e seja avisado primeiro da próxima edição.", botao: "Entrar na lista", img: "assets/img/atleta-carga.jpg", alt: "Atleta carregando uma anilha de 20 quilos pelo salão" }
   };
   var tipo = new URLSearchParams(location.search).get("tipo");
