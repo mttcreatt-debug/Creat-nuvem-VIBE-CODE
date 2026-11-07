@@ -824,7 +824,7 @@ h3 { font-weight: 600; font-size: var(--step-lead); line-height: 1.15; letter-sp
 .giro__head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; padding: 0 var(--m) 40px; }
 .giro__head h2 { font-size: var(--step-head); max-width: 16ch; }
 .giro__head p { max-width: 42ch; }
-.giro__stage { position: relative; height: min(78svh, 760px); margin: 0 var(--m); --c: 48px; clip-path: var(--hex); background: #050505; cursor: grab; touch-action: pan-y; }
+.giro__stage { position: relative; height: min(78svh, 760px); margin: 0 var(--m); --c: 48px; clip-path: var(--hex); cursor: grab; touch-action: pan-y; }
 .giro__stage.is-grab { cursor: grabbing; }
 .giro__stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity .8s; }
 .giro--3d canvas { opacity: 1; }
