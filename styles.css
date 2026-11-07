@@ -188,6 +188,7 @@ h3 { font-weight: 600; font-size: var(--step-lead); line-height: 1.15; letter-sp
   display: grid; grid-template-columns: 1fr 1fr;
   margin-top: var(--gap-section);
   min-height: 88svh;
+  padding: 16px;
   background: var(--surface);
 }
 .obra__plate { display: grid; place-items: center; padding: 40px; }
