@@ -36,11 +36,13 @@
   <section class="maq-hero" aria-labelledby="maqh-title">
     <div class="maq-hero__copy">
       <h1 id="maqh-title" class="rise">O arsenal</h1>
-      <p class="rise">Todas as máquinas fotografadas no próprio salão, recortadas e tratadas. Toque em uma para ver a ficha e a foto dela no lugar.</p>
+      <p class="rise">Todas as máquinas fotografadas no próprio salão, recortadas e tratadas. Assista ao filme com som, depois toque em uma máquina para ver a ficha e a foto dela no lugar.</p>
     </div>
-    <figure class="maq-hero__peca rise">
-      <span class="mq__glow" aria-hidden="true"></span>
-      <img src="assets/img/maquinas/m3560.webp" alt="Remada articulada vermelha, recortada" width="800" height="800">
+<figure class="filme filme--hero rise" id="filme" data-filme>
+      <video class="filme__video" muted loop playsinline preload="metadata" poster="assets/img/arsenal-poster.jpg" aria-label="Filme do arsenal: as máquinas da Elite Drako girando sob o neon, uma a uma" data-filme-video>
+        <source src="assets/video/arsenal.mp4" type="video/mp4">
+      </video>
+      <button type="button" class="filme__som" data-filme-som aria-pressed="false">Ativar som</button>
     </figure>
   </section>
 

@@ -180,10 +180,10 @@
       <a class="btn reveal" href="historia.html">Ver a linha do tempo</a>
     </div>
     <figure class="compara reveal" data-compara>
-      <img class="compara__a" src="assets/img/tour/salao-2.jpg" alt="Salão real em outubro, com neon no teto e piso emborrachado" width="2000" height="1500" loading="lazy">
-      <div class="compara__b"><img src="assets/img/linha/04-projeto-salao.jpg" alt="Render 3D do projeto do salão, feito antes da obra" width="1120" height="1400" loading="lazy"></div>
+      <img class="compara__a" src="assets/img/linha/real-pesos.jpg" alt="Área de pesos real: bancos de supino, racks e máquinas sob o neon" width="1600" height="1200" loading="lazy">
+      <div class="compara__b"><img src="assets/img/linha/render-pesos.jpg" alt="Render 3D da área de pesos, feito antes da obra" width="1600" height="1200" loading="lazy"></div>
       <span class="compara__tag compara__tag--b">Projeto 3D · fev</span>
-      <span class="compara__tag compara__tag--a">Realidade · out</span>
+      <span class="compara__tag compara__tag--a">Realidade · jul</span>
       <label class="sr" for="compara-range">Comparar projeto e realidade</label>
       <input id="compara-range" class="compara__range" type="range" min="0" max="100" value="50" data-compara-range>
       <span class="compara__handle" aria-hidden="true"></span>
@@ -219,7 +219,15 @@
       <p class="reveal">Cada máquina fotografada no salão, recortada e tratada. Passe o dedo ou o mouse para ver de perto.</p>
       <a class="btn reveal" href="maquinas.html">Ver todas as máquinas</a>
     </div>
+    <div class="maq__corpo">
+    <figure class="filme reveal" id="filme" data-filme>
+      <video class="filme__video" muted loop playsinline preload="none" poster="assets/img/arsenal-poster.jpg" aria-label="Filme do arsenal: as máquinas da Elite Drako girando sob o neon, uma a uma" data-filme-video>
+        <source src="assets/video/arsenal.mp4" type="video/mp4">
+      </video>
+      <button type="button" class="filme__som" data-filme-som aria-pressed="false">Ativar som</button>
+    </figure>
     <ul class="maq__grid" role="list" data-maq-destaque></ul>
+    </div>
   </section>
 
   <div class="hexstrip" aria-hidden="true"></div>

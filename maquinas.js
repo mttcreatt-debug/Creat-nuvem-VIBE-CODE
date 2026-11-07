@@ -99,6 +99,26 @@
     tilt(cat); render();
   }
 
+  /* filme do arsenal: plays muted when visible, sound on demand */
+  document.querySelectorAll("[data-filme]").forEach(function (fig) {
+    var v = fig.querySelector("[data-filme-video]"), b = fig.querySelector("[data-filme-som]");
+    b.addEventListener("click", function () {
+      v.muted = !v.muted;
+      if (!v.muted) { v.volume = 0.8; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+      b.textContent = v.muted ? "Ativar som" : "Desligar som";
+      b.setAttribute("aria-pressed", String(!v.muted));
+    });
+    if (reduce) { v.controls = true; return; }
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (en) {
+        en.forEach(function (x) {
+          if (x.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+          else { v.pause(); }
+        });
+      }, { threshold: 0.35 }).observe(fig);
+    }
+  });
+
   /* projeto × realidade */
   document.querySelectorAll("[data-compara]").forEach(function (fig) {
     var r = fig.querySelector("[data-compara-range]");

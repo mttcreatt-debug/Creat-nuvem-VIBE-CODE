@@ -957,3 +957,34 @@ h3 { font-weight: 600; font-size: var(--step-lead); line-height: 1.15; letter-sp
   .etapa::before { left: -1px; top: 0; margin-top: 0; }
   .etapa__txt { padding-left: 0; }
 }
+
+/* two comparisons side by side on the history page */
+.compara-par { grid-column: 5 / 13; display: grid; gap: 48px; }
+.compara-par__item h3 { font-size: var(--step-lead); margin-bottom: 14px; }
+@media (max-width: 1080px) { .compara-par { grid-column: 1 / -1; } }
+
+/* ---------- filme do arsenal ---------- */
+.maq__corpo { grid-column: 1 / -1; display: grid; grid-template-columns: 5fr 7fr; gap: var(--g); align-items: start; }
+.maq__corpo .maq__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.filme { position: relative; --c: 40px; clip-path: var(--hex); overflow: hidden; aspect-ratio: 1; background: #080808; }
+.filme__video { width: 100%; height: 100%; object-fit: cover; }
+.filme__som {
+  position: absolute; left: 50%; bottom: 28px; transform: translateX(-50%);
+  --c: 14px; min-height: 52px; padding: 0 30px; border: 0; cursor: pointer;
+  background: var(--accent); color: #fff; font: 600 var(--step-body) var(--font);
+  clip-path: var(--hex); transition: background-color .2s;
+}
+.filme__som:hover { background: var(--accent-hi); }
+.filme__som[aria-pressed="true"] { background: rgba(8,8,8,.84); }
+.maq__corpo .filme { position: sticky; top: 90px; }
+.filme--hero { grid-column: 6 / 13; }
+@media (max-width: 1080px) {
+  .maq__corpo { grid-template-columns: 1fr; }
+  .maq__corpo .filme { position: relative; top: 0; max-width: 640px; width: 100%; justify-self: center; }
+  .filme--hero { grid-column: 1 / -1; max-width: 640px; width: 100%; justify-self: center; }
+}
+@media (max-width: 760px) { .filme { --c: 20px; } .filme__som { bottom: 18px; } }
+/* footer links: thumb-sized on touch screens */
+@media (pointer: coarse), (max-width: 760px) {
+  .foot__cols a { display: flex; align-items: center; min-height: 44px; }
+}
