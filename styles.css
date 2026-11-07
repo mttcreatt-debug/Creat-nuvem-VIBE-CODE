@@ -917,6 +917,7 @@ h3 { font-weight: 600; font-size: var(--step-lead); line-height: 1.15; letter-sp
 .etapa__fotos--2 { grid-template-columns: 1fr 1fr; }
 .etapa__fotos img { --c: 22px; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; clip-path: var(--hex); }
 .etapa__fotos--2 img { aspect-ratio: 3 / 4; }
+.etapa__video { --c: 22px; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; clip-path: var(--hex); }
 .etapa__txt { padding-left: 32px; max-width: 52ch; }
 .etapa__quando { color: #ff6a6d; }
 .etapa__txt h2 { font-size: var(--step-head); }
