@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Loja Drako · Elite Drako Gym</title>
-<meta name="description" content="Loja da Elite Drako Gym: camiseta oficial, planos, avaliação física e ingresso do Drako 30. Monte o pedido e combine o pagamento com a academia.">
+<meta name="description" content="Loja da Elite Drako Gym: camiseta oficial, planos, avaliação física, ingresso do Drako 30 e, em breve, suplementos e acessórios. Monte o pedido e combine o pagamento com a academia.">
 <meta name="theme-color" content="#0b0b0b">
 <meta property="og:title" content="Loja Drako · Elite Drako Gym">
 <meta property="og:image" content="assets/img/atleta-retrato.jpg">
@@ -13,31 +13,97 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/loja.css">
 </head>
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
-<header class="bar" id="topo">
+<header class="bar nav" id="topo" data-nav>
   <a class="bar__mark" href="./" aria-label="Elite Drako Gym, início">
     <img src="assets/img/marca-dragao.png" alt="" width="40" height="40">
     <span>Elite Drako Gym</span>
   </a>
-  <nav class="bar__nav" aria-label="Principal">
-    <a href="historia.html">História</a>
-    <a href="./#tour">Tour 3D</a>
-    <a href="maquinas.html">Máquinas</a>
-    <a href="loja.html" aria-current="page">Loja</a>
-    <a href="cadastro.html">Cadastro</a>
+  <nav class="nav__main" aria-label="Principal">
+    <ul class="nav__list" role="list">
+      <li class="nav__item nav__item--t3"><a class="nav__link" href="./">Início</a></li>
+      <li class="nav__item nav__item--t2"><a class="nav__link" href="./#tour">Tour 3D</a></li>
+      <li class="nav__item nav__item--t2"><a class="nav__link" href="./#estrutura">Estrutura</a></li>
+      <li class="nav__item"><a class="nav__link" href="maquinas.html">Máquinas</a></li>
+      <li class="nav__item"><a class="nav__link" href="eventos.html">Eventos</a></li>
+      <li class="nav__item nav__item--t2"><a class="nav__link" href="historia.html">História</a></li>
+      <li class="nav__item nav__drop" data-nav-drop>
+        <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-loja">Loja<svg class="nav__chev" viewBox="0 0 12 8" width="12" height="8" aria-hidden="true" focusable="false"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+        <ul class="nav__drop-list" id="nav-loja" role="list" hidden>
+          <li><a href="loja.html">Toda a loja</a></li>
+          <li><a href="loja.html#suplementos">Suplementos</a></li>
+          <li><a href="loja.html#acessorios">Acessórios</a></li>
+          <li><a href="loja.html#roupas">Roupas</a></li>
+          <li><a href="loja.html#planos">Planos</a></li>
+          <li><a href="loja.html#ingressos">Ingressos</a></li>
+        </ul>
+      </li>
+      <li class="nav__item nav__item--t2"><a class="nav__link" href="./#como-chegar">Como chegar</a></li>
+    </ul>
   </nav>
-  <button class="bar__cart" type="button" data-abrir-carrinho aria-label="Abrir carrinho">Carrinho <span class="bar__count" data-contador hidden>0</span></button>
-  <a class="btn btn--sm" href="cadastro.html">Matricule-se</a>
+  <div class="nav__actions">
+    <button class="bar__cart" type="button" data-abrir-carrinho aria-label="Abrir carrinho"><svg class="nav__bag" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M5 8h14l-1.2 12H6.2L5 8zm4 0V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span class="bar__cart-txt">Carrinho</span> <span class="bar__count" data-contador hidden>0</span></button>
+    <a class="btn btn--sm nav__cta" href="cadastro.html?tipo=matricula">Matricule-se</a>
+    <button class="nav__burger" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menu" data-nav-abrir><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2.2"/></svg><span class="nav__burger-txt">Menu</span></button>
+  </div>
+  <div class="nav__sheet" id="nav-menu" role="dialog" aria-modal="true" aria-label="Menu do site" hidden data-nav-sheet>
+    <div class="nav__sheet-top">
+      <a class="bar__mark" href="./" aria-label="Elite Drako Gym, início">
+        <img src="assets/img/marca-dragao.png" alt="" width="40" height="40">
+        <span>Elite Drako Gym</span>
+      </a>
+      <button class="nav__close" type="button" data-nav-fechar>Fechar<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="2.2"/></svg></button>
+    </div>
+    <div class="nav__groups">
+      <section class="nav__group" aria-labelledby="nav-g1">
+        <h2 id="nav-g1">Conhecer</h2>
+        <ul role="list">
+          <li><a href="./">Início</a></li>
+          <li><a href="./#tour">Tour 3D</a></li>
+          <li><a href="./#estrutura">Estrutura</a></li>
+          <li><a href="maquinas.html">Máquinas</a></li>
+          <li><a href="historia.html">História</a></li>
+          <li><a href="./#como-chegar">Como chegar</a></li>
+        </ul>
+      </section>
+      <section class="nav__group" aria-labelledby="nav-g2">
+        <h2 id="nav-g2">Comprar</h2>
+        <ul role="list">
+          <li><a href="loja.html">Loja</a></li>
+        </ul>
+        <ul class="nav__subs" role="list">
+          <li><a href="loja.html#suplementos">Suplementos</a></li>
+          <li><a href="loja.html#acessorios">Acessórios</a></li>
+          <li><a href="loja.html#roupas">Roupas</a></li>
+          <li><a href="loja.html#planos">Planos</a></li>
+          <li><a href="loja.html#ingressos">Ingressos</a></li>
+        </ul>
+      </section>
+      <section class="nav__group" aria-labelledby="nav-g3">
+        <h2 id="nav-g3">Participar</h2>
+        <ul role="list">
+          <li><a href="eventos.html">Eventos</a></li>
+          <li><a href="cadastro.html?tipo=matricula">Matrícula</a></li>
+        </ul>
+      </section>
+    </div>
+    <div class="nav__sheet-actions">
+      <button class="bar__cart" type="button" data-abrir-carrinho aria-label="Abrir carrinho"><svg class="nav__bag" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M5 8h14l-1.2 12H6.2L5 8zm4 0V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>Carrinho</span> <span class="bar__count" data-contador hidden>0</span></button>
+      <a class="btn nav__cta-big" href="cadastro.html?tipo=matricula">Matricule-se</a>
+    </div>
+  </div>
 </header>
 
 <main id="conteudo">
   <section class="loja-hero" aria-labelledby="loja-title">
     <div class="loja-hero__copy">
       <h1 id="loja-title" class="rise">Loja Drako</h1>
-      <p class="rise">A camiseta da casa, os planos, a avaliação física e o ingresso do próximo Drako 30. Você monta o pedido aqui e combina o pagamento com a academia.</p>
+      <p class="rise">A camiseta da casa, os planos, a avaliação física e o ingresso do próximo Drako 30. Suplementos e acessórios estão chegando. Você monta o pedido aqui e combina o pagamento com a academia.</p>
       <a class="btn rise" href="#produtos">Ver produtos</a>
     </div>
     <figure class="loja-hero__pic rise">
@@ -48,18 +114,21 @@
     </figure>
   </section>
 
-  <section class="catalogo" id="produtos" aria-labelledby="catalogo-title">
-    <div class="catalogo__top">
-      <h2 id="catalogo-title">Produtos</h2>
-      <div class="filtros" role="group" aria-label="Filtrar por categoria" data-filtros></div>
-    </div>
-    <ul class="catalogo__grid" role="list" data-catalogo aria-live="polite"></ul>
-  </section>
+  <div class="catalogo loja" id="produtos" data-loja>
+    <nav class="lnav" aria-label="Seções da loja" data-lnav>
+      <ul class="lnav__list" role="list" data-lnav-list></ul>
+    </nav>
+    <section class="lsec" id="suplementos" data-sec="suplementos" aria-labelledby="sec-suplementos"></section>
+    <section class="lsec" id="acessorios" data-sec="acessorios" aria-labelledby="sec-acessorios"></section>
+    <section class="lsec" id="roupas" data-sec="roupas" aria-labelledby="sec-roupas"></section>
+    <section class="lsec" id="planos" data-sec="planos" aria-labelledby="sec-planos"></section>
+    <section class="lsec" id="ingressos" data-sec="eventos" aria-labelledby="sec-eventos"></section>
+  </div>
 
   <section class="comofunciona" aria-labelledby="como-title">
     <h2 id="como-title" class="reveal">Como comprar</h2>
     <ul class="passos" role="list">
-      <li class="reveal"><h3>Você escolhe</h3><p>Adicione os produtos ao carrinho, com tamanho quando houver.</p></li>
+      <li class="reveal"><h3>Você escolhe</h3><p>Adicione os produtos ao carrinho, com tamanho quando houver. O que ainda não chegou fica com o botão “Avise-me”.</p></li>
       <li class="reveal"><h3>O pedido chega pronto</h3><p>Ao enviar, a lista vai direto para a conversa com a academia, já com nomes, quantidades e total.</p></li>
       <li class="reveal"><h3>Paga e retira</h3><p>Pix ou cartão, combinado na conversa. A retirada é no balcão, no horário que você treina.</p></li>
     </ul>
@@ -68,21 +137,37 @@
 
 <footer class="foot">
   <div class="foot__mark reveal">
-    <img src="assets/img/logo-elite-drako-branco.png" alt="Elite Drako Gym" width="900" height="602" loading="lazy">
+    <img src="assets/img/logo-elite-drako-branco.png" alt="Elite Drako Gym" width="900" height="845" loading="lazy">
     <h2>Um novo nível</h2>
   </div>
-  <div class="foot__cols">
-    <nav aria-label="Rodapé">
+  <div class="foot__cols foot__cols--nav">
+    <nav aria-label="Rodapé: o site">
       <h3>Site</h3>
       <a href="./">Início</a>
       <a href="./#tour">Tour 3D</a>
-      <a href="cadastro.html">Cadastro</a>
+      <a href="./#estrutura">Estrutura</a>
+      <a href="maquinas.html">Máquinas</a>
+      <a href="eventos.html">Eventos</a>
+      <a href="historia.html">História</a>
+      <a href="./#como-chegar">Como chegar</a>
+      <a href="./#duvidas">Dúvidas</a>
+    </nav>
+    <nav aria-label="Rodapé: loja e matrícula">
+      <h3>Loja</h3>
+      <a href="loja.html">Toda a loja</a>
+      <a href="loja.html#suplementos">Suplementos</a>
+      <a href="loja.html#acessorios">Acessórios</a>
+      <a href="loja.html#roupas">Roupas</a>
+      <a href="loja.html#planos">Planos</a>
+      <a href="loja.html#ingressos">Ingressos</a>
+      <a href="cadastro.html?tipo=matricula">Matrícula</a>
+      <a href="cadastro.html?tipo=visita">Visita guiada</a>
     </nav>
     <div>
       <h3>Horários</h3>
-      <p>Seg a sex · 05h às 00h</p>
-      <p>Sábado · 07h às 18h</p>
-      <p>Domingo · 08h às 15h</p>
+      <p>Seg a sex · 5h às 0h</p>
+      <p>Sábado · 7h às 18h</p>
+      <p>Domingo · 8h às 15h</p>
     </div>
     <div>
       <h3>Onde</h3>
@@ -92,7 +177,7 @@
   </div>
   <div class="foot__last">
     <p>© <span data-year>2026</span> Elite Drako Gym. Preços sujeitos a confirmação na academia.</p>
-    <a class="btn btn--sm" href="#topo">Voltar ao topo</a>
+    <a class="btn btn--sm" href="#top">Voltar ao topo</a>
   </div>
 </footer>
 
@@ -100,29 +185,161 @@
 <script src="data/produtos.js"></script>
 <script src="assets/vendor/supabase.js"></script>
 <script src="site.js"></script>
+<script src="nav.js" defer></script>
 <script>
+/* Loja: monta as seções a partir de data/produtos.js, a barra de categorias e o salto para loja.html#secao. */
 (function () {
-  var grid = document.querySelector("[data-catalogo]");
-  var filtros = document.querySelector("[data-filtros]");
-  var cats = window.DRAKO_CATEGORIAS, prods = window.DRAKO_PRODUTOS;
-  var atual = (location.hash || "").replace("#", "");
-  if (!cats.some(function (c) { return c.id === atual; })) atual = "todos";
-  filtros.innerHTML = cats.map(function (c) {
-    return '<button type="button" data-cat="' + c.id + '" aria-pressed="' + (c.id === atual) + '">' + c.nome + "</button>";
-  }).join("");
-  function render() {
-    var lista = prods.filter(function (p) { return atual === "todos" || p.categoria === atual; });
-    grid.innerHTML = lista.map(window.Drako.cartao).join("");
-    grid.querySelectorAll(".reveal").forEach(function (el, i) { el.style.setProperty("--d", (i % 6) * 70 + "ms"); requestAnimationFrame(function () { el.classList.add("is-in"); }); });
-    filtros.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.cat === atual)); });
-  }
-  filtros.addEventListener("click", function (e) {
-    var b = e.target.closest("[data-cat]"); if (!b) return;
-    atual = b.dataset.cat; render();
-    history.replaceState(null, "", atual === "todos" ? location.pathname : "#" + atual);
+  "use strict";
+  var raiz = document.querySelector("[data-loja]");
+  if (!raiz || !window.Drako) return;
+  var cats = window.DRAKO_CATEGORIAS || [], prods = window.DRAKO_PRODUTOS || [];
+  var nav = raiz.querySelector("[data-lnav]"), navLista = raiz.querySelector("[data-lnav-list]");
+  var reduz = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  /* ---------- seções ---------- */
+  var secoes = [];
+  cats.forEach(function (c) {
+    var el = raiz.querySelector('[data-sec="' + c.id + '"]');
+    if (!el) return;
+    var lista = prods.filter(function (p) { return p.categoria === c.id; });
+    var breve = lista.length > 0 && lista.every(function (p) { return p.status === "em-breve"; });
+    var n = lista.length;
+    el.classList.toggle("lsec--breve", breve);
+    el.classList.toggle("lsec--um", n === 1);
+    el.classList.toggle("lsec--tres", n === 3);
+    el.innerHTML =
+      '<header class="lsec__head">' +
+      '  <div class="lsec__titulo"><h2 id="sec-' + c.id + '">' + esc(c.titulo || c.nome) + '</h2>' +
+      (breve ? '<span class="lsec__selo">Em breve</span>' : "") + "</div>" +
+      '  <div class="lsec__texto"><p>' + esc(c.texto || "") + "</p>" +
+      '  <p class="lsec__conta">' + (n === 1 ? "1 item" : n + " itens") + (breve ? " a caminho" : "") + "</p></div>" +
+      "</header>" +
+      (n ? '<ul class="catalogo__grid lsec__grid" role="list" data-catalogo>' + lista.map(window.Drako.cartao).join("") + "</ul>"
+         : '<p class="lsec__vazio">Nenhum item cadastrado ainda.</p>');
+    // produto sozinho na seção ganha destaque: mostra também os detalhes
+    if (n === 1) {
+      var li = el.querySelector(".prod"), p0 = lista[0];
+      var buy = li && li.querySelector(".prod__buy");
+      if (buy && p0.detalhes) buy.insertAdjacentHTML("beforebegin", '<p class="prod__det">' + esc(p0.detalhes) + "</p>");
+      if (buy && c.id === "eventos") buy.insertAdjacentHTML("afterend", '<p class="prod__link"><a href="eventos.html">Ver todos os eventos da academia</a></p>');
+    }
+    secoes.push({ cat: c, el: el });
   });
-  render();
-  if (location.hash && atual !== "todos") document.getElementById("produtos").scrollIntoView();
+  // as entradas (.reveal) são animadas pelo main.js, que roda depois deste script
+
+  /* ---------- barra de categorias (links de verdade para as âncoras) ---------- */
+  navLista.innerHTML = cats.map(function (c) {
+    var n = c.id === "todos" ? 0 : prods.filter(function (p) { return p.categoria === c.id; }).length;
+    return '<li><a class="lnav__chip" href="#' + (c.ancora || c.id) + '" data-cat="' + c.id + '">' + esc(c.nome) +
+      (n ? ' <span class="lnav__n" aria-hidden="true">' + n + "</span>" : "") + "</a></li>";
+  }).join("");
+  var chips = Array.prototype.slice.call(navLista.querySelectorAll(".lnav__chip"));
+
+  // o hash pode ser a âncora (#ingressos), o id da categoria (#eventos) ou um apelido antigo (#servicos)
+  function resolver(h) {
+    h = decodeURIComponent((h || "").replace(/^#/, "")).toLowerCase();
+    if (!h) return null;
+    for (var i = 0; i < cats.length; i++) {
+      var c = cats[i];
+      if (h === c.ancora || h === c.id || (c.apelidos || []).indexOf(h) > -1) return c;
+    }
+    return null;
+  }
+  function alvoDe(c) { return c.id === "todos" ? raiz : document.getElementById(c.ancora || c.id); }
+
+  // a barra do topo + a barra de categorias ficam por cima da página: a rolagem desconta as duas
+  var topo = document.querySelector("[data-nav]") || document.querySelector(".bar");
+  function folga() { return (topo ? topo.getBoundingClientRect().height : 62) + nav.getBoundingClientRect().height + 12; }
+  function ajustarFolga() {
+    if (topo) nav.style.setProperty("--lnav-top", Math.round(topo.getBoundingClientRect().height) + "px");
+    document.documentElement.style.scrollPaddingTop = Math.round(folga()) + "px";
+  }
+  ajustarFolga();
+  window.addEventListener("resize", ajustarFolga);
+
+  function marcar(id) {
+    chips.forEach(function (a) {
+      var on = a.dataset.cat === id;
+      a.classList.toggle("is-on", on);
+      if (on) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current");
+      // no celular a barra rola de lado: traz o chip ativo para a vista sem mexer na página
+      if (on && navLista.scrollWidth > navLista.clientWidth) {
+        var x = a.offsetLeft - (navLista.clientWidth - a.offsetWidth) / 2;
+        navLista.scrollTo({ left: Math.max(0, x), behavior: reduz ? "auto" : "smooth" });
+      }
+    });
+  }
+  var tDestaque = 0;
+  function destacar(el) {
+    if (!el || el === raiz) return;
+    secoes.forEach(function (s) { s.el.classList.remove("is-alvo"); });
+    void el.offsetWidth;
+    el.classList.add("is-alvo");
+    clearTimeout(tDestaque);
+    tDestaque = setTimeout(function () { el.classList.remove("is-alvo"); }, 2400);
+  }
+  var travaSpy = 0;
+  function irPara(c, suave) {
+    var el = alvoDe(c); if (!el) return;
+    // mira no título da seção (não no começo do respiro acima dele), para o fim da seção anterior não aparecer cortado
+    // "Tudo" mira no título da primeira seção, descontando as duas barras, para ele não ficar escondido
+    var head = el.querySelector(".lsec__head");
+    var y = (head || el).getBoundingClientRect().top + window.pageYOffset - folga() - (head ? 28 : 0);
+    travaSpy = Date.now() + (suave && !reduz ? 900 : 120);
+    window.scrollTo({ top: Math.max(0, y), behavior: suave && !reduz ? "smooth" : "auto" });
+    marcar(c.id);
+    destacar(el);
+  }
+
+  /* cliques em links para seções desta página: barra de categorias, menu do topo, rodapé */
+  document.addEventListener("click", function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest("a[href*='#']"); if (!a) return;
+    if (a.pathname.replace(/^\//, "") !== location.pathname.replace(/^\//, "") || a.host !== location.host) return;
+    var c = resolver(a.hash); if (!c) return;
+    e.preventDefault();
+    var hash = "#" + (c.ancora || c.id);
+    if (location.hash !== hash) history.pushState(null, "", hash);
+    // fecha o menu suspenso da Loja, se o clique veio dele
+    var drop = a.closest("[data-nav-drop]");
+    if (drop) drop.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+    irPara(c, true);
+    if (a.classList.contains("lnav__chip")) a.focus({ preventScroll: true });
+  });
+  window.addEventListener("hashchange", function () { var c = resolver(location.hash); if (c) irPara(c, true); });
+  window.addEventListener("popstate", function () { var c = resolver(location.hash); if (c) irPara(c, false); });
+
+  /* ---------- seção ativa conforme a rolagem ---------- */
+  var ticking = false;
+  function espiar() {
+    ticking = false;
+    if (Date.now() < travaSpy) return;
+    var linha = folga() + 40, atual = "todos";
+    secoes.forEach(function (s) { if (s.el.getBoundingClientRect().top <= linha) atual = s.cat.id; });
+    var fim = raiz.getBoundingClientRect().bottom;
+    if (fim < linha) atual = "";
+    marcar(atual);
+    nav.classList.toggle("is-preso", nav.getBoundingClientRect().top <= (topo ? topo.getBoundingClientRect().height : 62) + 1 && fim > linha);
+  }
+  window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(espiar); } }, { passive: true });
+
+  /* ---------- chegou com loja.html#secao: rola depois que as seções foram montadas ---------- */
+  var inicial = resolver(location.hash);
+  if (inicial) {
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    var canon = "#" + (inicial.ancora || inicial.id);
+    if (location.hash !== canon) history.replaceState(null, "", canon);
+    irPara(inicial, false);
+    // fontes e imagens podem empurrar a página: corrige a posição, a menos que a pessoa já tenha rolado
+    var mexeu = false, marca = function () { mexeu = true; };
+    ["wheel", "touchstart", "keydown", "mousedown"].forEach(function (t) { window.addEventListener(t, marca, { once: true, passive: true }); });
+    var deNovo = function () { if (!mexeu) irPara(inicial, false); };
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { requestAnimationFrame(deNovo); });
+    window.addEventListener("load", function () { requestAnimationFrame(deNovo); }, { once: true });
+  } else {
+    espiar();
+  }
 })();
 </script>
 <script src="main.js" defer></script>

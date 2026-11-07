@@ -17,6 +17,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/img/salao-poster.jpg">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/tour.css">
 <script type="importmap">{ "imports": { "three": "./assets/vendor/three.module.min.js" } }</script>
 <script type="application/ld+json">
 {
@@ -37,20 +39,84 @@
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
-<header class="bar" id="topo">
+<header class="bar nav" id="topo" data-nav>
   <a class="bar__mark" href="./" aria-label="Elite Drako Gym, início">
     <img src="assets/img/marca-dragao.png" alt="" width="40" height="40">
     <span>Elite Drako Gym</span>
   </a>
-  <nav class="bar__nav" aria-label="Principal">
-    <a href="historia.html">História</a>
-    <a href="#tour">Tour 3D</a>
-    <a href="maquinas.html">Máquinas</a>
-    <a href="loja.html">Loja</a>
-    <a href="cadastro.html">Cadastro</a>
+  <nav class="nav__main" aria-label="Principal">
+    <ul class="nav__list" role="list">
+      <li class="nav__item nav__item--t3"><a class="nav__link" href="./">Início</a></li>
+      <li class="nav__item nav__item--t2"><a class="nav__link" href="./#tour">Tour 3D</a></li>
+      <li class="nav__item nav__item--t2"><a class="nav__link" href="./#estrutura">Estrutura</a></li>
+      <li class="nav__item"><a class="nav__link" href="maquinas.html">Máquinas</a></li>
+      <li class="nav__item"><a class="nav__link" href="eventos.html">Eventos</a></li>
+      <li class="nav__item nav__item--t2"><a class="nav__link" href="historia.html">História</a></li>
+      <li class="nav__item nav__drop" data-nav-drop>
+        <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-loja">Loja<svg class="nav__chev" viewBox="0 0 12 8" width="12" height="8" aria-hidden="true" focusable="false"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+        <ul class="nav__drop-list" id="nav-loja" role="list" hidden>
+          <li><a href="loja.html">Toda a loja</a></li>
+          <li><a href="loja.html#suplementos">Suplementos</a></li>
+          <li><a href="loja.html#acessorios">Acessórios</a></li>
+          <li><a href="loja.html#roupas">Roupas</a></li>
+          <li><a href="loja.html#planos">Planos</a></li>
+          <li><a href="loja.html#ingressos">Ingressos</a></li>
+        </ul>
+      </li>
+      <li class="nav__item nav__item--t2"><a class="nav__link" href="./#como-chegar">Como chegar</a></li>
+    </ul>
   </nav>
-  <button class="bar__cart" type="button" data-abrir-carrinho aria-label="Abrir carrinho">Carrinho <span class="bar__count" data-contador hidden>0</span></button>
-  <a class="btn btn--sm" href="cadastro.html">Matricule-se</a>
+  <div class="nav__actions">
+    <button class="bar__cart" type="button" data-abrir-carrinho aria-label="Abrir carrinho"><svg class="nav__bag" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M5 8h14l-1.2 12H6.2L5 8zm4 0V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span class="bar__cart-txt">Carrinho</span> <span class="bar__count" data-contador hidden>0</span></button>
+    <a class="btn btn--sm nav__cta" href="cadastro.html?tipo=matricula">Matricule-se</a>
+    <button class="nav__burger" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menu" data-nav-abrir><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2.2"/></svg><span class="nav__burger-txt">Menu</span></button>
+  </div>
+  <div class="nav__sheet" id="nav-menu" role="dialog" aria-modal="true" aria-label="Menu do site" hidden data-nav-sheet>
+    <div class="nav__sheet-top">
+      <a class="bar__mark" href="./" aria-label="Elite Drako Gym, início">
+        <img src="assets/img/marca-dragao.png" alt="" width="40" height="40">
+        <span>Elite Drako Gym</span>
+      </a>
+      <button class="nav__close" type="button" data-nav-fechar>Fechar<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="2.2"/></svg></button>
+    </div>
+    <div class="nav__groups">
+      <section class="nav__group" aria-labelledby="nav-g1">
+        <h2 id="nav-g1">Conhecer</h2>
+        <ul role="list">
+          <li><a href="./">Início</a></li>
+          <li><a href="./#tour">Tour 3D</a></li>
+          <li><a href="./#estrutura">Estrutura</a></li>
+          <li><a href="maquinas.html">Máquinas</a></li>
+          <li><a href="historia.html">História</a></li>
+          <li><a href="./#como-chegar">Como chegar</a></li>
+        </ul>
+      </section>
+      <section class="nav__group" aria-labelledby="nav-g2">
+        <h2 id="nav-g2">Comprar</h2>
+        <ul role="list">
+          <li><a href="loja.html">Loja</a></li>
+        </ul>
+        <ul class="nav__subs" role="list">
+          <li><a href="loja.html#suplementos">Suplementos</a></li>
+          <li><a href="loja.html#acessorios">Acessórios</a></li>
+          <li><a href="loja.html#roupas">Roupas</a></li>
+          <li><a href="loja.html#planos">Planos</a></li>
+          <li><a href="loja.html#ingressos">Ingressos</a></li>
+        </ul>
+      </section>
+      <section class="nav__group" aria-labelledby="nav-g3">
+        <h2 id="nav-g3">Participar</h2>
+        <ul role="list">
+          <li><a href="eventos.html">Eventos</a></li>
+          <li><a href="cadastro.html?tipo=matricula">Matrícula</a></li>
+        </ul>
+      </section>
+    </div>
+    <div class="nav__sheet-actions">
+      <button class="bar__cart" type="button" data-abrir-carrinho aria-label="Abrir carrinho"><svg class="nav__bag" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M5 8h14l-1.2 12H6.2L5 8zm4 0V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>Carrinho</span> <span class="bar__count" data-contador hidden>0</span></button>
+      <a class="btn nav__cta-big" href="cadastro.html?tipo=matricula">Matricule-se</a>
+    </div>
+  </div>
 </header>
 
 <main id="conteudo">
@@ -72,87 +138,134 @@
     </div>
   </section>
 
-  <!-- TOUR 3D: cada lugar, uma cena -->
-  <section class="tour" id="tour" aria-labelledby="tour-title">
-    <div class="tour__head">
-      <h2 id="tour-title" class="tour__title reveal">Tour pelo salão</h2>
-      <p class="reveal">A academia como está agora, em outubro: oito lugares, da calçada à sala de avaliação. Role a página para atravessar o neon do teto.</p>
-    </div>
-    <div class="tour__stage">
-      <canvas class="tour__canvas" data-tour-canvas aria-hidden="true"></canvas>
-      <div class="tour__hud">
-        <p class="tour__hint" data-tour-hint>Role para entrar.</p>
+  <!-- TOUR 3D: caminhada em primeira pessoa, uma parada por vídeo -->
+  <section class="walk" id="tour" aria-labelledby="tour-title">
+    <div class="walk__head">
+      <h2 id="tour-title" class="reveal">Caminhe pela Drako</h2>
+      <div class="walk__intro reveal">
+        <p>Em outubro gravamos, à altura do olhar, o caminho que você faz: da calçada ao vestiário, em 9 paradas. Role a página para andar, ou toque no nome de um lugar para ir direto até ele.</p>
+        <button class="btn btn--ghost btn--sm" type="button" data-walk-film>Assistir o caminho inteiro <span class="walk__dur">44 s</span></button>
       </div>
-      <div class="tour__caption" data-tour-caption aria-live="polite"></div>
-      <div class="tour__progress" aria-hidden="true"><span data-tour-bar></span></div>
     </div>
 
-    <ol class="cenas" data-cenas>
-      <li class="cena" data-cena>
-        <img src="assets/img/tour/fachada.jpg" alt="Fachada iluminada da Elite Drako Gym à noite, com o nome em letras de luz branca" width="1800" height="1350" loading="lazy">
-        <div class="cena__txt">
-          <h3>A fachada</h3>
-          <p class="cena__plano">Plano aberto · noite</p>
-          <p>O nome em luz branca e o hexágono vermelho embaixo. À noite, a academia se vê do fim da rua.</p>
+    <div class="walk__track" data-walk-track>
+      <div class="walk__stage" data-walk-stage>
+        <canvas class="walk__canvas" data-walk-canvas aria-hidden="true"></canvas>
+        <div class="walk__cap" data-walk-cap aria-live="polite"></div>
+        <p class="walk__hint" data-walk-hint>Role para entrar</p>
+      </div>
+    </div>
+
+    <nav class="walk__rail" aria-label="Paradas do tour" data-walk-rail>
+      <ol role="list"></ol>
+      <span class="walk__meter" aria-hidden="true"><span data-walk-bar></span></span>
+    </nav>
+
+    <ol class="walk__strip" role="list" data-walk-strip>
+      <li class="walk__card" data-walk-cena id="cena-fachada" data-video="assets/video/tour/fachada.mp4" data-poster="assets/img/tour-vid/fachada.jpg" data-curto="Fachada">
+        <div class="walk__media">
+          <img src="assets/img/tour-vid/fachada.jpg" alt="Fachada da Elite Drako Gym à noite, com o pórtico vermelho e as portas de vidro" width="1280" height="720" loading="lazy" decoding="async">
+        </div>
+        <div class="walk__txt">
+          <p class="walk__count">Parada 1 de 9</p>
+          <h3>Fachada</h3>
+          <p>À noite, o pórtico vermelho com o letreiro Elite Drako Gym marca a entrada, e pelas portas de vidro já se vê a loja iluminada.</p>
         </div>
       </li>
-      <li class="cena" data-cena>
-        <img src="assets/img/tour/entrada.jpg" alt="Entrada da academia com moldura vermelha e porta de vidro" width="1125" height="1500" loading="lazy">
-        <div class="cena__txt">
-          <h3>A entrada</h3>
-          <p class="cena__plano">Plano frontal · moldura vermelha</p>
-          <p>Um portal vermelho na calçada. Quem passa já sabe onde fica a Drako.</p>
+      <li class="walk__card" data-walk-cena id="cena-recepcao" data-video="assets/video/tour/recepcao.mp4" data-poster="assets/img/tour-vid/recepcao.jpg" data-curto="Recepção">
+        <div class="walk__media">
+          <img src="assets/img/tour-vid/recepcao.jpg" alt="Recepção com balcão de atendimento e catraca de acesso" width="1280" height="720" loading="lazy" decoding="async">
+        </div>
+        <div class="walk__txt">
+          <p class="walk__count">Parada 2 de 9</p>
+          <h3>Recepção</h3>
+          <p>Logo na entrada fica o balcão de atendimento com a catraca de acesso, e a loja de suplementos já aparece à direita.</p>
         </div>
       </li>
-      <li class="cena" data-cena>
-        <img src="assets/img/tour/recepcao.jpg" alt="Recepção com balcão, prateleiras e neon vermelho no teto" width="1800" height="1350" loading="lazy">
-        <div class="cena__txt">
-          <h3>A recepção</h3>
-          <p class="cena__plano">Grande angular · luz de boas-vindas</p>
-          <p>O primeiro ambiente depois da porta: balcão, atendimento e o neon que segue até o salão.</p>
+      <li class="walk__card" data-walk-cena id="cena-loja" data-video="assets/video/tour/loja.mp4" data-poster="assets/img/tour-vid/loja.jpg" data-curto="Loja">
+        <div class="walk__media">
+          <img src="assets/img/tour-vid/loja.jpg" alt="Loja Drako com prateleiras de suplementos e geladeira de bebidas" width="1280" height="720" loading="lazy" decoding="async">
+        </div>
+        <div class="walk__txt">
+          <p class="walk__count">Parada 3 de 9</p>
+          <h3>Loja Drako</h3>
+          <p>Prateleiras de suplementos, geladeira de bebidas e mesas altas para o pós-treino, ao lado da recepção.</p>
         </div>
       </li>
-      <li class="cena" data-cena>
-        <img src="assets/img/tour/catraca.jpg" alt="Catraca de acesso com leitor digital ao lado de uma coluna" width="1050" height="1400" loading="lazy">
-        <div class="cena__txt">
-          <h3>O acesso</h3>
-          <p class="cena__plano">Detalhe · catraca digital</p>
-          <p>Entrada controlada por catraca: só aluno ativo passa, a qualquer hora entre 5h e meia-noite.</p>
+      <li class="walk__card" data-walk-cena id="cena-escada" data-video="assets/video/tour/escada.mp4" data-poster="assets/img/tour-vid/escada.jpg" data-curto="Escada">
+        <div class="walk__media">
+          <img src="assets/img/tour-vid/escada.jpg" alt="Escada com degraus iluminados e corrimão" width="1280" height="720" loading="lazy" decoding="async">
+        </div>
+        <div class="walk__txt">
+          <p class="walk__count">Parada 4 de 9</p>
+          <h3>Escada</h3>
+          <p>Escada com degraus iluminados e corrimão, no hall entre a recepção e as demais áreas.</p>
         </div>
       </li>
-      <li class="cena" data-cena>
-        <img src="assets/img/tour/salao.jpg" alt="Salão de musculação amplo sob hexágonos de neon branco e vermelho, piso emborrachado" width="2000" height="1500" loading="lazy">
-        <div class="cena__txt">
-          <h3>O salão</h3>
-          <p class="cena__plano">Plano geral · teto como protagonista</p>
-          <p>Colunas em fila, piso emborrachado e um teto preto riscado de luz. Feito para ser visto deitado no banco.</p>
+      <li class="walk__card" data-walk-cena id="cena-salao" data-video="assets/video/tour/salao.mp4" data-poster="assets/img/tour-vid/salao.jpg" data-curto="Salão">
+        <div class="walk__media">
+          <img src="assets/img/tour-vid/salao.jpg" alt="Salão de treino sob o neon hexagonal do teto, com máquinas e anilhas" width="1280" height="720" loading="lazy" decoding="async">
+        </div>
+        <div class="walk__txt">
+          <p class="walk__count">Parada 5 de 9</p>
+          <h3>Salão de treino</h3>
+          <p>O salão sob o neon hexagonal do teto, com máquinas de carga guiada e anilhas espalhadas pelo piso emborrachado.</p>
         </div>
       </li>
-      <li class="cena" data-cena>
-        <img src="assets/img/tour/cardio.jpg" alt="Esteira curva sem motor no espaço de cardio" width="1125" height="1500" loading="lazy">
-        <div class="cena__txt">
-          <h3>O cardio</h3>
-          <p class="cena__plano">Contra-plongée · esteira curva</p>
-          <p>Esteiras, inclusive a curva sem motor, em que é você quem faz a lona girar.</p>
+      <li class="walk__card" data-walk-cena id="cena-pesos-livres" data-video="assets/video/tour/pesos-livres.mp4" data-poster="assets/img/tour-vid/pesos-livres.jpg" data-curto="Pesos livres">
+        <div class="walk__media">
+          <img src="assets/img/tour-vid/pesos-livres.jpg" alt="Área de pesos livres com supinos, racks e espelhos" width="1280" height="720" loading="lazy" decoding="async">
+        </div>
+        <div class="walk__txt">
+          <p class="walk__count">Parada 6 de 9</p>
+          <h3>Pesos livres</h3>
+          <p>Área de supinos, racks e anilhas, com espelhos na parede e relógio de treino à vista.</p>
         </div>
       </li>
-      <li class="cena" data-cena>
-        <img src="assets/img/tour/halteres.jpg" alt="Halteres redondos com o logo da Elite Drako em vermelho, de 35 e 40 quilos" width="1125" height="1500" loading="lazy">
-        <div class="cena__txt">
-          <h3>Os halteres</h3>
-          <p class="cena__plano">Close · marca na peça</p>
-          <p>Até o peso leva o dragão: halteres com o logo da casa, de 35 a 45 kg.</p>
+      <li class="walk__card" data-walk-cena id="cena-banheiros" data-video="assets/video/tour/banheiros.mp4" data-poster="assets/img/tour-vid/banheiros.jpg" data-curto="Banheiros">
+        <div class="walk__media">
+          <img src="assets/img/tour-vid/banheiros.jpg" alt="Entrada dos banheiros com sinalização feminina e masculina e armários" width="1280" height="720" loading="lazy" decoding="async">
+        </div>
+        <div class="walk__txt">
+          <p class="walk__count">Parada 7 de 9</p>
+          <h3>Banheiros</h3>
+          <p>A sinalização indica o lado feminino e o lado masculino, com armários logo na entrada.</p>
         </div>
       </li>
-      <li class="cena" data-cena>
-        <img src="assets/img/tour/avaliacao.jpg" alt="Porta da sala de avaliação com placa em neon e teto de hexágonos" width="1125" height="1500" loading="lazy">
-        <div class="cena__txt">
-          <h3>A sala de avaliação</h3>
-          <p class="cena__plano">Plano fechado · placa em neon</p>
-          <p>Onde o treino começa: medidas, objetivos e o ponto de partida de cada aluno.</p>
+      <li class="walk__card" data-walk-cena id="cena-vestiario-masculino" data-video="assets/video/tour/vestiario-masculino.mp4" data-poster="assets/img/tour-vid/vestiario-masculino.jpg" data-curto="Vestiário masculino">
+        <div class="walk__media">
+          <img src="assets/img/tour-vid/vestiario-masculino.jpg" alt="Vestiário masculino com bancada de granito, cubas e espelho" width="1280" height="720" loading="lazy" decoding="async">
+        </div>
+        <div class="walk__txt">
+          <p class="walk__count">Parada 8 de 9</p>
+          <h3>Vestiário masculino</h3>
+          <p>Bancada de granito com cubas, espelho amplo e cabideiros, tudo limpo e bem iluminado.</p>
+        </div>
+      </li>
+      <li class="walk__card" data-walk-cena id="cena-vestiario-feminino" data-video="assets/video/tour/vestiario-feminino.mp4" data-poster="assets/img/tour-vid/vestiario-feminino.jpg" data-curto="Vestiário feminino">
+        <div class="walk__media">
+          <img src="assets/img/tour-vid/vestiario-feminino.jpg" alt="Vestiário feminino com bancada de granito e secador de cabelo" width="1280" height="720" loading="lazy" decoding="async">
+        </div>
+        <div class="walk__txt">
+          <p class="walk__count">Parada 9 de 9</p>
+          <h3>Vestiário feminino</h3>
+          <p>No vestiário feminino há bancada de granito, secador de cabelo e um kit de emergência feminina à disposição das alunas.</p>
         </div>
       </li>
     </ol>
+
+    <dialog class="walk__film" data-walk-dialog aria-labelledby="walk-film-title">
+      <div class="walk__film-box">
+        <div class="walk__film-top">
+          <h3 id="walk-film-title">O caminho inteiro</h3>
+          <button class="walk__close" type="button" data-walk-close aria-label="Fechar o vídeo">
+            <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="2.2" fill="none"/></svg>
+          </button>
+        </div>
+        <video class="walk__film-video" data-walk-film-video data-src="assets/video/tour/walk.mp4" poster="assets/img/tour-vid/walk.jpg" preload="none" controls muted playsinline width="1280" height="720"></video>
+        <p class="walk__film-note">Sem som. Da fachada ao vestiário feminino, gravado em 29 de outubro.</p>
+      </div>
+    </dialog>
   </section>
 
   <!-- ANILHA 3D -->
@@ -350,14 +463,14 @@
 
   <!-- DRAKO 30 -->
   <section class="evento" aria-labelledby="evento-title">
-    <figure class="evento__pic reveal"><img src="assets/img/atleta-carga.jpg" alt="Atleta carregando uma anilha de 20 quilos pelo salão" width="1050" height="1400" loading="lazy"></figure>
+    <figure class="evento__pic reveal"><img src="assets/img/eventos/drako-30/03-podio-dupla.jpg" alt="Dupla no pódio do Drako 30, com os números de inscrição no peito" width="1200" height="1600" loading="lazy"></figure>
     <div class="evento__copy">
-      <h2 id="evento-title" class="reveal">Drako 30: o primeiro rugido</h2>
-      <p class="evento__lead reveal">Uma manhã de desafios em dupla, com premiações e sorteios. 30 duplas, 60 participantes: cada aluno leva um convidado.</p>
-      <p class="reveal">A primeira edição foi em 30 de agosto, com níveis iniciante, intermediário e avançado. Entre na lista da próxima e seja avisado primeiro.</p>
+      <h2 id="evento-title" class="reveal">Eventos da Drako</h2>
+      <p class="evento__lead reveal">A academia também é ponto de encontro. Em agosto foi o Drako 30, uma manhã de desafios em dupla com pódio e sorteios. Em outubro, o Coffee Pink reuniu as alunas no Outubro Rosa.</p>
+      <p class="reveal">O próximo é o Novembro Azul, com data e programação a confirmar. Entre na lista e seja avisado primeiro.</p>
       <div class="evento__actions reveal">
-        <a class="btn" href="cadastro.html?tipo=drako30">Entrar na lista</a>
-        <a class="btn btn--ghost" href="loja.html#eventos">Ver ingresso</a>
+        <a class="btn" href="eventos.html">Ver os eventos</a>
+        <a class="btn btn--ghost" href="cadastro.html?tipo=drako30">Entrar na lista</a>
       </div>
     </div>
   </section>
@@ -427,7 +540,7 @@
     <div class="final__scrim" aria-hidden="true"></div>
     <div class="final__copy">
       <h2 id="final-title" class="reveal">Seu novo nível</h2>
-      <p class="reveal">Matrícula em dois minutos. A equipe confirma pelo WhatsApp.</p>
+      <p class="reveal">Matrícula em dois minutos. A equipe confirma com você pelo WhatsApp ou Instagram.</p>
       <div class="final__actions reveal">
         <a class="btn" href="cadastro.html?tipo=matricula">Fazer matrícula</a>
         <a class="btn btn--ghost" href="cadastro.html?tipo=visita">Agendar visita</a>
@@ -439,25 +552,37 @@
 
 <footer class="foot">
   <div class="foot__mark reveal">
-    <img src="assets/img/logo-elite-drako-branco.png" alt="Elite Drako Gym" width="900" height="602" loading="lazy">
+    <img src="assets/img/logo-elite-drako-branco.png" alt="Elite Drako Gym" width="900" height="845" loading="lazy">
     <h2>Um novo nível</h2>
   </div>
-  <div class="foot__cols">
-    <nav aria-label="Rodapé">
+  <div class="foot__cols foot__cols--nav">
+    <nav aria-label="Rodapé: o site">
       <h3>Site</h3>
-      <a href="historia.html">História</a>
-      <a href="#tour">Tour 3D</a>
+      <a href="./">Início</a>
+      <a href="./#tour">Tour 3D</a>
+      <a href="./#estrutura">Estrutura</a>
       <a href="maquinas.html">Máquinas</a>
-      <a href="loja.html">Loja</a>
-      <a href="cadastro.html">Cadastro</a>
-      <a href="#como-chegar">Como chegar</a>
-      <a href="#duvidas">Dúvidas</a>
+      <a href="eventos.html">Eventos</a>
+      <a href="historia.html">História</a>
+      <a href="./#como-chegar">Como chegar</a>
+      <a href="./#duvidas">Dúvidas</a>
+    </nav>
+    <nav aria-label="Rodapé: loja e matrícula">
+      <h3>Loja</h3>
+      <a href="loja.html">Toda a loja</a>
+      <a href="loja.html#suplementos">Suplementos</a>
+      <a href="loja.html#acessorios">Acessórios</a>
+      <a href="loja.html#roupas">Roupas</a>
+      <a href="loja.html#planos">Planos</a>
+      <a href="loja.html#ingressos">Ingressos</a>
+      <a href="cadastro.html?tipo=matricula">Matrícula</a>
+      <a href="cadastro.html?tipo=visita">Visita guiada</a>
     </nav>
     <div>
       <h3>Horários</h3>
-      <p>Seg a sex · 05h às 00h</p>
-      <p>Sábado · 07h às 18h</p>
-      <p>Domingo · 08h às 15h</p>
+      <p>Seg a sex · 5h às 0h</p>
+      <p>Sábado · 7h às 18h</p>
+      <p>Domingo · 8h às 15h</p>
     </div>
     <div>
       <h3>Onde</h3>
@@ -467,7 +592,7 @@
   </div>
   <div class="foot__last">
     <p>© <span data-year>2026</span> Elite Drako Gym. Um novo nível. Uma nova história.</p>
-    <a class="btn btn--sm" href="#topo">Voltar ao topo</a>
+    <a class="btn btn--sm" href="#top">Voltar ao topo</a>
   </div>
 </footer>
 
@@ -475,6 +600,7 @@
 <script src="data/produtos.js"></script>
 <script src="assets/vendor/supabase.js"></script>
 <script src="site.js"></script>
+<script src="nav.js" defer></script>
 <script src="main.js" defer></script>
 <script src="maquinas.js" defer></script>
 <script src="data/maquinas.js"></script>

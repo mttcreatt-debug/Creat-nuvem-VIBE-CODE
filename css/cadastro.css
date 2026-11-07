@@ -1,0 +1,178 @@
+/* Elite Drako Gym — página de matrícula / visita / Drako 30 (cadastro.html).
+   Usa os tokens de styles.css; o único motivo continua sendo o hexágono do neon. */
+
+/* ---------- estrutura: foto fixa ao lado da coluna do formulário ---------- */
+.mat {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--g);
+  padding: 0 var(--m); align-items: start;
+}
+.mat__foto { --c: 48px; position: sticky; top: 74px; height: calc(100svh - 62px - 24px); min-height: 520px; }
+.mat__foto img { width: 100%; height: 100%; object-fit: cover; clip-path: var(--hex); background: var(--surface); }
+.mat__foto figcaption {
+  position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%);
+  max-width: calc(100% - 2 * var(--c) - 16px); width: max-content;
+  background: rgba(11, 11, 11, .82); color: var(--ink); padding: 12px 16px;
+  font-size: var(--step-small); line-height: 1.35; text-align: center;
+}
+.mat__col { padding: clamp(24px, 4vw, 64px) 0 64px clamp(8px, 3vw, 48px); min-width: 0; max-width: 760px; }
+.mat__col h1 { font-size: var(--step-head); }
+.mat__lead { margin-top: 20px; max-width: 46ch; font-size: var(--step-lead); line-height: 1.4; color: var(--ink); }
+
+/* ---------- tipo: controle segmentado (botões com aria-pressed) ---------- */
+.mat__tipos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: 32px; padding: 6px; background: var(--surface); }
+.mat__tipos[hidden] { display: none; }
+.mat__tipos button {
+  --c: 12px; min-height: 52px; padding: 0 12px; border: 0; cursor: pointer;
+  background: transparent; color: var(--muted); font: 600 var(--step-body) var(--font); line-height: 1.2;
+  clip-path: var(--hex); -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+  transition: background-color .2s, color .2s;
+}
+.mat__tipos button:hover { background: var(--surface-2); color: var(--ink); }
+.mat__tipos button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.mat__tipos button:focus-visible { outline: 3px solid var(--ink); outline-offset: -3px; }
+
+/* ---------- resumo do plano (dados de data/produtos.js) ---------- */
+.mat__plano { margin-top: 16px; background: var(--surface); padding: 24px; display: grid; gap: 12px; }
+.mat__plano[hidden] { display: none; }
+.plano__topo { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; }
+.mat__plano h2 { font-size: var(--step-lead); letter-spacing: -0.01em; line-height: 1.15; }
+.plano__preco { font-size: var(--step-state); font-weight: 700; line-height: 1.1; color: var(--ink); white-space: nowrap; }
+.plano__preco span { font-size: var(--step-small); font-weight: 500; color: var(--muted); }
+.mat__plano p { line-height: 1.45; max-width: 58ch; }
+.plano__lista { display: grid; gap: 8px; }
+.plano__lista li { position: relative; padding-left: 26px; line-height: 1.4; }
+.plano__lista li::before {
+  --c: 4px; content: ""; position: absolute; left: 0; top: .5em; width: 14px; height: 8px;
+  background: var(--accent-hi); clip-path: var(--hex);
+}
+.plano__nota { color: var(--muted); font-size: var(--step-small); }
+.plano__nota a { color: var(--ink); text-underline-offset: 3px; }
+
+/* ---------- caixa do formulário ---------- */
+.mat__caixa { margin-top: 40px; scroll-margin-top: 80px; }
+.mat__passos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.mat__passos[hidden] { display: none; }
+.mat__passos button {
+  width: 100%; min-height: 48px; padding: 10px 8px 14px; border: 0; background: none; cursor: pointer;
+  color: var(--muted); font: 500 var(--step-small) var(--font); line-height: 1.25; text-align: left;
+  position: relative; touch-action: manipulation;
+}
+.mat__passos button::after { content: ""; position: absolute; left: 8px; right: 0; bottom: 0; height: 6px; background: var(--surface-2); }
+.mat__passos button.is-feito { color: var(--ink); }
+.mat__passos button.is-feito::after { background: #6d1012; }
+.mat__passos button[aria-current="step"] { color: var(--ink); font-weight: 700; }
+.mat__passos button[aria-current="step"]::after { background: var(--accent-hi); }
+.mat__passos button:disabled { cursor: default; }
+.mat__passos li:first-child button { padding-left: 0; }
+.mat__passos li:first-child button::after { left: 0; }
+.mat__contagem { margin-top: 14px; color: var(--muted); font-size: var(--step-small); }
+.mat__contagem[hidden] { display: none; }
+
+.mat__form[hidden], .passo[hidden] { display: none; }
+.passo { border: 0; padding: 0; margin: 8px 0 0; min-width: 0; }
+.passo__titulo { padding: 0; font-weight: 700; font-size: var(--step-state); text-transform: uppercase; letter-spacing: -0.02em; line-height: 1.05; outline: none; }
+.passo .campos { margin-top: 24px; }
+.passo__nav { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+.passo__nav .btn { flex: 1 1 180px; border: 0; cursor: pointer; font-family: var(--font); }
+.passo__nav .btn--ghost { flex: 0 1 160px; }
+.passo__nav .btn[disabled] { opacity: .6; cursor: wait; }
+
+/* campos: base em styles.css (.campo). Aqui o estado de erro e fontes ≥16px (sem zoom no iPhone). */
+.campo input, .campo select, .campo textarea { font-size: max(16px, var(--step-body)); }
+.campo input[aria-invalid="true"], .campo select[aria-invalid="true"], .campo textarea[aria-invalid="true"] { box-shadow: inset 0 -3px 0 var(--accent-hi); }
+.campo__erro { color: #ffb3b4; font-size: var(--step-small); line-height: 1.35; }
+.campo__erro[hidden] { display: none; }
+.campo__erro::before { content: "! "; font-weight: 700; }
+
+/* nível: três opções grandes em vez de uma lista suspensa */
+.nivel { border: 0; padding: 0; margin: 0; min-width: 0; }
+.nivel legend { padding: 0; margin-bottom: 8px; font-weight: 500; }
+.nivel legend span { color: var(--muted); font-weight: 400; }
+.nivel__ops { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+.nivel__ops label { position: relative; display: block; }
+.nivel__ops input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; z-index: 1; }
+.nivel__ops span {
+  display: flex; align-items: center; justify-content: center; min-height: 52px; padding: 8px 10px;
+  background: var(--surface-2); color: var(--ink); font-weight: 500; text-align: center; line-height: 1.2;
+  transition: background-color .2s;
+}
+.nivel__ops label:hover span { background: #2e2e2e; }
+.nivel__ops input:checked + span, .nivel__ops label:hover input:checked + span { background: var(--accent); color: #fff; font-weight: 600; }
+.nivel__ops input:focus-visible + span { outline: 3px solid var(--accent-hi); outline-offset: 2px; }
+.nivel.is-erro .nivel__ops span { box-shadow: inset 0 -3px 0 var(--accent-hi); }
+
+/* confirmação */
+.resumo { margin: 24px 0 0; display: grid; gap: 4px; }
+.resumo div { display: grid; grid-template-columns: minmax(110px, 1fr) 2fr; gap: 4px 16px; padding: 12px 16px; background: var(--surface); }
+.resumo dt { color: var(--muted); font-size: var(--step-small); line-height: 1.5; }
+.resumo dd { margin: 0; line-height: 1.4; overflow-wrap: anywhere; }
+.resumo__editar {
+  margin-top: 8px; min-height: 44px; padding: 0 2px; border: 0; background: none; cursor: pointer;
+  color: var(--ink); font: 500 var(--step-small) var(--font); text-decoration: underline; text-underline-offset: 3px;
+}
+.passo .aceite { margin-top: 20px; padding: 14px 16px; background: var(--surface); line-height: 1.4; }
+.passo .aceite.is-erro { box-shadow: inset 3px 0 0 var(--accent-hi); }
+.passo .aceite + .campo__erro { margin-top: 8px; }
+.mat__falha { margin-top: 16px; background: #3a0607; color: #ffd9d9; padding: 14px 16px; font-size: var(--step-small); }
+.mat__falha[hidden] { display: none; }
+
+/* ---------- sucesso ---------- */
+.mat__caixa .pronto { margin-top: 0; padding: clamp(24px, 4vw, 40px); }
+.pronto h2 { line-height: 1.05; }
+.pronto__txt { line-height: 1.45; }
+.pronto h3 { margin-top: 28px; font-size: var(--step-body); font-weight: 700; }
+.pronto__passos { margin-top: 12px; display: grid; gap: 10px; counter-reset: p; }
+.pronto__passos li { position: relative; padding: 12px 16px 12px 44px; background: var(--surface-2); line-height: 1.4; }
+.pronto__passos li::before {
+  --c: 4px; content: ""; position: absolute; left: 16px; top: calc(12px + .55em); width: 16px; height: 9px;
+  background: var(--accent-hi); clip-path: var(--hex);
+}
+.pronto__acoes .btn { border: 0; cursor: pointer; font-family: var(--font); }
+
+/* ---------- informações rápidas ---------- */
+.mat__info { margin-top: 48px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px var(--g); }
+.mat__info h2 { font-size: var(--step-body); letter-spacing: 0; line-height: 1.3; margin-bottom: 6px; }
+.mat__info p { color: var(--muted); font-size: var(--step-small); line-height: 1.45; }
+.mat__info a { color: var(--ink); display: inline-flex; align-items: center; min-height: 44px; text-underline-offset: 3px; }
+
+/* ---------- o que te espera ---------- */
+.mat-espaco { padding-top: clamp(64px, 9vw, 120px); }
+.mat-espaco__fotos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px var(--g); }
+.mat-espaco__item img { --c: 22px; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; clip-path: var(--hex); background: var(--surface); }
+.mat-espaco__item--grande { grid-column: span 2; grid-row: span 2; }
+.mat-espaco__item--grande { display: flex; flex-direction: column; }
+.mat-espaco__item--grande img { --c: 36px; aspect-ratio: auto; flex: 1 1 auto; height: 0; min-height: 320px; }
+.mat-espaco__item p { margin-top: 12px; line-height: 1.3; }
+
+@media (max-width: 960px) {
+  .mat { grid-template-columns: 1fr; }
+  .mat__foto { --c: 24px; position: relative; top: 0; height: auto; min-height: 0; margin-top: 8px; }
+  .mat__foto img { height: 38svh; min-height: 240px; max-height: 420px; }
+  /* on the short mobile crop the caption sits under the photo, never over the people */
+  .mat__foto figcaption {
+    position: static; transform: none; width: auto; max-width: none;
+    margin-top: 10px; padding: 0; background: none; color: var(--muted); text-align: left;
+  }
+  .mat__col h1 { line-height: 1.08; }
+  .mat__col { padding: 28px 0 48px; max-width: none; }
+  .mat-espaco__fotos { grid-template-columns: 1fr 1fr; gap: 24px 8px; }
+  .mat-espaco__item--grande { grid-row: auto; display: block; }
+  .mat-espaco__item--grande img { --c: 24px; aspect-ratio: 4 / 3; height: auto; min-height: 0; }
+}
+@media (max-width: 560px) {
+  .mat__tipos { gap: 4px; padding: 4px; }
+  .mat__tipos button { --c: 9px; padding: 0 6px; font-size: var(--step-small); min-height: 50px; }
+  .mat__plano { padding: 20px 16px; }
+  .campos { grid-template-columns: 1fr; }
+  .nivel__ops span { font-size: var(--step-small); }
+  .passo__nav .btn--ghost { flex: 0 0 auto; padding: 0 22px; }
+  .passo__nav .btn { flex: 1 1 0; padding: 0 18px; }
+  .resumo div { grid-template-columns: 1fr; gap: 2px; }
+  .mat__info { grid-template-columns: 1fr 1fr; }
+  .mat__info > div:last-child { grid-column: 1 / -1; }
+  .pronto__acoes .btn { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mat__tipos button, .nivel__ops span { transition: none; }
+}
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }

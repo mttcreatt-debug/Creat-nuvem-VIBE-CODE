@@ -2,6 +2,16 @@
   "aspect": "16:9",
   "cenas": [
     {
+      "id": "fachada",
+      "titulo": "Fachada",
+      "legenda": "À noite, o pórtico vermelho com o letreiro Elite Drako Gym marca a entrada, e pelas portas de vidro já se vê a loja iluminada.",
+      "video": "assets/video/tour/fachada.mp4",
+      "poster": "assets/img/tour-vid/fachada.jpg",
+      "w": 1280,
+      "h": 720,
+      "dur": 6.0
+    },
+    {
       "id": "recepcao",
       "titulo": "Recepção",
       "legenda": "Logo na entrada fica o balcão de atendimento com a catraca de acesso, e a loja de suplementos já aparece à direita.",
@@ -85,7 +95,7 @@
   "filme": {
     "video": "assets/video/tour/walk.mp4",
     "poster": "assets/img/tour-vid/walk.jpg",
-    "dur": 41.83
+    "dur": 47.43
   },
-  "nota": "Fonte: vídeos de 29/10 (IMG_5122–5177, pasta VÍDEOS(SITE)/SITE(VIDEOS)). Faltam fachada, corredor longo e cardio: a caminhada principal em ProRes 4K (IMG_3543/3548/3549/3550) estava bloqueada no Drive (cota de download excedida). Confirmar com o cliente o que fica no andar de cima."
+  "nota": "Fonte: vídeos de 29/10 (IMG_5122–5177, pastas VÍDEOS(SITE) e SITE(VIDEOS)). Fachada recortada do IMG_5133 (duas pessoas de costas aparecem só pela nuca, no rodapé). Faltam o corredor longo, a entrada/catraca em caminhada e o cardio: estão na caminhada principal em ProRes 4K (IMG_3543/3549/3550, 3–8 GB), que o Drive bloqueia por cota de download excedida; os MOV da pasta Drako fotos não são compartilhados por link e passam de 6 MB. Pedir ao cliente uma versão comprimida (H.264/HEVC) desses três arquivos ou liberar o download."
 }

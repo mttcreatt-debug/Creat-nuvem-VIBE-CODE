@@ -1,0 +1,126 @@
+/* ============================================================
+   Elite Drako Gym — loja.html: seções da loja, barra de categorias
+   e os blocos desenhados dos produtos que ainda vão chegar.
+   ============================================================ */
+
+/* Os recortes usam o polígono escrito aqui (e não var(--hex)) para que o --c de cada elemento valha. */
+
+/* ---------- barra de categorias (fica presa abaixo do topo só enquanto a loja está na tela) ---------- */
+.loja { padding-top: clamp(72px, 9vw, 140px); }
+.lnav {
+  position: sticky; top: var(--lnav-top, 62px); z-index: 15;
+  margin: 0 calc(var(--m) * -1); padding: 10px var(--m);
+  background: var(--bg);
+}
+.lnav__list {
+  display: flex; gap: 8px; margin: 0; padding: 0; list-style: none;
+  overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.lnav__list::-webkit-scrollbar { display: none; }
+.lnav__list li { flex: none; }
+.lnav__chip {
+  --c: 10px; display: inline-flex; align-items: center; gap: 8px;
+  min-height: 44px; padding: 0 20px; white-space: nowrap; text-decoration: none;
+  background: var(--surface-2); color: var(--ink); font: 500 var(--step-small) var(--font);
+  clip-path: polygon(var(--c) 0, calc(100% - var(--c)) 0, 100% 50%, calc(100% - var(--c)) 100%, var(--c) 100%, 0 50%); transition: background-color .2s, color .2s;
+}
+.lnav__chip:hover { background: #333; }
+.lnav__chip.is-on { background: var(--accent); color: #fff; }
+.lnav__chip:focus-visible { outline: none; background: #333; box-shadow: inset 0 0 0 3px var(--accent-hi); }
+.lnav__chip.is-on:focus-visible { background: var(--accent); box-shadow: inset 0 0 0 3px #fff; }
+.lnav__n { font-size: 0.8125rem; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
+.lnav__chip.is-on .lnav__n { color: #fff; }
+
+/* ---------- seções ---------- */
+.lsec { padding-top: clamp(64px, 8vw, 120px); }
+.lsec:first-of-type { padding-top: clamp(40px, 5vw, 64px); }
+.lsec__head { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 20px var(--g); align-items: end; margin-bottom: 40px; }
+.lsec__titulo { grid-column: 1 / 7; position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; padding-top: 24px; }
+.lsec__titulo::before {
+  content: ""; position: absolute; left: 0; top: 0; width: 40px; height: 8px;
+  --c: 4px; clip-path: polygon(var(--c) 0, calc(100% - var(--c)) 0, 100% 50%, calc(100% - var(--c)) 100%, var(--c) 100%, 0 50%); background: var(--accent);
+  transition: width .7s var(--ease-out);
+}
+.lsec__titulo h2 { font-size: clamp(2.25rem, 1.4rem + 2.8vw, 3.75rem); transition: color .4s; }
+.lsec__selo {
+  --c: 10px; display: inline-flex; align-items: center; min-height: 40px; padding: 0 18px;
+  background: var(--surface-2); color: var(--ink); clip-path: polygon(var(--c) 0, calc(100% - var(--c)) 0, 100% 50%, calc(100% - var(--c)) 100%, var(--c) 100%, 0 50%);
+  font-size: var(--step-small); font-weight: 600;
+}
+.lsec__selo::before { content: ""; width: 8px; height: 8px; margin-right: 10px; background: var(--accent-hi); --c: 2px; clip-path: polygon(var(--c) 0, calc(100% - var(--c)) 0, 100% 50%, calc(100% - var(--c)) 100%, var(--c) 100%, 0 50%); }
+.lsec__texto { grid-column: 8 / 13; }
+.lsec__texto p { color: var(--muted); max-width: 46ch; line-height: 1.45; }
+.lsec__texto .lsec__conta { margin-top: 10px; color: var(--ink); font-weight: 600; font-size: var(--step-small); }
+.lsec__vazio { color: var(--muted); }
+
+/* chegou por loja.html#secao (ou clicou na barra): a seção se acende por um instante */
+.lsec.is-alvo .lsec__titulo::before { width: 160px; }
+.lsec.is-alvo .lsec__titulo h2 { color: #fff; }
+
+/* ---------- produto que ainda vai chegar: desenho no hexágono, sem foto de marca ---------- */
+.prod__pic--breve { display: grid; place-items: center; background: var(--surface); }
+.prod__pic--breve::before {
+  content: ""; position: absolute; inset: 16% 12%; --c: 18%;
+  clip-path: polygon(var(--c) 0, calc(100% - var(--c)) 0, 100% 50%, calc(100% - var(--c)) 100%, var(--c) 100%, 0 50%);
+  background: #1c1c1c; transition: background-color .4s;
+}
+.prod__ico {
+  position: relative; width: 42%; height: auto; overflow: visible;
+  fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+  transition: transform .6s var(--ease-out);
+}
+.prod__ico .a { fill: var(--accent); stroke: none; }
+.prod__ico .a-l { stroke: var(--accent-hi); }
+.prod__mais { margin-left: .3em; }
+.prod--breve:hover .prod__ico { transform: translateY(-4px); }
+.prod--breve:hover .prod__pic--breve::before { background: #222; }
+.prod__price--breve { color: var(--accent-hi); font-size: var(--step-small); }
+.prod--breve .prod__buy .btn { flex: 1; }
+/* cartões da mesma fileira: o botão desce para o pé do cartão, todos na mesma linha */
+.lsec:not(.lsec--um) .prod__buy { margin-top: auto; padding-top: 16px; }
+
+/* seção com 3 itens: três colunas; com 1 item: o produto em destaque, foto e texto lado a lado */
+.lsec--tres .lsec__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.lsec--um .lsec__grid { grid-template-columns: minmax(0, 1fr); }
+.lsec--um .prod {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); column-gap: clamp(24px, 4vw, 64px);
+  grid-template-rows: repeat(5, auto) 1fr; align-items: start;
+}
+.lsec--um .prod > * { grid-column: 2; }
+.lsec--um .prod__pic { grid-column: 1; grid-row: 1 / -1; --c: 40px; }
+.lsec--um .prod__row { margin-top: clamp(8px, 3vw, 48px); }
+.lsec--um .prod h3 { font-size: var(--step-state); width: 100%; }
+.lsec--um .prod__price { font-size: var(--step-lead); }
+.lsec--um .prod p { font-size: var(--step-lead); line-height: 1.4; max-width: 34ch; }
+.lsec--um .prod .prod__det { font-size: var(--step-body); margin-top: 12px; }
+.lsec--um .prod__buy { max-width: 420px; margin-top: 28px; }
+.lsec--um .prod__link { margin-top: 20px; }
+.prod__link a { color: var(--ink); text-underline-offset: 4px; font-weight: 500; display: inline-flex; align-items: center; min-height: 44px; }
+
+@media (max-width: 1080px) {
+  .lsec__titulo { grid-column: 1 / -1; }
+  .lsec__texto { grid-column: 1 / -1; }
+}
+@media (max-width: 760px) {
+  .lsec--tres .lsec__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lsec--um .prod { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; }
+  .lsec--um .prod > *, .lsec--um .prod__pic { grid-column: 1; grid-row: auto; }
+  .lsec--um .prod__pic { --c: 24px; }
+  .lsec--um .prod__row { margin-top: 18px; }
+  .lsec--um .prod p { font-size: var(--step-body); }
+  .lnav { padding-top: 8px; padding-bottom: 8px; }
+  .lnav__chip { padding: 0 16px; }
+  .lsec__head { margin-bottom: 28px; gap: 14px; }
+  .lsec__titulo h2 { font-size: clamp(2rem, 9vw, 2.5rem); }
+  .lsec__grid { gap: 36px 8px; }
+  .prod__mais { display: none; }
+  .prod--breve .prod__buy .btn { padding: 0 12px; font-size: var(--step-small); }
+}
+@media (max-width: 480px) {
+  /* cartão estreito: nome e preço (ou "Em breve") sempre em linhas próprias, a mesma estrutura em todos */
+  .lsec .prod__row { flex-direction: column; align-items: flex-start; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lsec__titulo::before, .lsec__titulo h2, .prod__ico, .prod__pic--breve::before { transition: none; }
+  .prod--breve:hover .prod__ico { transform: none; }
+}

@@ -1,7 +1,7 @@
 /* Elite Drako Gym — 3D.
-   1) Tour: a câmera atravessa os hexágonos de neon do teto da academia; entre eles, as fotos de cada lugar.
+   1) Tour "Caminhe pela Drako": caminhada em primeira pessoa pelo túnel de neon, com o vídeo de cada lugar.
    2) Anilha: uma anilha de borracha em 3D que gira com o dedo ou o mouse.
-   Sem WebGL ou com "reduzir movimento", a página mostra as mesmas cenas como fotos com legenda. */
+   Sem WebGL ou com "reduzir movimento", o tour vira uma faixa de cartões com pôster e vídeo. */
 import * as THREE from "three";
 import { EffectComposer } from "./assets/vendor/addons/postprocessing/EffectComposer.js";
 import { RenderPass } from "./assets/vendor/addons/postprocessing/RenderPass.js";
@@ -35,209 +35,423 @@ function hexTube(w, h, cut, radius, color, intensity) {
   return new THREE.Mesh(geo, mat);
 }
 
-/* ============================================================ TOUR */
+/* ============================================================ TOUR: "Caminhe pela Drako"
+   A câmera anda, em primeira pessoa, por um túnel de hexágonos de neon (o teto da academia).
+   Em cada parada, um vídeo do lugar, gravado à altura do olhar. Ao seguir, o vídeo se abre
+   para o lado como uma porta e a câmera passa. Só o vídeo da parada atual toca. */
+const smooth = (t) => t * t * (3 - 2 * t);
+const clamp01 = (v) => Math.max(0, Math.min(1, v));
+
+/* flat stretched hexagon with 0..1 UVs, so a video fills it */
+function hexPlane(w, h, cut) {
+  const pts = hexPoints(w, h, cut);
+  const shape = new THREE.Shape(pts.map((p) => new THREE.Vector2(p.x, p.y)));
+  const geo = new THREE.ShapeGeometry(shape);
+  const pos = geo.attributes.position, uv = geo.attributes.uv;
+  for (let i = 0; i < pos.count; i++) uv.setXY(i, pos.getX(i) / w + 0.5, pos.getY(i) / h + 0.5);
+  uv.needsUpdate = true;
+  return geo;
+}
+
+function makeVideo(src) {
+  const v = document.createElement("video");
+  v.muted = true; v.defaultMuted = true; v.loop = true; v.playsInline = true;
+  v.setAttribute("muted", ""); v.setAttribute("playsinline", ""); v.setAttribute("preload", "none");
+  v.crossOrigin = "anonymous";
+  v.dataset.src = src;
+  return v;
+}
+function attach(v) { if (!v.getAttribute("src")) { v.preload = "auto"; v.src = v.dataset.src; } }
+function detach(v) { if (v.getAttribute("src")) { v.pause(); v.removeAttribute("src"); v.load(); } }
+function play(v) { if (v.paused) { const p = v.play(); if (p && p.catch) p.catch(() => {}); } }
+
 function initTour() {
   const section = document.getElementById("tour");
-  const canvas = document.querySelector("[data-tour-canvas]");
-  if (!section || !canvas) return;
-  const cenas = Array.from(section.querySelectorAll("[data-cena]"));
-  if (reduce || !webglOK()) { section.classList.add("tour--static"); return; }
+  if (!section || !section.classList.contains("walk")) return;
+  const cards = Array.from(section.querySelectorAll("[data-walk-cena]"));
+  const N = cards.length;
+  if (!N) return;
+  const rail = section.querySelector("[data-walk-rail]");
+  const railList = rail.querySelector("ol");
+  const strip = section.querySelector("[data-walk-strip]");
+  const data = cards.map((li) => ({
+    id: li.id,
+    title: li.querySelector("h3").textContent,
+    text: li.querySelector(".walk__txt p:last-child").textContent,
+    short: li.dataset.curto || li.querySelector("h3").textContent,
+    video: li.dataset.video, poster: li.dataset.poster
+  }));
+
+  /* rail buttons, one per stop */
+  const stops = data.map((d, i) => {
+    const li = document.createElement("li");
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "walk__stop"; b.textContent = d.short;
+    b.setAttribute("aria-label", d.short + ", parada " + (i + 1) + " de " + N);
+    li.appendChild(b); railList.appendChild(li);
+    return b;
+  });
+  function markStop(i) {
+    stops.forEach((b, k) => {
+      if (k === i) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current");
+      b.classList.toggle("is-past", k < i);
+    });
+    const b = stops[i];
+    if (!b) return;
+    // keep the active stop visible inside the rail, without moving the page
+    const l = b.parentElement.offsetLeft, r = l + b.parentElement.offsetWidth;
+    if (l < railList.scrollLeft + 8 || r > railList.scrollLeft + railList.clientWidth - 8) {
+      railList.scrollTo({ left: Math.max(0, l - railList.clientWidth / 2 + b.offsetWidth / 2), behavior: reduce ? "auto" : "smooth" });
+    }
+  }
+
+  const film = initWalkFilm(section);
+  const use3d = !reduce && webglOK();
+  if (!use3d) { initWalkStrip(section, strip, cards, data, stops, markStop, film); return; }
 
   let renderer;
-  try {
-    renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: "high-performance" });
-  } catch (e) { section.classList.add("tour--static"); return; }
-  section.classList.add("tour--3d");
-  section.style.setProperty("--n", cenas.length);
+  try { renderer = new THREE.WebGLRenderer({ canvas: section.querySelector("[data-walk-canvas]"), antialias: true, powerPreference: "high-performance" }); }
+  catch (e) { initWalkStrip(section, strip, cards, data, stops, markStop, film); return; }
 
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.6));
+  section.classList.add("walk--3d");
+  section.style.setProperty("--n", N);
+  const track = section.querySelector("[data-walk-track]");
+  const stage = section.querySelector("[data-walk-stage]");
+  const canvas = renderer.domElement;
+  stage.appendChild(rail);
+  const capEl = section.querySelector("[data-walk-cap]");
+  const bar = section.querySelector("[data-walk-bar]");
+  const hint = section.querySelector("[data-walk-hint]");
+
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.setClearColor(0x050505, 1);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
 
   const scene = new THREE.Scene();
-  scene.fog = new THREE.Fog(0x050505, 6, 26);
-  const camera = new THREE.PerspectiveCamera(55, 1, 0.1, 80);
+  scene.fog = new THREE.Fog(0x050505, 7, 30);
+  const camera = new THREE.PerspectiveCamera(52, 1, 0.1, 90);
 
-  const SPACING = 7;
-  const N = cenas.length;
-
-  /* rings: alternate white and red, like the ceiling */
+  const S = 9;                // distance between stops
+  const PW = 4, PH = 2.25;    // 16:9 video plane
   const WHITE = new THREE.Color(0xffffff);
-  for (let i = 0; i <= N + 1; i++) {
-    const red = i % 2 === 1;
-    const ring = hexTube(10, 5.4, 1.4, 0.03, red ? RED : WHITE, red ? 2.6 : 1.15);
-    ring.position.set(0, 0.2, -i * SPACING);
+
+  /* tunnel: a hex ring every half stop, red and white like the ceiling; a lower long strip on the floor */
+  const RINGS = N * 2 + 6;
+  for (let i = -3; i < RINGS; i++) {
+    const red = i % 2 !== 0;
+    const ring = hexTube(10.5, 5.6, 1.5, 0.028, red ? RED : WHITE, red ? 2.6 : 1.1);
+    ring.position.set(0, 0.25, -i * S / 2 + S / 4);
     scene.add(ring);
-    // a smaller inner ring, offset, as on the real ceiling
-    const inner = hexTube(6, 3.2, 0.9, 0.022, red ? WHITE : RED, red ? 1.2 : 2.6);
-    inner.position.set(0, 1.9, -i * SPACING - 0.6);
-    inner.rotation.x = Math.PI / 2.2;
-    scene.add(inner);
+    if (i % 2 === 0) {
+      const inner = hexTube(5.6, 3, 0.85, 0.02, red ? WHITE : RED, red ? 1.1 : 2.4);
+      inner.position.set(0, 2.85, -i * S / 2 + S / 4 - 1.2);
+      inner.rotation.x = Math.PI / 2;
+      scene.add(inner);
+    }
   }
-
-  /* floor: dark rubber with a faint red sheen under each ring */
-  const floor = new THREE.Mesh(
-    new THREE.PlaneGeometry(14, (N + 3) * SPACING),
-    new THREE.MeshBasicMaterial({ color: 0x0d0d0d })
-  );
-  floor.rotation.x = -Math.PI / 2;
-  floor.position.set(0, -2.6, -(N + 1) * SPACING / 2);
+  const len = (N + 4) * S;
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(16, len), new THREE.MeshBasicMaterial({ color: 0x0c0c0c }));
+  floor.rotation.x = -Math.PI / 2; floor.position.set(0, -2.55, -len / 2 + 2 * S);
   scene.add(floor);
-  for (let i = 0; i <= N + 1; i++) {
-    const glow = new THREE.Mesh(
-      new THREE.PlaneGeometry(9, 1.2),
-      new THREE.MeshBasicMaterial({ color: i % 2 ? 0x2a0405 : 0x141414, transparent: true, opacity: 0.8 })
-    );
-    glow.rotation.x = -Math.PI / 2;
-    glow.position.set(0, -2.59, -i * SPACING);
-    scene.add(glow);
-  }
-
-  /* photos: one per place, alternating sides, turned toward the aisle */
-  const loader = new THREE.TextureLoader();
-  const photos = [];
-  cenas.forEach((li, i) => {
-    const img = li.querySelector("img");
-    const w = Number(img.getAttribute("width")) || 4, h = Number(img.getAttribute("height")) || 3;
-    const aspect = w / h;
-    const height = aspect > 1 ? 2.6 : 3.4;
-    const geo = new THREE.PlaneGeometry(height * aspect, height);
-    const mat = new THREE.MeshBasicMaterial({ color: 0xd8d8d8, transparent: true, opacity: 0 });
-    const mesh = new THREE.Mesh(geo, mat);
-    const side = i % 2 === 0 ? -1 : 1;
-    mesh.userData = { side, baseX: side * 2.5, z: -i * SPACING - SPACING * 0.55 };
-    mesh.position.set(mesh.userData.baseX, 0.15, mesh.userData.z);
-    mesh.rotation.y = side * -0.38;
-    scene.add(mesh);
-    photos.push(mesh);
-    loader.load(img.currentSrc || img.src, (tex) => {
-      tex.colorSpace = THREE.SRGBColorSpace;
-      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
-      mat.map = tex; mat.needsUpdate = true;
-    });
-    // red frame behind each photo
-    // a red border only (a rectangle with the photo cut out), so it never tints the picture
-    const fw = height * aspect / 2, fh = height / 2, b = 0.06;
-    const border = new THREE.Shape();
-    border.moveTo(-fw - b, -fh - b); border.lineTo(fw + b, -fh - b); border.lineTo(fw + b, fh + b); border.lineTo(-fw - b, fh + b); border.lineTo(-fw - b, -fh - b);
-    const cut = new THREE.Path();
-    cut.moveTo(-fw, -fh); cut.lineTo(-fw, fh); cut.lineTo(fw, fh); cut.lineTo(fw, -fh); cut.lineTo(-fw, -fh);
-    border.holes.push(cut);
-    const frame = new THREE.Mesh(
-      new THREE.ShapeGeometry(border),
-      new THREE.MeshBasicMaterial({ color: RED.clone().multiplyScalar(1.6), toneMapped: false, transparent: true, opacity: 0 })
-    );
-    frame.position.z = -0.02;
-    mesh.add(frame);
-    mesh.userData.frame = frame;
+  // the walking line on the floor, like a runway
+  [-1.15, 1.15].forEach((x) => {
+    const l = new THREE.Mesh(new THREE.PlaneGeometry(0.035, len), new THREE.MeshBasicMaterial({ color: RED.clone().multiplyScalar(1.4), toneMapped: false }));
+    l.rotation.x = -Math.PI / 2; l.position.set(x, -2.54, -len / 2 + 2 * S);
+    scene.add(l);
   });
 
-  /* dust in the light */
-  const DUST = 700;
-  const dustGeo = new THREE.BufferGeometry();
-  const pos = new Float32Array(DUST * 3);
-  for (let i = 0; i < DUST; i++) {
-    pos[i * 3] = (Math.random() - 0.5) * 12;
-    pos[i * 3 + 1] = (Math.random() - 0.5) * 6;
-    pos[i * 3 + 2] = 4 - Math.random() * (N + 2) * SPACING;
+  /* stops: hex screen + neon frame + a pool of light on the floor */
+  const loader = new THREE.TextureLoader();
+  const vbin = document.createElement("div");
+  vbin.className = "walk__vbin";
+  stage.appendChild(vbin);
+  const planeGeo = hexPlane(PW, PH, 0.32);
+  const stopsGL = data.map((d, i) => {
+    const g = new THREE.Group();
+    g.position.set(0, 0, -i * S);
+    scene.add(g);
+    const pivot = new THREE.Group();     // hinge on one side, so the screen swings open like a door
+    const side = i % 2 === 0 ? -1 : 1;
+    pivot.position.x = side * PW / 2 * 1.06;
+    g.add(pivot);
+    const mat = new THREE.MeshBasicMaterial({ color: 0x1a1a1a, transparent: true, opacity: 0, toneMapped: false, side: THREE.DoubleSide, fog: false });
+    const screen = new THREE.Mesh(planeGeo, mat);
+    screen.position.x = -side * PW / 2 * 1.06;
+    pivot.add(screen);
+    const frame = hexTube(PW * 1.06, PH * 1.1, 0.36, 0.02, RED, 2.4);
+    frame.material.transparent = true;
+    frame.position.copy(screen.position); frame.position.z = -0.01;
+    pivot.add(frame);
+    const pool = new THREE.Mesh(new THREE.PlaneGeometry(PW * 1.3, 1.6), new THREE.MeshBasicMaterial({ color: 0x2a0506, transparent: true, opacity: 0 }));
+    pool.rotation.x = -Math.PI / 2; pool.position.set(0, -2.53, 0.6);
+    g.add(pool);
+    const st = { g, pivot, side, screen, mat, frame, pool, video: null, vtex: null, ptex: null, live: false, wantPoster: false };
+    return st;
+  });
+  function loadPoster(i) {
+    const st = stopsGL[i];
+    if (!st || st.wantPoster) return;
+    st.wantPoster = true;
+    loader.load(data[i].poster, (tex) => {
+      tex.colorSpace = THREE.SRGBColorSpace;
+      st.ptex = tex;
+      if (!st.live) { st.mat.map = tex; st.mat.color.set(0xffffff); st.mat.needsUpdate = true; }
+    });
   }
-  dustGeo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
-  const dust = new THREE.Points(dustGeo, new THREE.PointsMaterial({ color: 0xffffff, size: 0.025, transparent: true, opacity: 0.45 }));
-  scene.add(dust);
+  function videoFor(i) {
+    const st = stopsGL[i];
+    if (st.video) return st.video;
+    const v = makeVideo(data[i].video);
+    v.setAttribute("aria-hidden", "true"); v.tabIndex = -1;
+    vbin.appendChild(v);
+    v.addEventListener("playing", () => {
+      if (!st.vtex) { st.vtex = new THREE.VideoTexture(v); st.vtex.colorSpace = THREE.SRGBColorSpace; }
+      st.live = true; st.mat.map = st.vtex; st.mat.color.set(0xffffff); st.mat.needsUpdate = true;
+    });
+    st.video = v;
+    return v;
+  }
 
-  /* bloom: the neon glows like it does in the room */
+  /* dust in the light */
+  const DUST = 600;
+  const dpos = new Float32Array(DUST * 3);
+  for (let i = 0; i < DUST; i++) {
+    dpos[i * 3] = (Math.random() < 0.5 ? -1 : 1) * (1.6 + Math.random() * 4.4); // never right in front of the lens
+    dpos[i * 3 + 1] = (Math.random() - 0.5) * 6;
+    dpos[i * 3 + 2] = 8 - Math.random() * (N + 2) * S;
+  }
+  const dustGeo = new THREE.BufferGeometry();
+  dustGeo.setAttribute("position", new THREE.BufferAttribute(dpos, 3));
+  scene.add(new THREE.Points(dustGeo, new THREE.PointsMaterial({ color: 0xffffff, size: 0.022, transparent: true, opacity: 0.4 })));
+
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
-  const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.55, 0.4, 0.9);
+  const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.5, 0.35, 0.92);
   composer.addPass(bloom);
   composer.addPass(new OutputPass());
 
-  /* captions */
-  const capEl = section.querySelector("[data-tour-caption]");
-  const bar = section.querySelector("[data-tour-bar]");
-  const hint = section.querySelector("[data-tour-hint]");
-  let shown = -1;
-  function caption(i) {
-    if (i === shown) return;
-    shown = i;
-    const txt = cenas[i] && cenas[i].querySelector(".cena__txt");
-    capEl.classList.remove("is-in");
-    void capEl.offsetWidth;
-    capEl.innerHTML = txt ? '<p class="tour__count">Cena ' + (i + 1) + " de " + N + "</p>" + txt.innerHTML : "";
-    capEl.classList.add("is-in");
-  }
-
-  /* size */
+  /* layout: how far from the screen the camera stops so the video fits */
+  let D = 5, narrow = false, W = 1, H = 1;
+  const header = document.getElementById("topo");
   function resize() {
-    const r = canvas.getBoundingClientRect();
-    const w = Math.max(1, r.width), h = Math.max(1, r.height);
-    renderer.setSize(w, h, false);
-    composer.setSize(w, h);
-    bloom.resolution.set(w, h);
-    camera.aspect = w / h;
-    // narrow screens: bring photos toward the middle so they stay in frame
-    const narrow = camera.aspect < 0.9;
-    camera.fov = narrow ? 68 : 55;
+    if (header) section.style.setProperty("--bar", Math.round(header.getBoundingClientRect().height) + "px");
+    const r = stage.getBoundingClientRect();
+    W = Math.max(1, r.width); H = Math.max(1, r.height);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    renderer.setPixelRatio(dpr);
+    renderer.setSize(W, H, false);
+    composer.setPixelRatio(dpr);
+    composer.setSize(W, H);
+    // wide: screen to the right, caption in the left column. Otherwise: screen on top, caption under it.
+    const wide = W >= 1100 && W / H > 1.2;
+    narrow = W / H < 0.9;
+    camera.aspect = W / H;
+    camera.fov = narrow ? 64 : 50;
+    const t2 = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2);
+    const fitW = wide ? 0.52 : 0.9, fitH = wide ? 0.6 : 0.44;
+    D = Math.max(PW * 1.06 / (fitW * t2 * camera.aspect), PH * 1.1 / (fitH * t2));
+    // where the screen centre sits, as a share of the stage size
+    const xc = wide ? 0.62 : 0.5, yc = wide ? 0.44 : (narrow ? 0.29 : 0.3);
+    camera.setViewOffset(W, H, (0.5 - xc) * W, (0.5 - yc) * H, W, H);
+    stage.classList.toggle("is-wide", wide);
     camera.updateProjectionMatrix();
-    photos.forEach((m) => {
-      m.position.x = m.userData.side * (narrow ? 0.55 : 2.5);
-      m.rotation.y = m.userData.side * (narrow ? -0.1 : -0.38);
-      m.scale.setScalar(narrow ? 0.9 : 1);
-    });
+    // tell the caption where the screen ends (mobile puts the caption under it)
+    const planePx = (PH * 1.1 / (t2 * D)) * H;
+    stage.style.setProperty("--plane-bottom", ((yc * H + planePx / 2) / H * 100).toFixed(2) + "%");
   }
   resize();
   window.addEventListener("resize", resize);
 
-  /* scroll → camera */
-  let target = 0, current = 0, mx = 0, my = 0;
-  function progress() {
-    const r = section.getBoundingClientRect();
-    const head = section.querySelector(".tour__head");
-    const start = head ? head.offsetHeight : 0; // sticky elements report a moving offsetTop, so measure the heading instead
-    const total = section.offsetHeight - start - window.innerHeight;
-    return Math.min(1, Math.max(0, (-r.top - start) / Math.max(1, total)));
+  /* scroll → position along the route (with a dwell at each stop) */
+  function geom() {
+    const r = track.getBoundingClientRect();
+    const top = parseFloat(getComputedStyle(stage).top) || 0;
+    const total = Math.max(1, track.offsetHeight - stage.offsetHeight);
+    return { r, top, total };
   }
-  window.addEventListener("scroll", () => { target = progress(); }, { passive: true });
-  window.addEventListener("pointermove", (e) => {
-    mx = (e.clientX / window.innerWidth - 0.5) * 2;
-    my = (e.clientY / window.innerHeight - 0.5) * 2;
-  }, { passive: true });
-  target = current = progress();
+  function scrollProgress() {
+    const { r, top, total } = geom();
+    return clamp01((top - r.top) / total);
+  }
+  function routeAt(p) {
+    const raw = p * (N - 1);
+    const k = Math.min(N - 2, Math.floor(raw));
+    if (k < 0) return 0;
+    const f = raw - k;
+    return k + smooth(clamp01((f - 0.2) / 0.6));
+  }
+  function jump(i) {
+    const { r, top, total } = geom();
+    const y = window.scrollY + r.top - top + (i / (N - 1)) * total + 2;
+    window.scrollTo({ top: Math.round(y), behavior: reduce ? "auto" : "smooth" });
+  }
+  stops.forEach((b, i) => b.addEventListener("click", () => jump(i)));
 
-  let visible = false, raf = 0, t0 = performance.now();
+  let target = routeAt(scrollProgress()), cur = target, prog = scrollProgress();
+  window.addEventListener("scroll", () => { prog = scrollProgress(); target = routeAt(prog); }, { passive: true });
+  let mx = 0, my = 0;
+  window.addEventListener("pointermove", (e) => {
+    if (e.pointerType !== "mouse") return;
+    mx = (e.clientX / window.innerWidth - 0.5) * 2; my = (e.clientY / window.innerHeight - 0.5) * 2;
+  }, { passive: true });
+
+  /* caption */
+  let shown = -1;
+  function caption(i) {
+    if (i === shown) return;
+    shown = i;
+    const d = data[i];
+    capEl.classList.remove("is-in");
+    void capEl.offsetWidth;
+    capEl.innerHTML = '<p class="walk__count">Parada ' + (i + 1) + " de " + N + "</p><h3></h3><p></p>";
+    capEl.querySelector("h3").textContent = d.title;
+    capEl.querySelector("p:last-child").textContent = d.text;
+    capEl.classList.add("is-in");
+    markStop(i);
+  }
+
+  /* videos: only the nearest one plays; neighbours get their src just in time; far ones are released */
+  let visible = false, paused = false;
+  function manageVideos(s) {
+    const near = Math.round(s);
+    stopsGL.forEach((st, i) => {
+      const d = Math.abs(s - i);
+      if (d < 2.2) loadPoster(i);
+      if (d <= 1.25) attach(videoFor(i));
+      else if (st.video && d > 2.6) { detach(st.video); st.live = false; if (st.ptex) { st.mat.map = st.ptex; st.mat.needsUpdate = true; } }
+      if (st.video) {
+        if (visible && !paused && i === near && d < 0.6) play(st.video); else if (!st.video.paused) st.video.pause();
+      }
+    });
+  }
+  function pauseAll() { stopsGL.forEach((st) => st.video && st.video.pause()); }
+  film.onOpen = () => { paused = true; pauseAll(); };
+  film.onClose = () => { paused = false; };
+  document.addEventListener("visibilitychange", () => { if (document.hidden) pauseAll(); });
+
+  let raf = 0, last = performance.now(), t = 0;
   function frame(now) {
     raf = requestAnimationFrame(frame);
-    const t = (now - t0) / 1000;
-    current += (target - current) * 0.08;
-    const z = 6 - current * (N * SPACING + 1);
-    camera.position.set(mx * 0.35, 0.1 - my * 0.2 + Math.sin(t * 0.6) * 0.04, z);
-    camera.lookAt(mx * 0.6, 0.05, z - 8);
+    const dt = Math.min(0.1, (now - last) / 1000); last = now; t += dt;
+    const prev = cur;
+    cur += (target - cur) * (1 - Math.exp(-dt * 5.5));
+    if (Math.abs(target - cur) < 1e-4) cur = target;
+    const speed = Math.min(1, Math.abs(cur - prev) / Math.max(dt, 1e-3) * 0.9);
 
-    const idx = Math.min(N - 1, Math.max(0, Math.round(current * N - 0.35)));
-    caption(idx);
-    bar.style.transform = "scaleX(" + current.toFixed(4) + ")";
-    if (hint) hint.style.opacity = current > 0.02 ? "0" : "1";
+    // first person: walk forward, a soft step bob while moving, a breath while still
+    const k = Math.floor(cur), f = cur - k;
+    const z = -cur * S + D;
+    const bob = Math.sin(z * 2.1) * 0.05 * speed + Math.sin(t * 0.9) * 0.02;
+    const sway = Math.sin(z * 1.05) * 0.06 * speed;
+    camera.position.set(mx * 0.25 + sway, 0.1 + bob - my * 0.12, z);
+    camera.lookAt(mx * 0.45 + sway * 0.5, 0.1 - my * 0.1, z - 10);
 
-    photos.forEach((m, i) => {
-      const d = Math.abs(m.userData.z - (z - 5));
-      const ahead = z - m.userData.z; // how far in front of the camera the photo is
-      const o = Math.max(0, Math.min(1, 1.6 - d / 5)) * Math.max(0, Math.min(1, (ahead - 1.2) / 2));
-      m.material.opacity = o;
-      m.userData.frame.material.opacity = i === idx ? o : o * 0.25;
+    stopsGL.forEach((st, i) => {
+      const rel = cur - i; // <0: still ahead, 0: here, >0: passing
+      let open = 0, o;
+      if (rel <= 0) o = clamp01(1.25 + rel * 0.9);         // fades in from the fog as you approach
+      else { open = smooth(clamp01(rel * 1.7)); o = 1 - smooth(clamp01((rel - 0.25) * 2.2)); }
+      st.pivot.rotation.y = -st.side * open * 1.45;
+      st.mat.opacity = o;
+      st.frame.material.opacity = o;
+      st.frame.visible = st.g.visible = o > 0.003;
+      st.pool.material.opacity = 0.9 * o * (1 - open);
     });
-    const p = dust.geometry.attributes.position;
-    for (let i = 0; i < DUST; i += 3) p.array[i * 3 + 1] += Math.sin(t + i) * 0.0008;
-    p.needsUpdate = true;
+
+    const idx = Math.max(0, Math.min(N - 1, Math.round(cur)));
+    caption(idx);
+    manageVideos(cur);
+    bar.style.transform = "scaleX(" + prog.toFixed(4) + ")";
+    if (hint) hint.style.opacity = prog > 0.015 ? "0" : "1";
 
     composer.render();
   }
   new IntersectionObserver((entries) => {
     entries.forEach((en) => {
-      if (en.isIntersecting && !visible) { visible = true; t0 = performance.now(); raf = requestAnimationFrame(frame); }
-      else if (!en.isIntersecting && visible) { visible = false; cancelAnimationFrame(raf); }
+      if (en.isIntersecting && !visible) { visible = true; last = performance.now(); resize(); raf = requestAnimationFrame(frame); }
+      else if (!en.isIntersecting && visible) { visible = false; cancelAnimationFrame(raf); pauseAll(); }
     });
-  }, { threshold: 0 }).observe(section);
+  }, { rootMargin: "200px 0px" }).observe(track);
+  loadPoster(0); loadPoster(1);
   caption(0);
+}
+
+/* fallback: horizontal strip of cards that swipe; each card plays its clip when it is in view */
+function initWalkStrip(section, strip, cards, data, stops, markStop, film) {
+  section.classList.add("walk--static");
+  const vids = cards.map((li, i) => {
+    const v = makeVideo(data[i].video);
+    v.poster = data[i].poster;
+    v.setAttribute("aria-label", "Vídeo: " + data[i].title);
+    if (reduce) { v.controls = true; v.classList.add("is-on"); }
+    v.addEventListener("playing", () => v.classList.add("is-on"));
+    li.querySelector(".walk__media").appendChild(v);
+    return v;
+  });
+  let paused = false;
+  film.onOpen = () => { paused = true; vids.forEach((v) => v.pause()); };
+  film.onClose = () => { paused = false; };
+  const ratio = new Map();
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      const i = cards.indexOf(en.target);
+      ratio.set(i, en.intersectionRatio);
+      if (en.isIntersecting) attach(vids[i]);
+      if (!reduce) { if (en.intersectionRatio > 0.6 && !paused) play(vids[i]); else vids[i].pause(); }
+    });
+  }, { threshold: [0, 0.6, 1], rootMargin: "0px 40% 0px 40%" });
+  cards.forEach((c) => io.observe(c));
+
+  function nearest() {
+    const pad = parseFloat(getComputedStyle(strip).paddingLeft) || 0;
+    const left = strip.getBoundingClientRect().left + pad;
+    let best = 0, bd = Infinity;
+    cards.forEach((c, i) => { const d = Math.abs(c.getBoundingClientRect().left - left); if (d < bd) { bd = d; best = i; } });
+    return best;
+  }
+  let ticking = false;
+  strip.addEventListener("scroll", () => {
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(() => { ticking = false; markStop(nearest()); });
+  }, { passive: true });
+  stops.forEach((b, i) => b.addEventListener("click", () => {
+    const pad = parseFloat(getComputedStyle(strip).paddingLeft) || 0;
+    const dx = cards[i].getBoundingClientRect().left - strip.getBoundingClientRect().left - pad;
+    strip.scrollTo({ left: strip.scrollLeft + dx, behavior: reduce ? "auto" : "smooth" });
+    markStop(i);
+  }));
+  markStop(0);
+}
+
+/* the continuous walk film, in a modal dialog (Esc, close button or a click outside closes it) */
+function initWalkFilm(section) {
+  const api = { onOpen: null, onClose: null };
+  const dlg = section.querySelector("[data-walk-dialog]");
+  const btn = section.querySelector("[data-walk-film]");
+  if (!dlg || !btn) return api;
+  const video = dlg.querySelector("[data-walk-film-video]");
+  const close = () => { if (dlg.open) dlg.close(); };
+  let opener = null;
+  btn.addEventListener("click", () => {
+    opener = document.activeElement;
+    if (!video.getAttribute("src")) video.src = video.dataset.src;
+    if (typeof dlg.showModal === "function") dlg.showModal(); else dlg.setAttribute("open", "");
+    document.documentElement.classList.add("walk-lock");
+    if (api.onOpen) api.onOpen();
+    dlg.querySelector("[data-walk-close]").focus();
+    if (!reduce) play(video);
+  });
+  dlg.querySelector("[data-walk-close]").addEventListener("click", () => { if (dlg.open && typeof dlg.close === "function") dlg.close(); else { dlg.removeAttribute("open"); onClosed(); } });
+  dlg.addEventListener("click", (e) => { if (e.target === dlg) close(); });
+  function onClosed() {
+    video.pause();
+    document.documentElement.classList.remove("walk-lock");
+    if (api.onClose) api.onClose();
+    if (opener && opener.focus) opener.focus({ preventScroll: true });
+  }
+  dlg.addEventListener("close", onClosed);
+  return api;
 }
 
 

@@ -13,23 +13,89 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="css/nav.css">
 </head>
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
-<header class="bar" id="topo">
+<header class="bar nav" id="topo" data-nav>
   <a class="bar__mark" href="./" aria-label="Elite Drako Gym, início">
     <img src="assets/img/marca-dragao.png" alt="" width="40" height="40">
     <span>Elite Drako Gym</span>
   </a>
-  <nav class="bar__nav" aria-label="Principal">
-    <a href="historia.html" aria-current="page">História</a>
-    <a href="./#tour">Tour 3D</a>
-    <a href="maquinas.html">Máquinas</a>
-    <a href="loja.html">Loja</a>
+  <nav class="nav__main" aria-label="Principal">
+    <ul class="nav__list" role="list">
+      <li class="nav__item nav__item--t3"><a class="nav__link" href="./">Início</a></li>
+      <li class="nav__item nav__item--t2"><a class="nav__link" href="./#tour">Tour 3D</a></li>
+      <li class="nav__item nav__item--t2"><a class="nav__link" href="./#estrutura">Estrutura</a></li>
+      <li class="nav__item"><a class="nav__link" href="maquinas.html">Máquinas</a></li>
+      <li class="nav__item"><a class="nav__link" href="eventos.html">Eventos</a></li>
+      <li class="nav__item nav__item--t2"><a class="nav__link" href="historia.html">História</a></li>
+      <li class="nav__item nav__drop" data-nav-drop>
+        <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-loja">Loja<svg class="nav__chev" viewBox="0 0 12 8" width="12" height="8" aria-hidden="true" focusable="false"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+        <ul class="nav__drop-list" id="nav-loja" role="list" hidden>
+          <li><a href="loja.html">Toda a loja</a></li>
+          <li><a href="loja.html#suplementos">Suplementos</a></li>
+          <li><a href="loja.html#acessorios">Acessórios</a></li>
+          <li><a href="loja.html#roupas">Roupas</a></li>
+          <li><a href="loja.html#planos">Planos</a></li>
+          <li><a href="loja.html#ingressos">Ingressos</a></li>
+        </ul>
+      </li>
+      <li class="nav__item nav__item--t2"><a class="nav__link" href="./#como-chegar">Como chegar</a></li>
+    </ul>
   </nav>
-  <button class="bar__cart" type="button" data-abrir-carrinho aria-label="Abrir carrinho">Carrinho <span class="bar__count" data-contador hidden>0</span></button>
-  <a class="btn btn--sm" href="cadastro.html">Matricule-se</a>
+  <div class="nav__actions">
+    <button class="bar__cart" type="button" data-abrir-carrinho aria-label="Abrir carrinho"><svg class="nav__bag" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M5 8h14l-1.2 12H6.2L5 8zm4 0V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span class="bar__cart-txt">Carrinho</span> <span class="bar__count" data-contador hidden>0</span></button>
+    <a class="btn btn--sm nav__cta" href="cadastro.html?tipo=matricula">Matricule-se</a>
+    <button class="nav__burger" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menu" data-nav-abrir><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2.2"/></svg><span class="nav__burger-txt">Menu</span></button>
+  </div>
+  <div class="nav__sheet" id="nav-menu" role="dialog" aria-modal="true" aria-label="Menu do site" hidden data-nav-sheet>
+    <div class="nav__sheet-top">
+      <a class="bar__mark" href="./" aria-label="Elite Drako Gym, início">
+        <img src="assets/img/marca-dragao.png" alt="" width="40" height="40">
+        <span>Elite Drako Gym</span>
+      </a>
+      <button class="nav__close" type="button" data-nav-fechar>Fechar<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="2.2"/></svg></button>
+    </div>
+    <div class="nav__groups">
+      <section class="nav__group" aria-labelledby="nav-g1">
+        <h2 id="nav-g1">Conhecer</h2>
+        <ul role="list">
+          <li><a href="./">Início</a></li>
+          <li><a href="./#tour">Tour 3D</a></li>
+          <li><a href="./#estrutura">Estrutura</a></li>
+          <li><a href="maquinas.html">Máquinas</a></li>
+          <li><a href="historia.html">História</a></li>
+          <li><a href="./#como-chegar">Como chegar</a></li>
+        </ul>
+      </section>
+      <section class="nav__group" aria-labelledby="nav-g2">
+        <h2 id="nav-g2">Comprar</h2>
+        <ul role="list">
+          <li><a href="loja.html">Loja</a></li>
+        </ul>
+        <ul class="nav__subs" role="list">
+          <li><a href="loja.html#suplementos">Suplementos</a></li>
+          <li><a href="loja.html#acessorios">Acessórios</a></li>
+          <li><a href="loja.html#roupas">Roupas</a></li>
+          <li><a href="loja.html#planos">Planos</a></li>
+          <li><a href="loja.html#ingressos">Ingressos</a></li>
+        </ul>
+      </section>
+      <section class="nav__group" aria-labelledby="nav-g3">
+        <h2 id="nav-g3">Participar</h2>
+        <ul role="list">
+          <li><a href="eventos.html">Eventos</a></li>
+          <li><a href="cadastro.html?tipo=matricula">Matrícula</a></li>
+        </ul>
+      </section>
+    </div>
+    <div class="nav__sheet-actions">
+      <button class="bar__cart" type="button" data-abrir-carrinho aria-label="Abrir carrinho"><svg class="nav__bag" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M5 8h14l-1.2 12H6.2L5 8zm4 0V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>Carrinho</span> <span class="bar__count" data-contador hidden>0</span></button>
+      <a class="btn nav__cta-big" href="cadastro.html?tipo=matricula">Matricule-se</a>
+    </div>
+  </div>
 </header>
 
 <main id="conteudo">
@@ -75,7 +141,7 @@
           <p>Inauguração com lote fundador e um grupo VIP de centenas de pessoas esperando o link. Máquinas novas, camiseta nova e o neon aceso.</p></div>
       </li>
       <li class="etapa reveal">
-        <div class="etapa__fotos"><img src="assets/img/linha/08-drako30.jpg" alt="Arte do evento Drako 30, o primeiro rugido" width="900" height="1600" loading="lazy"></div>
+        <div class="etapa__fotos"><img src="assets/img/eventos/drako-30/02-aquecimento-turma.jpg" alt="Participantes do Drako 30 com número no peito, no aquecimento sob o neon do salão" width="1600" height="900" loading="lazy"></div>
         <div class="etapa__txt"><h2>O primeiro rugido</h2><p class="etapa__quando">30 de agosto de 2026</p>
           <p>O Drako 30 juntou 30 duplas, 60 participantes, numa manhã de desafios por nível, prêmios e sorteios.</p></div>
       </li>
@@ -125,7 +191,7 @@
     <div class="final__scrim" aria-hidden="true"></div>
     <div class="final__copy">
       <h2 id="final-title" class="reveal">O próximo capítulo</h2>
-      <p class="reveal">Matrícula em dois minutos. A equipe confirma pelo WhatsApp.</p>
+      <p class="reveal">Matrícula em dois minutos. A equipe confirma com você pelo WhatsApp ou Instagram.</p>
       <div class="final__actions reveal">
         <a class="btn" href="cadastro.html?tipo=matricula">Fazer matrícula</a>
         <a class="btn btn--ghost" href="./#giro">Ver o salão em 360</a>
@@ -135,9 +201,44 @@
 </main>
 
 <footer class="foot foot--min">
+  <div class="foot__cols foot__cols--nav">
+    <nav aria-label="Rodapé: o site">
+      <h3>Site</h3>
+      <a href="./">Início</a>
+      <a href="./#tour">Tour 3D</a>
+      <a href="./#estrutura">Estrutura</a>
+      <a href="maquinas.html">Máquinas</a>
+      <a href="eventos.html">Eventos</a>
+      <a href="historia.html">História</a>
+      <a href="./#como-chegar">Como chegar</a>
+      <a href="./#duvidas">Dúvidas</a>
+    </nav>
+    <nav aria-label="Rodapé: loja e matrícula">
+      <h3>Loja</h3>
+      <a href="loja.html">Toda a loja</a>
+      <a href="loja.html#suplementos">Suplementos</a>
+      <a href="loja.html#acessorios">Acessórios</a>
+      <a href="loja.html#roupas">Roupas</a>
+      <a href="loja.html#planos">Planos</a>
+      <a href="loja.html#ingressos">Ingressos</a>
+      <a href="cadastro.html?tipo=matricula">Matrícula</a>
+      <a href="cadastro.html?tipo=visita">Visita guiada</a>
+    </nav>
+    <div>
+      <h3>Horários</h3>
+      <p>Seg a sex · 5h às 0h</p>
+      <p>Sábado · 7h às 18h</p>
+      <p>Domingo · 8h às 15h</p>
+    </div>
+    <div>
+      <h3>Onde</h3>
+      <p data-endereco-curto>Valente, Bahia</p>
+      <p><a href="https://www.instagram.com/elite_drakogym/" target="_blank" rel="noopener">Instagram @elite_drakogym</a></p>
+    </div>
+  </div>
   <div class="foot__last">
     <p>© <span data-year>2026</span> Elite Drako Gym · <span data-endereco-curto>Valente, Bahia</span> · <a href="https://www.instagram.com/elite_drakogym/" target="_blank" rel="noopener">@elite_drakogym</a></p>
-    <a class="btn btn--sm" href="#topo">Voltar ao topo</a>
+    <a class="btn btn--sm" href="#top">Voltar ao topo</a>
   </div>
 </footer>
 
@@ -145,6 +246,7 @@
 <script src="data/produtos.js"></script>
 <script src="assets/vendor/supabase.js"></script>
 <script src="site.js"></script>
+<script src="nav.js" defer></script>
 <script src="main.js" defer></script>
 <script src="maquinas.js" defer></script>
 </body>

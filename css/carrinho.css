@@ -1,0 +1,104 @@
+/* ============================================================
+   Elite Drako Gym — gaveta do carrinho e janela "Avise-me quando chegar".
+   Injetado pelo site.js em todas as páginas (complementa as regras .gaveta de styles.css).
+   ============================================================ */
+
+/* botões <button class="btn"> herdam a fonte da casa (o navegador não herda sozinho) */
+.prod button.btn, .gaveta button.btn, .avise button.btn { font-family: var(--font); }
+
+/* o --hex de styles.css já chega resolvido com o --c da raiz (28px); aqui o polígono é escrito
+   por elemento para que o --c local valha de verdade */
+
+/* ---------- gaveta ---------- */
+.gaveta__painel { gap: 0; padding: 0; overscroll-behavior: contain; }
+.gaveta__topo { position: sticky; top: 0; z-index: 1; background: var(--surface); padding: 20px 24px 16px; gap: 12px; }
+.gaveta__topo h2 { display: flex; align-items: baseline; gap: 10px; }
+.gaveta__conta { font-size: var(--step-body); font-weight: 500; color: var(--muted); letter-spacing: 0; }
+.gaveta__x { --c: 10px; min-height: 44px; padding: 0 18px; clip-path: polygon(var(--c) 0, calc(100% - var(--c)) 0, 100% 50%, calc(100% - var(--c)) 100%, var(--c) 100%, 0 50%); transition: background-color .2s; }
+.gaveta__x:hover { background: #333; }
+
+.gaveta__lista { padding: 8px 24px 24px; gap: 12px; }
+.gaveta__lista[hidden] { display: none; }
+.gitem {
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+  grid-template-areas: "img info preco" "img acoes acoes";
+  gap: 8px 14px; align-items: start;
+  background: var(--surface-2); padding: 14px;
+}
+.gitem img { --c: 12px; grid-area: img; background: #111; clip-path: polygon(var(--c) 0, calc(100% - var(--c)) 0, 100% 50%, calc(100% - var(--c)) 100%, var(--c) 100%, 0 50%); }
+.gitem__info { grid-area: info; min-width: 0; }
+.gitem__nome { font-size: var(--step-body); line-height: 1.3; }
+.gitem__unit { color: var(--muted); font-size: var(--step-small); margin-top: 2px; }
+.gitem__preco { grid-area: preco; color: var(--ink); font-weight: 600; font-size: var(--step-body); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.gitem__acoes { grid-area: acoes; display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 4px; }
+.gitem__q { gap: 0; background: var(--bg); }
+.gitem__q button { width: 44px; height: 44px; background: transparent; font-size: 1.25rem; transition: background-color .15s; }
+.gitem__q button:hover { background: var(--accent); }
+.gitem__q button:disabled { opacity: .35; cursor: default; background: transparent; }
+.gitem__q span { min-width: 32px; text-align: center; font-weight: 600; font-variant-numeric: tabular-nums; }
+.gitem__rm {
+  min-height: 44px; padding: 0 4px; border: 0; background: none; cursor: pointer;
+  color: var(--muted); font: 500 var(--step-small) var(--font); text-decoration: underline; text-underline-offset: 3px;
+}
+.gitem__rm:hover { color: var(--ink); }
+
+.gaveta__vazio, .gaveta__enviado { padding: 24px; display: grid; gap: 12px; justify-items: start; color: var(--muted); }
+.gaveta__vazio[hidden], .gaveta__enviado[hidden] { display: none; }
+.gaveta__vazio-ico {
+  --c: 14px; display: grid; place-items: center; width: 72px; height: 52px;
+  background: var(--surface-2); color: var(--ink); clip-path: polygon(var(--c) 0, calc(100% - var(--c)) 0, 100% 50%, calc(100% - var(--c)) 100%, var(--c) 100%, 0 50%); margin-bottom: 4px;
+}
+.gaveta__vazio-t { color: var(--ink); font-size: var(--step-lead); font-weight: 600; line-height: 1.3; }
+.gaveta__vazio p, .gaveta__enviado p { max-width: 34ch; line-height: 1.45; }
+.gaveta__vazio-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.gaveta__vazio-links .btn, .gaveta__enviado .btn { min-height: 44px; }
+.gaveta__enviado .gaveta__vazio-t { color: var(--ink); }
+
+.gaveta__form { padding: 16px 24px 24px; margin-top: auto; }
+.gaveta__resumo { display: grid; gap: 4px; padding-bottom: 6px; }
+.gaveta__linha { display: flex; justify-content: space-between; color: var(--muted); font-size: var(--step-small); }
+.gaveta__total { padding-bottom: 0; }
+.gaveta__total strong { font-variant-numeric: tabular-nums; }
+.gaveta__nota { color: var(--muted); font-size: var(--step-small); line-height: 1.4; }
+.gaveta__form .btn[disabled] { opacity: .6; cursor: progress; }
+
+@media (max-width: 420px) {
+  .gaveta__topo { padding: 16px 16px 12px; }
+  .gaveta__lista { padding: 8px 16px 20px; }
+  .gaveta__form { padding: 14px 16px calc(16px + env(safe-area-inset-bottom, 0px)); }
+  .gaveta__vazio, .gaveta__enviado { padding: 20px 16px; }
+  .gitem { grid-template-columns: 56px minmax(0, 1fr) auto; padding: 12px; }
+  .gitem img { width: 56px; height: 56px; }
+}
+
+/* ---------- Avise-me quando chegar ---------- */
+.avise { position: fixed; inset: 0; z-index: 70; display: grid; place-items: center; padding: 16px; visibility: hidden; }
+.avise.is-open { visibility: visible; }
+.avise__fundo { position: absolute; inset: 0; background: rgba(0,0,0,.7); opacity: 0; transition: opacity .25s; }
+.avise.is-open .avise__fundo { opacity: 1; }
+.avise__painel {
+  position: relative; width: min(460px, 100%); max-height: calc(100svh - 32px); overflow-y: auto;
+  background: var(--surface); padding: 24px; display: grid; gap: 16px; outline: none;
+  opacity: 0; transform: translateY(16px); transition: opacity .25s, transform .35s var(--ease-out);
+}
+.avise.is-open .avise__painel { opacity: 1; transform: none; }
+.avise__topo { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
+.avise__topo h2 { font-size: var(--step-state); line-height: 1.05; }
+.avise__txt { color: var(--muted); line-height: 1.45; }
+.avise__txt strong { color: var(--ink); font-weight: 600; }
+.avise__form { display: grid; gap: 10px; }
+.avise__form[hidden] { display: none; }
+.avise__form input {
+  height: 52px; padding: 0 16px; border: 0; border-radius: 0; background: var(--surface-2); color: var(--ink);
+  font: 400 var(--step-body) var(--font); width: 100%; appearance: none; -webkit-appearance: none;
+}
+.avise__form input::placeholder { color: #a3a3a0; }
+.avise__form input:focus { outline: 3px solid var(--accent-hi); outline-offset: 0; }
+.avise__msg { color: var(--ink); line-height: 1.45; }
+.avise__msg:empty { display: none; }
+.avise__conversa { justify-self: start; min-height: 44px; }
+.avise__conversa[hidden] { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .avise__fundo, .avise__painel { transition: none; }
+}

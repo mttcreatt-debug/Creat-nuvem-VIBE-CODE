@@ -78,3 +78,21 @@ SITE(FOTOS) e Identidade Visual. Nenhuma foto de produto de outra marca é usada
 - Fotos e vídeos acima de ~6 MB do Drive (HEIC de máxima qualidade e os MOV da academia vazia)
   não passam pelo conector. Para usar esses originais, compartilhe a pasta por link por alguns
   minutos ou exporte versões menores.
+
+## Como adicionar um evento
+
+A página `eventos.html` monta a agenda e os capítulos sozinha a partir de dois arquivos:
+
+1. **`data/eventos-media.json`**: acrescente um item na lista `eventos` com
+   `id` (sem espaços, ex.: `"novembro-azul"`), `titulo`, `data` (`"AAAA-MM-DD"`, ou `"AAAA-MM"` se o dia
+   ainda não está fechado), `status` (`"em-breve"` ou `"realizado"`), `resumo` (2 ou 3 frases),
+   `fotos` e `videos`. Cada foto: `{ "src", "alt", "w", "h" }`; cada vídeo: `{ "src", "poster", "alt", "w", "h" }`
+   e `"som": true` só se o áudio importa (aparece o botão "Ligar som"). Arte de divulgação opcional em `arte`.
+2. **`data/eventos.js`** (opcional): com o mesmo `id`, os detalhes de texto: `tema`, `publico`,
+   `horarios`, `programa`, `premios` e os botões `cta` (`[{ texto, href }]`).
+
+Fotos em `assets/img/eventos/<id>/` (jpg até ~350 KB, lado maior até 1600 px, com o LUT aplicado),
+vídeos em `assets/video/eventos/` (h264, até 4 MB, sem som). Eventos `em-breve` vão para "Próximos";
+quando o evento acontecer, troque para `realizado` e coloque as fotos. O vídeo do topo da página
+fica direto em `eventos.html` (seção `ev-hero`). Abra o site por um servidor (não por `file://`),
+porque a página lê o JSON.

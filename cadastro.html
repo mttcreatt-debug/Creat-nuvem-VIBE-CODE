@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cadastro · Elite Drako Gym</title>
+<title>Matrícula e visita · Elite Drako Gym</title>
 <meta name="description" content="Faça sua matrícula na Elite Drako Gym, agende uma visita guiada ou entre na lista do próximo Drako 30.">
 <meta name="theme-color" content="#0b0b0b">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
@@ -11,90 +11,305 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="css/cadastro.css">
 </head>
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 
-<header class="bar" id="topo">
+<header class="bar nav" id="topo" data-nav>
   <a class="bar__mark" href="./" aria-label="Elite Drako Gym, início">
     <img src="assets/img/marca-dragao.png" alt="" width="40" height="40">
     <span>Elite Drako Gym</span>
   </a>
-  <nav class="bar__nav" aria-label="Principal">
-    <a href="historia.html">História</a>
-    <a href="./#tour">Tour 3D</a>
-    <a href="maquinas.html">Máquinas</a>
-    <a href="loja.html">Loja</a>
-    <a href="cadastro.html" aria-current="page">Cadastro</a>
+  <nav class="nav__main" aria-label="Principal">
+    <ul class="nav__list" role="list">
+      <li class="nav__item nav__item--t3"><a class="nav__link" href="./">Início</a></li>
+      <li class="nav__item nav__item--t2"><a class="nav__link" href="./#tour">Tour 3D</a></li>
+      <li class="nav__item nav__item--t2"><a class="nav__link" href="./#estrutura">Estrutura</a></li>
+      <li class="nav__item"><a class="nav__link" href="maquinas.html">Máquinas</a></li>
+      <li class="nav__item"><a class="nav__link" href="eventos.html">Eventos</a></li>
+      <li class="nav__item nav__item--t2"><a class="nav__link" href="historia.html">História</a></li>
+      <li class="nav__item nav__drop" data-nav-drop>
+        <button class="nav__link nav__drop-btn" type="button" aria-expanded="false" aria-controls="nav-loja">Loja<svg class="nav__chev" viewBox="0 0 12 8" width="12" height="8" aria-hidden="true" focusable="false"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+        <ul class="nav__drop-list" id="nav-loja" role="list" hidden>
+          <li><a href="loja.html">Toda a loja</a></li>
+          <li><a href="loja.html#suplementos">Suplementos</a></li>
+          <li><a href="loja.html#acessorios">Acessórios</a></li>
+          <li><a href="loja.html#roupas">Roupas</a></li>
+          <li><a href="loja.html#planos">Planos</a></li>
+          <li><a href="loja.html#ingressos">Ingressos</a></li>
+        </ul>
+      </li>
+      <li class="nav__item nav__item--t2"><a class="nav__link" href="./#como-chegar">Como chegar</a></li>
+    </ul>
   </nav>
-  <button class="bar__cart" type="button" data-abrir-carrinho aria-label="Abrir carrinho">Carrinho <span class="bar__count" data-contador hidden>0</span></button>
-  <a class="btn btn--sm" href="loja.html">Loja</a>
+  <div class="nav__actions">
+    <button class="bar__cart" type="button" data-abrir-carrinho aria-label="Abrir carrinho"><svg class="nav__bag" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M5 8h14l-1.2 12H6.2L5 8zm4 0V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span class="bar__cart-txt">Carrinho</span> <span class="bar__count" data-contador hidden>0</span></button>
+    <a class="btn btn--sm nav__cta" href="cadastro.html?tipo=matricula">Matricule-se</a>
+    <button class="nav__burger" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Abrir menu" data-nav-abrir><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2.2"/></svg><span class="nav__burger-txt">Menu</span></button>
+  </div>
+  <div class="nav__sheet" id="nav-menu" role="dialog" aria-modal="true" aria-label="Menu do site" hidden data-nav-sheet>
+    <div class="nav__sheet-top">
+      <a class="bar__mark" href="./" aria-label="Elite Drako Gym, início">
+        <img src="assets/img/marca-dragao.png" alt="" width="40" height="40">
+        <span>Elite Drako Gym</span>
+      </a>
+      <button class="nav__close" type="button" data-nav-fechar>Fechar<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M5 5l14 14M19 5L5 19" fill="none" stroke="currentColor" stroke-width="2.2"/></svg></button>
+    </div>
+    <div class="nav__groups">
+      <section class="nav__group" aria-labelledby="nav-g1">
+        <h2 id="nav-g1">Conhecer</h2>
+        <ul role="list">
+          <li><a href="./">Início</a></li>
+          <li><a href="./#tour">Tour 3D</a></li>
+          <li><a href="./#estrutura">Estrutura</a></li>
+          <li><a href="maquinas.html">Máquinas</a></li>
+          <li><a href="historia.html">História</a></li>
+          <li><a href="./#como-chegar">Como chegar</a></li>
+        </ul>
+      </section>
+      <section class="nav__group" aria-labelledby="nav-g2">
+        <h2 id="nav-g2">Comprar</h2>
+        <ul role="list">
+          <li><a href="loja.html">Loja</a></li>
+        </ul>
+        <ul class="nav__subs" role="list">
+          <li><a href="loja.html#suplementos">Suplementos</a></li>
+          <li><a href="loja.html#acessorios">Acessórios</a></li>
+          <li><a href="loja.html#roupas">Roupas</a></li>
+          <li><a href="loja.html#planos">Planos</a></li>
+          <li><a href="loja.html#ingressos">Ingressos</a></li>
+        </ul>
+      </section>
+      <section class="nav__group" aria-labelledby="nav-g3">
+        <h2 id="nav-g3">Participar</h2>
+        <ul role="list">
+          <li><a href="eventos.html">Eventos</a></li>
+          <li><a href="cadastro.html?tipo=matricula">Matrícula</a></li>
+        </ul>
+      </section>
+    </div>
+    <div class="nav__sheet-actions">
+      <button class="bar__cart" type="button" data-abrir-carrinho aria-label="Abrir carrinho"><svg class="nav__bag" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M5 8h14l-1.2 12H6.2L5 8zm4 0V6a3 3 0 0 1 6 0v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>Carrinho</span> <span class="bar__count" data-contador hidden>0</span></button>
+      <a class="btn nav__cta-big" href="cadastro.html?tipo=matricula">Matricule-se</a>
+    </div>
+  </div>
 </header>
 
-<main id="conteudo" class="ficha">
-  <figure class="ficha__pic">
-    <img data-ficha-img src="assets/img/atleta-rack.jpg" alt="Atleta com a camiseta da Elite Drako colocando uma anilha de 20 quilos no suporte" width="1050" height="1400">
+<main id="conteudo" class="mat" data-mat>
+  <figure class="mat__foto">
+    <img data-mat-img src="assets/img/tour/corredor.jpg" alt="Corredor de máquinas sob o neon branco e vermelho do teto da Elite Drako" width="1125" height="1500" fetchpriority="high">
+    <figcaption data-mat-legenda>O salão, aberto das 5h à meia-noite de segunda a sexta</figcaption>
   </figure>
 
-  <section class="ficha__main" aria-labelledby="ficha-title">
-    <h1 id="ficha-title" class="rise" data-ficha-titulo>Faça sua matrícula</h1>
-    <p class="ficha__lead rise" data-ficha-lead>Preencha em dois minutos. A equipe confirma pelo WhatsApp e você já pode treinar.</p>
+  <div class="mat__col">
+    <h1 class="rise" data-mat-titulo>Faça sua matrícula</h1>
+    <p class="mat__lead rise" data-mat-lead>Três passos, uns dois minutos. A equipe confirma pelo WhatsApp e você já combina o primeiro treino.</p>
 
-    <div class="tipos rise" role="radiogroup" aria-label="Tipo de cadastro" data-tipos>
-      <button type="button" role="radio" data-tipo="matricula" aria-checked="true">Matrícula</button>
-      <button type="button" role="radio" data-tipo="visita" aria-checked="false">Visita guiada</button>
-      <button type="button" role="radio" data-tipo="drako30" aria-checked="false">Drako 30</button>
+    <div class="mat__tipos rise" role="group" aria-label="O que você quer fazer" data-tipos>
+      <button type="button" data-tipo="matricula" aria-pressed="true">Matrícula</button>
+      <button type="button" data-tipo="visita" aria-pressed="false">Visita guiada</button>
+      <button type="button" data-tipo="drako30" aria-pressed="false">Drako 30</button>
     </div>
 
-    <form class="campos rise" data-form novalidate>
-      <div class="campo campo--2"><label for="c-nome">Nome completo</label><input id="c-nome" name="nome" autocomplete="name" required minlength="2"></div>
-      <div class="campo"><label for="c-fone">WhatsApp com DDD</label><input id="c-fone" name="telefone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="(75) 9 9999-9999"></div>
-      <div class="campo"><label for="c-email">E-mail <span>(opcional)</span></label><input id="c-email" name="email" type="email" autocomplete="email"></div>
+    <section class="mat__plano rise" aria-label="Resumo do que você está pedindo" data-plano aria-live="polite"></section>
 
-      <div class="campo" data-so="matricula"><label for="c-nasc">Data de nascimento</label><input id="c-nasc" name="nascimento" type="date"></div>
-      <div class="campo" data-so="matricula visita"><label for="c-obj">Objetivo</label>
-        <select id="c-obj" name="objetivo"><option value="">Escolha</option><option>Ganhar massa muscular</option><option>Emagrecer</option><option>Melhorar o condicionamento</option><option>Voltar a treinar</option><option>Saúde e qualidade de vida</option></select></div>
-      <div class="campo" data-so="matricula visita"><label for="c-turno">Turno em que vai treinar</label>
-        <select id="c-turno" name="turno"><option value="">Escolha</option><option>Madrugada (5h às 7h)</option><option>Manhã</option><option>Tarde</option><option>Noite</option><option>Fim de semana</option></select></div>
+    <section class="mat__caixa" aria-labelledby="passo-titulo" data-caixa>
+      <ol class="mat__passos" aria-label="Etapas do cadastro" data-passos>
+        <li><button type="button" data-ir="1" aria-current="step">Seus dados</button></li>
+        <li><button type="button" data-ir="2" disabled data-nome-passo2>Seu treino</button></li>
+        <li><button type="button" data-ir="3" disabled>Confirmação</button></li>
+      </ol>
+      <p class="mat__contagem visually-hidden" data-contagem aria-live="polite">Etapa 1 de 3</p>
 
-      <div class="campo" data-so="drako30"><label for="c-nivel">Seu nível</label>
-        <select id="c-nivel" name="nivel"><option value="">Escolha</option><option>Iniciante</option><option>Intermediário</option><option>Avançado</option></select></div>
-      <div class="campo" data-so="drako30"><label for="c-conv">Nome do convidado</label><input id="c-conv" name="convidado"></div>
-      <div class="campo" data-so="drako30"><label for="c-convfone">WhatsApp do convidado</label><input id="c-convfone" name="convidado_telefone" type="tel" inputmode="tel"></div>
+      <form class="mat__form" data-form novalidate>
+        <fieldset class="passo" data-passo="1">
+          <legend id="passo-titulo" class="passo__titulo" tabindex="-1">Seus dados</legend>
+          <div class="campos">
+            <div class="campo campo--2">
+              <label for="c-nome">Nome completo</label>
+              <input id="c-nome" name="nome" autocomplete="name" autocapitalize="words" required minlength="2" maxlength="120" aria-describedby="e-nome" enterkeyhint="next">
+              <p class="campo__erro" id="e-nome" data-erro-de="nome" hidden></p>
+            </div>
+            <div class="campo">
+              <label for="c-fone">WhatsApp com DDD</label>
+              <input id="c-fone" name="telefone" type="tel" inputmode="tel" autocomplete="tel-national" required maxlength="20" placeholder="(75) 9 9999-9999" aria-describedby="e-fone" enterkeyhint="next">
+              <p class="campo__erro" id="e-fone" data-erro-de="telefone" hidden></p>
+            </div>
+            <div class="campo">
+              <label for="c-email">E-mail <span>(opcional)</span></label>
+              <input id="c-email" name="email" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="160" aria-describedby="e-email" enterkeyhint="next">
+              <p class="campo__erro" id="e-email" data-erro-de="email" hidden></p>
+            </div>
+            <div class="campo" data-so="matricula">
+              <label for="c-nasc">Data de nascimento</label>
+              <input id="c-nasc" name="nascimento" type="date" autocomplete="bday" aria-describedby="e-nasc">
+              <p class="campo__erro" id="e-nasc" data-erro-de="nascimento" hidden></p>
+            </div>
+          </div>
+          <div class="passo__nav">
+            <button class="btn" type="button" data-avancar>Continuar</button>
+          </div>
+        </fieldset>
 
-      <div class="campo campo--2"><label for="c-obs">Algo que a equipe deve saber? <span>(opcional)</span></label><textarea id="c-obs" name="observacoes" rows="3" maxlength="1000" placeholder="Lesões, horários, dúvidas…"></textarea></div>
+        <fieldset class="passo" data-passo="2" hidden>
+          <legend class="passo__titulo" tabindex="-1" data-titulo-passo2>Seu treino</legend>
+          <div class="campos">
+            <div class="campo" data-so="matricula visita">
+              <label for="c-obj">Objetivo</label>
+              <select id="c-obj" name="objetivo" aria-describedby="e-obj">
+                <option value="">Escolha</option>
+                <option>Ganhar massa muscular</option>
+                <option>Emagrecer</option>
+                <option>Melhorar o condicionamento</option>
+                <option>Voltar a treinar</option>
+                <option>Saúde e qualidade de vida</option>
+              </select>
+              <p class="campo__erro" id="e-obj" data-erro-de="objetivo" hidden></p>
+            </div>
+            <div class="campo" data-so="matricula visita">
+              <label for="c-turno" data-label-turno>Turno em que vai treinar</label>
+              <select id="c-turno" name="turno" aria-describedby="e-turno">
+                <option value="">Escolha</option>
+                <option>Madrugada (5h às 7h)</option>
+                <option>Manhã</option>
+                <option>Tarde</option>
+                <option>Noite</option>
+                <option>Fim de semana</option>
+              </select>
+              <p class="campo__erro" id="e-turno" data-erro-de="turno" hidden></p>
+            </div>
+            <fieldset class="campo campo--2 nivel" aria-describedby="e-nivel">
+              <legend data-label-nivel>Seu nível de treino</legend>
+              <div class="nivel__ops">
+                <label><input type="radio" name="nivel" value="Iniciante"><span>Iniciante</span></label>
+                <label><input type="radio" name="nivel" value="Intermediário"><span>Intermediário</span></label>
+                <label><input type="radio" name="nivel" value="Avançado"><span>Avançado</span></label>
+              </div>
+              <p class="campo__erro" id="e-nivel" data-erro-de="nivel" hidden></p>
+            </fieldset>
+            <div class="campo" data-so="drako30">
+              <label for="c-conv">Nome do convidado</label>
+              <input id="c-conv" name="convidado" autocomplete="off" autocapitalize="words" maxlength="120" aria-describedby="e-conv">
+              <p class="campo__erro" id="e-conv" data-erro-de="convidado" hidden></p>
+            </div>
+            <div class="campo" data-so="drako30">
+              <label for="c-convfone">WhatsApp do convidado <span>(opcional)</span></label>
+              <input id="c-convfone" name="convidado_telefone" type="tel" inputmode="tel" autocomplete="off" maxlength="20" placeholder="(75) 9 9999-9999" aria-describedby="e-convfone">
+              <p class="campo__erro" id="e-convfone" data-erro-de="convidado_telefone" hidden></p>
+            </div>
+            <div class="campo campo--2">
+              <label for="c-obs">Algo que a equipe deve saber? <span>(opcional)</span></label>
+              <textarea id="c-obs" name="observacoes" rows="3" maxlength="1000" placeholder="Lesões, horários, dúvidas…" aria-describedby="e-obs"></textarea>
+              <p class="campo__erro" id="e-obs" data-erro-de="observacoes" hidden></p>
+            </div>
+          </div>
+          <div class="passo__nav">
+            <button class="btn btn--ghost" type="button" data-voltar>Voltar</button>
+            <button class="btn" type="button" data-avancar>Continuar</button>
+          </div>
+        </fieldset>
 
-      <label class="aceite campo--2"><input type="checkbox" name="aceite" required> <span>Autorizo a Elite Drako Gym a usar estes dados para entrar em contato comigo sobre este cadastro.</span></label>
+        <fieldset class="passo" data-passo="3" hidden>
+          <legend class="passo__titulo" tabindex="-1">Confira e envie</legend>
+          <dl class="resumo" data-resumo></dl>
+          <button class="resumo__editar" type="button" data-ir-editar="1">Corrigir meus dados</button>
+          <label class="aceite">
+            <input type="checkbox" name="aceite" required aria-describedby="e-aceite">
+            <span>Autorizo a Elite Drako Gym a usar estes dados para entrar em contato comigo sobre este cadastro.</span>
+          </label>
+          <p class="campo__erro" id="e-aceite" data-erro-de="aceite" hidden></p>
+          <p class="mat__falha" data-falha role="alert" hidden></p>
+          <div class="passo__nav">
+            <button class="btn btn--ghost" type="button" data-voltar>Voltar</button>
+            <button class="btn" type="submit" data-enviar>Enviar matrícula</button>
+          </div>
+        </fieldset>
+      </form>
 
-      <p class="campos__erro campo--2" data-erro role="alert" hidden></p>
-      <button class="btn btn--full campo--2" type="submit" data-enviar>Enviar matrícula</button>
-    </form>
+      <div class="pronto" data-pronto hidden tabindex="-1" aria-labelledby="pronto-titulo">
+        <h2 id="pronto-titulo" data-pronto-titulo>Cadastro recebido</h2>
+        <p class="pronto__txt" data-pronto-txt>A equipe vai falar com você pelo WhatsApp.</p>
+        <h3>Próximos passos</h3>
+        <ol class="pronto__passos" data-pronto-passos></ol>
+        <div class="pronto__acoes">
+          <button class="btn" type="button" data-confirmar>Confirmar pela conversa</button>
+          <button class="btn btn--ghost" type="button" data-novo>Fazer outro cadastro</button>
+        </div>
+      </div>
+    </section>
 
-    <div class="pronto" data-pronto hidden tabindex="-1">
-      <h2>Cadastro recebido</h2>
-      <p data-pronto-txt>A equipe vai falar com você pelo WhatsApp.</p>
-      <div class="pronto__acoes">
-        <button class="btn" type="button" data-confirmar>Confirmar pela conversa</button>
-        <a class="btn btn--ghost" href="./">Voltar ao início</a>
+    <div class="mat__info">
+      <div>
+        <h2>Horários</h2>
+        <p>Seg a sex · 5h às 0h</p>
+        <p>Sábado · 7h às 18h</p>
+        <p>Domingo · 8h às 15h</p>
+      </div>
+      <div>
+        <h2>Onde</h2>
+        <p data-endereco-curto>Rua Eraldo Lopes, Valente, Bahia</p>
+        <p><a href="./#como-chegar">Como chegar</a></p>
+      </div>
+      <div>
+        <h2>Seus dados</h2>
+        <p>Usados só pela equipe para responder este cadastro. Nada de lista de spam.</p>
       </div>
     </div>
-  </section>
+  </div>
 </main>
 
-<section class="espaco" aria-labelledby="espaco-title">
+<section class="espaco mat-espaco" aria-labelledby="espaco-title">
   <h2 id="espaco-title" class="reveal">O que te espera</h2>
-  <ul class="espaco__fotos" role="list">
-    <li class="reveal"><img src="assets/img/tour/salao.jpg" alt="Salão de musculação com neon branco e vermelho no teto" width="2000" height="1500" loading="lazy"><p>O salão, aberto das 5h à meia-noite</p></li>
-    <li class="reveal"><img src="assets/img/maquinas/f3560.jpg" alt="Máquina articulada vermelha no salão" width="1050" height="1400" loading="lazy"><p>Máquinas Rotha Fitness</p></li>
-    <li class="reveal"><img src="assets/img/tour/avaliacao.jpg" alt="Porta da sala de avaliação com placa em neon" width="1125" height="1500" loading="lazy"><p>Sala de avaliação</p></li>
-    <li class="reveal"><img src="assets/img/atendimento.jpg" alt="Cauã, da Elite Drako, de braços cruzados no salão entre as máquinas" width="1050" height="1400" loading="lazy"><p>Quem te recebe no salão</p></li>
+  <ul class="mat-espaco__fotos" role="list">
+    <li class="mat-espaco__item mat-espaco__item--grande reveal"><img src="assets/img/tour/salao.jpg" alt="Salão de musculação com o neon branco e vermelho em hexágonos no teto" width="2000" height="1500" loading="lazy"><p>O salão inteiro sob o neon, aberto das 5h à meia-noite</p></li>
+    <li class="mat-espaco__item reveal"><img src="assets/img/maquinas/f3560.jpg" alt="Máquina articulada vermelha da Rotha Fitness no salão" width="1050" height="1400" loading="lazy"><p>Máquinas Rotha Fitness</p></li>
+    <li class="mat-espaco__item reveal"><img src="assets/img/tour/halteres.jpg" alt="Halteres de 35 e 40 quilos com a marca Elite Drako no suporte" width="1125" height="1500" loading="lazy"><p>Halteres com a marca da casa</p></li>
+    <li class="mat-espaco__item reveal"><img src="assets/img/tour/avaliacao.jpg" alt="Porta da sala de avaliação com placa em neon" width="1125" height="1500" loading="lazy"><p>Sala de avaliação</p></li>
+    <li class="mat-espaco__item reveal"><img src="assets/img/estrutura/recepcao-equipe.jpg" alt="Equipe atendendo no balcão da recepção" width="1050" height="1400" loading="lazy"><p>A recepção que confirma seu cadastro</p></li>
   </ul>
 </section>
 
 <footer class="foot foot--min">
+  <div class="foot__cols foot__cols--nav">
+    <nav aria-label="Rodapé: o site">
+      <h3>Site</h3>
+      <a href="./">Início</a>
+      <a href="./#tour">Tour 3D</a>
+      <a href="./#estrutura">Estrutura</a>
+      <a href="maquinas.html">Máquinas</a>
+      <a href="eventos.html">Eventos</a>
+      <a href="historia.html">História</a>
+      <a href="./#como-chegar">Como chegar</a>
+      <a href="./#duvidas">Dúvidas</a>
+    </nav>
+    <nav aria-label="Rodapé: loja e matrícula">
+      <h3>Loja</h3>
+      <a href="loja.html">Toda a loja</a>
+      <a href="loja.html#suplementos">Suplementos</a>
+      <a href="loja.html#acessorios">Acessórios</a>
+      <a href="loja.html#roupas">Roupas</a>
+      <a href="loja.html#planos">Planos</a>
+      <a href="loja.html#ingressos">Ingressos</a>
+      <a href="cadastro.html?tipo=matricula">Matrícula</a>
+      <a href="cadastro.html?tipo=visita">Visita guiada</a>
+    </nav>
+    <div>
+      <h3>Horários</h3>
+      <p>Seg a sex · 5h às 0h</p>
+      <p>Sábado · 7h às 18h</p>
+      <p>Domingo · 8h às 15h</p>
+    </div>
+    <div>
+      <h3>Onde</h3>
+      <p data-endereco-curto>Valente, Bahia</p>
+      <p><a href="https://www.instagram.com/elite_drakogym/" target="_blank" rel="noopener">Instagram @elite_drakogym</a></p>
+    </div>
+  </div>
   <div class="foot__last">
     <p>© <span data-year>2026</span> Elite Drako Gym · <span data-endereco-curto>Valente, Bahia</span> · <a href="https://www.instagram.com/elite_drakogym/" target="_blank" rel="noopener">@elite_drakogym</a></p>
-    <a class="btn btn--sm" href="admin.html">Área da equipe</a>
+    <a class="btn btn--ghost btn--sm" href="admin.html">Área da equipe</a>
   </div>
 </footer>
 
@@ -102,81 +317,316 @@
 <script src="data/produtos.js"></script>
 <script src="assets/vendor/supabase.js"></script>
 <script src="site.js"></script>
+<script src="nav.js" defer></script>
 <script>
 (function () {
+  var D = window.Drako || {};
+  var brl = D.brl || function (v) { return "R$ " + v.toFixed(2).replace(".", ","); };
+  function prod(id) { return (window.DRAKO_PRODUTOS || []).filter(function (p) { return p.id === id; })[0]; }
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+
+  /* o que muda em cada tipo de cadastro; os campos obrigatórios seguem supabase/schema.sql (tabela cadastros) */
   var TIPOS = {
-    matricula: { titulo: "Faça sua matrícula", lead: "Preencha em dois minutos. A equipe confirma pelo WhatsApp e você já pode treinar.", botao: "Enviar matrícula", img: "assets/img/atleta-rack.jpg", alt: "Atleta com a camiseta da Elite Drako colocando uma anilha de 20 quilos no suporte" },
-    visita: { titulo: "Agende uma visita", lead: "Escolha o turno e alguém da equipe te mostra o salão e as máquinas, sem compromisso.", botao: "Agendar visita", img: "assets/img/tour/corredor.jpg", alt: "Corredor de máquinas sob o neon do salão" },
-    drako30: { titulo: "Lista do Drako 30", lead: "Desafio em dupla: você e um convidado. Entre na lista e seja avisado primeiro da próxima edição.", botao: "Entrar na lista", img: "assets/img/atleta-carga.jpg", alt: "Atleta carregando uma anilha de 20 quilos pelo salão" }
+    matricula: {
+      nome: "matrícula", titulo: "Faça sua matrícula",
+      lead: "Três passos, uns dois minutos. A equipe confirma pelo WhatsApp e você já combina o primeiro treino.",
+      botao: "Enviar matrícula", passo2: "Seu treino", turno: "Turno em que vai treinar",
+      img: "assets/img/tour/corredor.jpg", w: 1125, h: 1500,
+      alt: "Corredor de máquinas sob o neon branco e vermelho do teto da Elite Drako",
+      legenda: "O salão, aberto das 5h à meia-noite de segunda a sexta",
+      obrig: ["nome", "telefone", "nascimento"],
+      produto: "plano-mensal",
+      inclui: ["Musculação e cardio em todos os horários da casa", "Vestiário com armários", "Eventos para alunos, como o Drako 30"],
+      proximos: ["A equipe chama você no WhatsApp para confirmar os dados e o plano.", "Vocês combinam o dia e o horário do primeiro treino.", "Na recepção, você termina o cadastro e já entra no salão."]
+    },
+    visita: {
+      nome: "visita guiada", titulo: "Agende uma visita",
+      lead: "Diga o turno que prefere e alguém da equipe te mostra o salão e as máquinas, sem compromisso.",
+      botao: "Agendar visita", passo2: "Sua visita", turno: "Melhor turno para a visita",
+      img: "assets/img/tour/entrada.jpg", w: 1125, h: 1500, foco: "50% 6%",
+      alt: "Entrada da Elite Drako Gym com a fachada vermelha e as portas de vidro",
+      legenda: "A entrada da Elite Drako, na Rua Eraldo Lopes",
+      obrig: ["nome", "telefone", "turno"],
+      produto: null,
+      proximos: ["A equipe chama você no WhatsApp para marcar o dia.", "No turno escolhido, alguém te mostra o salão, as máquinas e o vestiário.", "Gostou? A matrícula pode ser feita ali mesmo, na recepção."]
+    },
+    drako30: {
+      nome: "lista do Drako 30", titulo: "Lista do Drako 30",
+      lead: "Desafio em dupla: você e um convidado. Entre na lista e seja avisado primeiro quando a próxima edição for marcada.",
+      botao: "Entrar na lista", passo2: "Sua dupla", turno: "Turno",
+      img: "assets/img/eventos/drako-30/03-podio-dupla.jpg", w: 1200, h: 1600, foco: "50% 18%",
+      alt: "Dupla sorrindo no pódio do Drako 30, com os números de inscrição no peito",
+      legenda: "Pódio da primeira edição do Drako 30",
+      obrig: ["nome", "telefone", "nivel", "convidado"],
+      produto: "drako30-ingresso",
+      proximos: ["Seu nome e o do convidado entram na lista.", "Quando a data sair, a equipe avisa vocês dois primeiro pelo WhatsApp.", "A inscrição da dupla é confirmada com a equipe."]
+    }
   };
+  var ROTULOS = { nome: "Nome", telefone: "WhatsApp", email: "E-mail", nascimento: "Nascimento", objetivo: "Objetivo", turno: "Turno", nivel: "Nível", convidado: "Convidado", convidado_telefone: "WhatsApp do convidado", observacoes: "Observações" };
+
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var form = $("[data-form]"), grupo = $("[data-tipos]"), pronto = $("[data-pronto]"), falha = $("[data-falha]");
+  var passos = $$("[data-passo]", form), atual = 1, alcancado = 1, tocados = {}, ultimo = "", enviando = false;
   var tipo = new URLSearchParams(location.search).get("tipo");
   if (!TIPOS[tipo]) tipo = "matricula";
-  var form = document.querySelector("[data-form]");
-  var erro = document.querySelector("[data-erro]");
-  var pronto = document.querySelector("[data-pronto]");
-  var ultimo = "";
 
-  function aplicar(t) {
-    tipo = t; var c = TIPOS[t];
-    document.querySelector("[data-ficha-titulo]").textContent = c.titulo;
-    document.querySelector("[data-ficha-lead]").textContent = c.lead;
-    document.querySelector("[data-enviar]").textContent = c.botao;
-    var img = document.querySelector("[data-ficha-img]"); img.src = c.img; img.alt = c.alt;
-    document.querySelectorAll("[data-tipo]").forEach(function (b) {
-      var on = b.dataset.tipo === t; b.setAttribute("aria-checked", String(on)); b.tabIndex = on ? 0 : -1;
-    });
-    document.querySelectorAll("[data-so]").forEach(function (el) {
-      var on = el.dataset.so.split(" ").indexOf(t) >= 0;
-      el.hidden = !on;
-      el.querySelectorAll("input,select").forEach(function (i) { i.disabled = !on; });
-    });
-    document.getElementById("c-nasc").required = t === "matricula";
-    document.getElementById("c-nivel").required = t === "drako30";
-    document.getElementById("c-conv").required = t === "drako30";
-    history.replaceState(null, "", "?tipo=" + t);
+  /* ---------- validação, mensagens em português ---------- */
+  function suave() { return matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"; }
+  function digitos(v) { return String(v || "").replace(/\D/g, ""); }
+  function valor(nome) {
+    var el = form.elements[nome];
+    if (!el) return "";
+    if (el.length && !el.tagName) { var m = $$('input[name="' + nome + '"]:checked', form)[0]; return m ? m.value : ""; }
+    if (el.type === "checkbox") return el.checked ? "sim" : "";
+    return el.value.trim();
   }
-  var grupo = document.querySelector("[data-tipos]");
-  grupo.addEventListener("click", function (e) { var b = e.target.closest("[data-tipo]"); if (b) aplicar(b.dataset.tipo); });
-  grupo.addEventListener("keydown", function (e) {
-    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
-    var ks = Object.keys(TIPOS), i = ks.indexOf(tipo);
-    i = (i + (e.key === "ArrowRight" ? 1 : ks.length - 1)) % ks.length;
-    aplicar(ks[i]); grupo.querySelector('[data-tipo="' + ks[i] + '"]').focus(); e.preventDefault();
-  });
-  aplicar(tipo);
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    erro.hidden = true;
-    var fone = form.telefone.value.replace(/\D/g, "");
-    if (!form.checkValidity() || fone.length < 10) {
-      var primeiro = Array.prototype.find.call(form.elements, function (el) { return !el.disabled && el.willValidate && !el.checkValidity(); });
-      erro.textContent = fone.length < 10 && !(primeiro && primeiro !== form.telefone)
-        ? "Confira o WhatsApp: precisa ter DDD e número, por exemplo (75) 9 9999-9999."
-        : "Falta preencher: " + (primeiro ? (form.querySelector('label[for="' + primeiro.id + '"]') || {}).textContent || "o aceite" : "um campo") + ".";
-      erro.hidden = false;
-      if (primeiro) primeiro.focus();
-      return;
+  function ativo(nome) {
+    var el = form.querySelector('[name="' + nome + '"]');
+    return !!el && !el.disabled;
+  }
+  function obrig(nome) { return TIPOS[tipo].obrig.indexOf(nome) >= 0; }
+  function erroDe(nome) {
+    var v = valor(nome);
+    switch (nome) {
+      case "nome":
+        if (!v) return "Escreva seu nome completo.";
+        if (v.length < 2) return "O nome precisa ter pelo menos 2 letras.";
+        if (v.indexOf(" ") < 0) return "Escreva nome e sobrenome, para a equipe te encontrar.";
+        return "";
+      case "telefone": case "convidado_telefone":
+        if (!v) return obrig(nome) ? "Informe o WhatsApp com DDD." : "";
+        var d = digitos(v).replace(/^55(?=\d{10,11}$)/, "");
+        if (d.length < 10 || d.length > 11) return "Confira o número: DDD + celular, por exemplo (75) 9 9999-9999.";
+        return "";
+      case "email":
+        if (!v) return "";
+        return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) ? "" : "Esse e-mail parece incompleto. Exemplo: nome@gmail.com";
+      case "nascimento":
+        if (!v) return obrig(nome) ? "Informe sua data de nascimento." : "";
+        var dt = new Date(v + "T12:00:00"), idade = (Date.now() - dt) / 31557600000;
+        if (isNaN(dt) || idade < 0) return "Essa data ainda não chegou. Confira o ano.";
+        if (idade < 10 || idade > 100) return "Confira o ano de nascimento.";
+        return "";
+      case "turno": return !v && obrig(nome) ? "Escolha o turno que fica melhor para você." : "";
+      case "objetivo": return !v && obrig(nome) ? "Escolha seu objetivo." : "";
+      case "nivel": return !v && obrig(nome) ? "Escolha o seu nível, para a equipe montar as baterias." : "";
+      case "convidado":
+        if (!v) return obrig(nome) ? "Escreva o nome de quem vai fazer dupla com você." : "";
+        return v.length < 2 ? "O nome precisa ter pelo menos 2 letras." : "";
+      case "aceite": return v ? "" : "Marque a autorização para a equipe poder responder.";
     }
-    var d = {}; Array.prototype.forEach.call(form.elements, function (el) {
-      if (el.name && !el.disabled && el.type !== "checkbox" && el.value.trim()) d[el.name] = el.value.trim();
+    return "";
+  }
+  function mostrar(nome, msg) {
+    var p = form.querySelector('[data-erro-de="' + nome + '"]');
+    $$('[name="' + nome + '"]', form).forEach(function (el) {
+      if (msg) el.setAttribute("aria-invalid", "true"); else el.removeAttribute("aria-invalid");
+    });
+    if (p) { p.textContent = msg; p.hidden = !msg; }
+    var caixa = form.querySelector('[name="' + nome + '"]');
+    caixa = caixa && caixa.closest(".campo, .aceite");
+    if (caixa) caixa.classList.toggle("is-erro", !!msg);
+  }
+  function nomesDoPasso(n) {
+    var vistos = {};
+    return $$("[name]", passos[n - 1]).map(function (el) { return el.name; })
+      .filter(function (nm) { if (vistos[nm] || !ativo(nm)) return false; vistos[nm] = 1; return true; });
+  }
+  function validarPasso(n, focar) {
+    var primeiro = null;
+    nomesDoPasso(n).forEach(function (nm) {
+      var msg = erroDe(nm); tocados[nm] = true; mostrar(nm, msg);
+      if (msg && !primeiro) primeiro = form.querySelector('[name="' + nm + '"]:not([disabled])');
+    });
+    if (primeiro && focar) { primeiro.focus(); if (primeiro.scrollIntoView) primeiro.scrollIntoView({ block: "center", behavior: suave() }); }
+    return !primeiro;
+  }
+
+  form.addEventListener("input", function (e) {
+    var el = e.target;
+    if (el.type === "tel") mascara(el);
+    if (tocados[el.name]) mostrar(el.name, erroDe(el.name));
+  });
+  form.addEventListener("change", function (e) { var nm = e.target.name; if (nm) { tocados[nm] = true; mostrar(nm, erroDe(nm)); } });
+  form.addEventListener("focusout", function (e) {
+    var el = e.target; if (!el.name || el.type === "radio" || el.type === "checkbox") return;
+    if (el.value.trim() || tocados[el.name]) { tocados[el.name] = true; mostrar(el.name, erroDe(el.name)); }
+  });
+
+  /* (75) 9 9999-9999 enquanto digita; não mexe se a pessoa apagar */
+  function mascara(el) {
+    var d = digitos(el.value);
+    if (/^55\d{11}$/.test(d)) d = d.slice(2);
+    d = d.slice(0, 11);
+    var s = d;
+    if (d.length > 2) s = "(" + d.slice(0, 2) + ") " + d.slice(2);
+    if (d.length === 11) s = "(" + d.slice(0, 2) + ") " + d[2] + " " + d.slice(3, 7) + "-" + d.slice(7);
+    else if (d.length === 10) s = "(" + d.slice(0, 2) + ") " + d.slice(2, 6) + "-" + d.slice(6);
+    if (el.value !== s && document.activeElement === el && el.selectionEnd === el.value.length) el.value = s;
+  }
+
+  /* ---------- etapas ---------- */
+  function irPara(n, focar) {
+    atual = n; alcancado = Math.max(alcancado, n);
+    passos.forEach(function (p, i) { p.hidden = i + 1 !== n; });
+    $$("[data-ir]").forEach(function (b) {
+      var k = Number(b.dataset.ir);
+      if (k === n) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current");
+      b.disabled = k > alcancado;
+      b.classList.toggle("is-feito", k < n);
+    });
+    $("[data-contagem]").textContent = "Etapa " + n + " de 3";
+    if (n === 3) resumir();
+    if (focar) {
+      var lg = $(".passo__titulo", passos[n - 1]);
+      lg.focus({ preventScroll: true });
+      var caixa = $("[data-caixa]"), top = caixa.getBoundingClientRect().top;
+      if (top < 0 || top > innerHeight * 0.6) caixa.scrollIntoView({ block: "start", behavior: suave() });
+    }
+  }
+  form.addEventListener("click", function (e) {
+    if (e.target.closest("[data-avancar]")) { if (validarPasso(atual, true)) irPara(atual + 1, true); }
+    else if (e.target.closest("[data-voltar]")) irPara(atual - 1, true);
+    else if (e.target.closest("[data-ir-editar]")) irPara(1, true);
+  });
+  $("[data-passos]").addEventListener("click", function (e) {
+    var b = e.target.closest("[data-ir]"); if (!b || b.disabled) return;
+    var k = Number(b.dataset.ir);
+    if (k > atual) { for (var i = atual; i < k; i++) if (!validarPasso(i, true)) { irPara(i, false); return; } }
+    irPara(k, true);
+  });
+  /* Enter num campo de texto avança a etapa em vez de enviar o formulário antes da hora */
+  form.addEventListener("keydown", function (e) {
+    if (e.key !== "Enter" || e.target.tagName === "TEXTAREA" || e.target.tagName === "BUTTON" || atual === 3) return;
+    e.preventDefault();
+    if (validarPasso(atual, true)) irPara(atual + 1, true);
+  });
+
+  function dados() {
+    var d = {};
+    $$("[name]", form).forEach(function (el) {
+      if (!el.name || el.disabled || el.name === "aceite" || d[el.name]) return;
+      var v = valor(el.name); if (v) d[el.name] = v;
     });
     d.tipo = tipo;
-    var btn = form.querySelector("[data-enviar]"); btn.disabled = true; btn.textContent = "Enviando…";
-    var nomes = { matricula: "matrícula", visita: "visita guiada", drako30: "lista do Drako 30" };
-    ultimo = "Olá, Elite Drako Gym! Fiz meu cadastro de " + nomes[tipo] + " pelo site.\nNome: " + d.nome + "\nWhatsApp: " + d.telefone +
+    return d;
+  }
+  function resumir() {
+    var d = dados();
+    $("[data-resumo]").innerHTML = '<div><dt>Pedido</dt><dd>' + esc(TIPOS[tipo].titulo) + "</dd></div>" +
+      Object.keys(ROTULOS).filter(function (k) { return d[k]; }).map(function (k) {
+        var v = k === "nascimento" ? d[k].split("-").reverse().join("/") : d[k];
+        return "<div><dt>" + ROTULOS[k] + "</dt><dd>" + esc(v) + "</dd></div>";
+      }).join("");
+  }
+
+  /* ---------- tipo de cadastro (botões com aria-pressed, ?tipo= no endereço) ---------- */
+  function plano(c) {
+    var el = $("[data-plano]"), p = c.produto && prod(c.produto), mensal = prod("plano-mensal");
+    if (tipo === "visita") {
+      el.innerHTML = '<div class="plano__topo"><h2>Visita guiada</h2><p class="plano__preco">Sem compromisso</p></div>' +
+        "<p>Você conhece o salão, as máquinas Rotha Fitness e o vestiário antes de decidir.</p>" +
+        (mensal ? '<p class="plano__nota">Se quiser ficar, o plano mensal é ' + brl(mensal.preco) + " " + esc(mensal.unidade) + (mensal.confirmar ? " (valor a confirmar com a equipe)" : "") + ".</p>" : "");
+      return;
+    }
+    if (!p) { el.hidden = true; return; }
+    el.hidden = false;
+    var inclui = c.inclui ? '<ul class="plano__lista" role="list">' + c.inclui.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" : "<p>" + esc(p.detalhes || "") + "</p>";
+    el.innerHTML = '<div class="plano__topo"><h2>' + esc(p.nome) + '</h2><p class="plano__preco">' +
+      (typeof p.preco === "number" ? brl(p.preco) + ' <span>' + esc(p.unidade || "") + "</span>" : "Valor a definir") + "</p></div>" +
+      "<p>" + esc(p.resumo) + "</p>" + inclui +
+      (p.confirmar ? '<p class="plano__nota">Valor e condições a confirmar com a equipe pelo WhatsApp.</p>' : '<p class="plano__nota">Pagamento combinado com a equipe na confirmação. <a href="loja.html#planos">Ver diária e avaliação</a></p>');
+  }
+  function aplicar(t, deClique) {
+    tipo = t; var c = TIPOS[t];
+    $("[data-mat-titulo]").textContent = c.titulo;
+    $("[data-mat-lead]").textContent = c.lead;
+    $("[data-enviar]").textContent = c.botao;
+    $("[data-nome-passo2]").textContent = c.passo2;
+    $("[data-titulo-passo2]").textContent = c.passo2;
+    $("[data-label-turno]").innerHTML = esc(c.turno) + (c.obrig.indexOf("turno") < 0 ? " <span>(opcional)</span>" : "");
+    $('label[for="c-obj"]').innerHTML = "Objetivo" + (c.obrig.indexOf("objetivo") < 0 ? " <span>(opcional)</span>" : "");
+    $("[data-label-nivel]").innerHTML = (t === "drako30" ? "Nível em que vai competir" : "Seu nível de treino") + (c.obrig.indexOf("nivel") < 0 ? " <span>(opcional)</span>" : "");
+    var img = $("[data-mat-img]");
+    if (img.getAttribute("src") !== c.img) { img.src = c.img; img.width = c.w; img.height = c.h; }
+    img.style.objectPosition = c.foco || ""; img.alt = c.alt; $("[data-mat-legenda]").textContent = c.legenda;
+    $$("[data-tipo]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.tipo === t)); });
+    $$("[data-so]").forEach(function (el) {
+      var on = el.dataset.so.split(" ").indexOf(t) >= 0;
+      el.hidden = !on;
+      $$("input,select,textarea", el).forEach(function (i) { i.disabled = !on; });
+    });
+    ["nome", "telefone", "nascimento", "turno", "objetivo", "convidado"].forEach(function (nm) {
+      var el = form.querySelector('[name="' + nm + '"]'); if (el) el.required = obrig(nm);
+    });
+    /* mensagens antigas de campos que mudaram de regra */
+    Object.keys(tocados).forEach(function (nm) { if (ativo(nm)) mostrar(nm, erroDe(nm)); else mostrar(nm, ""); });
+    plano(c);
+    if (atual === 3) resumir();
+    var u = new URL(location.href); u.searchParams.set("tipo", t);
+    if (deClique) history.replaceState(null, "", u.pathname + u.search + u.hash);
+  }
+  grupo.addEventListener("click", function (e) { var b = e.target.closest("[data-tipo]"); if (b) aplicar(b.dataset.tipo, true); });
+  window.addEventListener("popstate", function () {
+    var t = new URLSearchParams(location.search).get("tipo"); if (TIPOS[t] && t !== tipo) aplicar(t, false);
+  });
+
+  /* nome e WhatsApp já digitados neste aparelho (mesma chave usada pelo carrinho) */
+  try {
+    var salvo = JSON.parse(localStorage.getItem("drako-contato-v1")) || {};
+    if (salvo.nome && !form.nome.value) form.nome.value = salvo.nome;
+    if (salvo.telefone && !form.telefone.value) form.telefone.value = salvo.telefone;
+  } catch (e) {}
+
+  aplicar(tipo, false);
+  irPara(1, false);
+
+  /* ---------- envio ---------- */
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (enviando) return;
+    falha.hidden = true;
+    for (var i = 1; i <= 3; i++) {
+      if (!validarPasso(i, false)) {
+        if (i !== atual) irPara(i, false);
+        validarPasso(i, true);
+        return;
+      }
+    }
+    var d = dados();
+    var btn = $("[data-enviar]"); btn.disabled = true; btn.textContent = "Enviando…"; enviando = true;
+    try { localStorage.setItem("drako-contato-v1", JSON.stringify({ nome: d.nome, telefone: d.telefone })); } catch (err) {}
+    var c = TIPOS[tipo];
+    ultimo = "Olá, Elite Drako Gym! Fiz meu cadastro de " + c.nome + " pelo site.\nNome: " + d.nome + "\nWhatsApp: " + d.telefone +
       (d.objetivo ? "\nObjetivo: " + d.objetivo : "") + (d.turno ? "\nTurno: " + d.turno : "") +
       (d.nivel ? "\nNível: " + d.nivel : "") + (d.convidado ? "\nConvidado: " + d.convidado : "");
-    window.Drako.salvar("cadastros", d).then(function (r) {
-      form.hidden = true; grupo.hidden = true; pronto.hidden = false; pronto.focus();
-      document.querySelector("[data-pronto-txt]").textContent = r.salvo
-        ? "Seus dados já estão com a equipe. Para agilizar, confirme pela conversa."
-        : "Para concluir, envie a confirmação pela conversa: a mensagem já vai pronta.";
+    var salvar = D.salvar ? Promise.resolve(D.salvar("cadastros", d)).catch(function () { return { salvo: false }; }) : Promise.resolve({ salvo: false });
+    /* a stalled connection must not leave the button stuck on "Enviando…": after 8 s fall through to the chat confirmation */
+    var limite = new Promise(function (ok) { setTimeout(function () { ok({ salvo: false, motivo: "timeout" }); }, 8000); });
+    Promise.race([salvar, limite]).then(function (r) {
+      enviando = false; btn.disabled = false; btn.textContent = c.botao;
+      form.hidden = true; grupo.hidden = true; $("[data-passos]").hidden = true; $("[data-contagem]").hidden = true;
+      var primeiro = d.nome.split(" ")[0];
+      $("[data-pronto-titulo]").textContent = (tipo === "drako30" ? "Você está na lista, " : tipo === "visita" ? "Visita pedida, " : "Matrícula recebida, ") + primeiro;
+      $("[data-pronto-txt]").textContent = r.salvo
+        ? "Seus dados já estão com a equipe. Se quiser agilizar, mande a confirmação pela conversa."
+        : "Falta um toque: envie a confirmação pela conversa, a mensagem já vai pronta com seus dados.";
+      $("[data-pronto-passos]").innerHTML = c.proximos.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("");
+      pronto.hidden = false; pronto.focus({ preventScroll: true });
+      $("[data-caixa]").scrollIntoView({ block: "start", behavior: "auto" });
     });
   });
-  document.querySelector("[data-confirmar]").addEventListener("click", function () {
-    var copiou = window.Drako.abrirConversa(ultimo);
-    if (copiou) document.querySelector("[data-pronto-txt]").textContent = "Mensagem copiada. Cole no direct do Instagram que abriu e envie.";
+  $("[data-confirmar]").addEventListener("click", function () {
+    var copiou = D.abrirConversa && D.abrirConversa(ultimo);
+    if (copiou) $("[data-pronto-txt]").textContent = "Mensagem copiada. Cole no direct do Instagram que abriu e envie.";
+  });
+  $("[data-novo]").addEventListener("click", function () {
+    var nome = form.nome.value, fone = form.telefone.value;
+    form.reset(); form.nome.value = nome; form.telefone.value = fone;
+    tocados = {}; $$("[data-erro-de]").forEach(function (p) { mostrar(p.dataset.erroDe, ""); });
+    alcancado = 1; form.hidden = false; grupo.hidden = false; $("[data-passos]").hidden = false; $("[data-contagem]").hidden = false; pronto.hidden = true;
+    aplicar(tipo, false); irPara(1, true);
   });
 })();
 </script>

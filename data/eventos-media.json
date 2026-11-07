@@ -2,14 +2,39 @@
   "eventos": [
     {
       "id": "coffee-pink-drako",
-      "titulo": "Coffee Break Pink",
+      "titulo": "Coffee Pink",
       "data": "2026-10-24",
       "status": "realizado",
-      "resumo": "Coffee break do Outubro Rosa oferecido pela Elite Drako às alunas no dia 24 de outubro. Fotos e vídeos do evento serão publicados aqui assim que o material for liberado no Drive.",
+      "resumo": "Uma manhã especial para mulheres no Outubro Rosa: no sábado, 24 de outubro, a Elite Drako recebeu as alunas a partir das 7h30, com início às 8h. A programação teve café da manhã, aula de dança, sorteios, brindes e espaço para fotos, e o convite era vir de rosa.",
       "fotos": [],
       "videos": [],
-      "fonte_drive": [],
-      "confirmar": "Fotos/vídeos não encontrados no Drive (ver relatório). Confirmar horário, local e texto com a academia."
+      "fonte_drive": [
+        "1nH_52tRw8TcRD11IwiP7MqYi1vbMrPqi"
+      ],
+      "confirmar": "Fotos e vídeos do dia ainda não acessíveis: 14 vídeos IMG_2230–IMG_2265.MOV (Meu laptop > Downloads, 14–99 MB, salvos em 26/10) são os prováveis do evento, mas não têm link público e passam do limite de download (10 MB). Compartilhar por link ou subir as fotos. Confirmar se a arte de divulgação pode aparecer no site.",
+      "arte": {
+        "src": "assets/img/eventos/coffee-pink/00-arte-coffee-pink.jpg",
+        "alt": "Arte de divulgação do Coffee Pink: alunas alongando no salão, com o texto 24 de outubro, café da manhã, aula de dança, sorteios, brindes e espaço para fotos",
+        "w": 900,
+        "h": 1600,
+        "tipo": "divulgacao"
+      },
+      "candidatos_drive": [
+        "1klklkk6tyEoKLR8sEFotlmJTPFS_BTvq",
+        "1ahgcH3D9Xtw1Z30OlA9tGSQELkkDSVvO",
+        "1jx4VVD-2n-VFw-ExHVfYUVhbLz-Ut0vx",
+        "1I8FxY94tmoRyrUzdDbz3zEhIB_49vvtt",
+        "1Pb6WKWlVx9uhI129fmy8JzI38jEOcTfN",
+        "1mkXcnPy7oMB5CJmqU8vEp8UznWb6FTZi",
+        "1GFEMTHl7dDVdrVZinn4aO4bY9N8xfu1I",
+        "11ZjjKOhGCeUQnEtImGr9wHL19C1SEuAk",
+        "1eAkzP4Rsba11bDdp1C8Mry6E3Ad7C-6D",
+        "1F1EUTu0j_P3IBOQx0UzbAIIn8M2ssBQw",
+        "1E0Tjz2GJs2QHrDVRWT7UNnXHRHh1qAon",
+        "1ufcKw02vYR6FSkaHRm25QhaX1vl3bbyJ",
+        "1zLtNSGnMbhag9r9FCPZ5tkmHR0ltJDkz",
+        "1f7XDSipaqM-bushiGGtnS61CPPFT3elf"
+      ]
     },
     {
       "id": "drako-30",
@@ -18,13 +43,6 @@
       "status": "realizado",
       "resumo": "Manhã de desafios, sorteios e experiência na Elite Drako Gym, no domingo 30 de agosto, a partir das 8h30. Alunos e convidados participaram em duplas, com desafios separados por nível (iniciante, intermediário e avançado), agachamentos e prancha, e terminaram no pódio Drako 30. O sorteio teve três prêmios: um mês de consultoria online, um kit Drako e um mês de academia grátis.",
       "fotos": [
-        {
-          "src": "assets/img/eventos/drako-30/01-desafio-agachamento.jpg",
-          "alt": "Participantes de número no peito fazem o desafio de agachamento no salão, com a equipe contando as repetições",
-          "w": 1600,
-          "h": 1011,
-          "destaque": true
-        },
         {
           "src": "assets/img/eventos/drako-30/02-aquecimento-turma.jpg",
           "alt": "Turma de alunas reunida no salão sob o neon do teto durante a manhã do Drako 30",
@@ -54,16 +72,16 @@
           "destaque": false
         },
         {
+          "src": "assets/img/eventos/drako-30/01-desafio-agachamento.jpg",
+          "alt": "Participantes de número no peito fazem o desafio de agachamento no salão, com a equipe contando as repetições",
+          "w": 1600,
+          "h": 1011,
+          "destaque": true
+        },
+        {
           "src": "assets/img/eventos/drako-30/06-equipe-recepcao.jpg",
           "alt": "Três integrantes da equipe Elite Drako posam juntas diante do pódio do evento",
           "w": 1395,
-          "h": 1600,
-          "destaque": false
-        },
-        {
-          "src": "assets/img/eventos/drako-30/07-equipe-drako.jpg",
-          "alt": "Equipe de professores da Elite Drako reunida no pódio Drako 30",
-          "w": 963,
           "h": 1600,
           "destaque": false
         },
@@ -103,7 +121,8 @@
         "1Zvq5EPaDcvhuAg7itghl97NEY7oTSsAs",
         "1lKCGHGe1Ew61anjDHNb_LgvOUN2JADsg",
         "1NoyEh3TzjvG0Ewr5pgU40z7tN98Axgct"
-      ]
+      ],
+      "confirmar_fotos": "Foto 07-equipe-drako.jpg (equipe: 3 homens e 1 mulher no pódio) retirada da galeria por parecer com a foto dos 3 homens que não pode aparecer; o arquivo está em raw/eventos/drako30/removido/. Se o cliente liberar, devolver ao array fotos e à pasta assets/img/eventos/drako-30/."
     },
     {
       "id": "novembro-azul",
