@@ -200,3 +200,11 @@
   var y = document.querySelector("[data-year]");
   if (y) y.textContent = new Date().getFullYear();
 })();
+
+/* copiar coordenadas GPS */
+document.addEventListener("click", function (e) {
+  var b = e.target.closest("[data-copiar]"); if (!b) return;
+  var txt = b.dataset.copiar, ok = function () { b.textContent = "Copiado"; setTimeout(function () { b.textContent = "Copiar"; }, 1800); };
+  try { navigator.clipboard.writeText(txt).then(ok, function () { sel(); }); } catch (err) { sel(); }
+  function sel() { var s = document.querySelector("[data-gps]"); if (s) { var r = document.createRange(); r.selectNodeContents(s); var w = getSelection(); w.removeAllRanges(); w.addRange(r); } }
+});

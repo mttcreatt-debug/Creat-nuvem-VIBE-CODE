@@ -320,6 +320,134 @@ function initGiro() {
   }).observe(stage);
 }
 
+
+/* ============================================================ COMO CHEGAR: mapa 3D de Valente */
+function initMapa() {
+  const stage = document.querySelector("[data-mapa]");
+  if (!stage) return;
+  const canvas = stage.querySelector("canvas");
+  const labelsEl = stage.querySelector("[data-mapa-labels]");
+  if (!webglOK()) { stage.classList.add("mapa--static"); return; }
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true }); } catch (e) { stage.classList.add("mapa--static"); return; }
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(0x070707, 1);
+  const scene = new THREE.Scene();
+  scene.fog = new THREE.Fog(0x070707, 900, 2600);
+  const camera = new THREE.PerspectiveCamera(42, 1, 1, 6000);
+
+  fetch(stage.dataset.mapa).then((r) => r.json()).then((d) => {
+    stage.classList.add("mapa--3d");
+    const S = 1; // metres → units
+    const col = { primary: 0x9a9a9a, secondary: 0x8a8a8a, tertiary: 0x7a7a7a, residential: 0x5c5c5c, unclassified: 0x4a4a4a };
+    const groups = {};
+    d.roads.forEach((r) => {
+      const c = col[r.k] || 0x353535;
+      const arr = groups[c] || (groups[c] = []);
+      for (let i = 0; i < r.p.length - 1; i++) arr.push(r.p[i][0] * S, 0, r.p[i][1] * S, r.p[i + 1][0] * S, 0, r.p[i + 1][1] * S);
+    });
+    Object.keys(groups).forEach((c) => {
+      const g = new THREE.BufferGeometry();
+      g.setAttribute("position", new THREE.Float32BufferAttribute(groups[c], 3));
+      scene.add(new THREE.LineSegments(g, new THREE.LineBasicMaterial({ color: Number(c) })));
+    });
+    // ground grid feel
+    const ground = new THREE.Mesh(new THREE.PlaneGeometry(5000, 5000), new THREE.MeshBasicMaterial({ color: 0x0b0b0b }));
+    ground.rotation.x = -Math.PI / 2; ground.position.y = -1; scene.add(ground);
+
+    // route as a glowing tube that draws itself
+    const rp = d.rotas[0].r.p.map((p) => new THREE.Vector3(p[0] * S, 2, p[1] * S));
+    const path = new THREE.CurvePath();
+    for (let i = 0; i < rp.length - 1; i++) path.add(new THREE.LineCurve3(rp[i], rp[i + 1]));
+    const tube = new THREE.TubeGeometry(path, Math.max(64, rp.length * 6), 3.2, 6, false);
+    const routeMat = new THREE.MeshBasicMaterial({ color: RED.clone().multiplyScalar(2.2), toneMapped: false });
+    const route = new THREE.Mesh(tube, routeMat);
+    scene.add(route);
+    const totalIdx = tube.index.count;
+    tube.setDrawRange(0, 0);
+
+    // target: the gym street, with a hex beacon at its centre
+    const [tx, tz] = d.alvo.c;
+    const beacon = new THREE.Group(); beacon.position.set(tx, 0, tz); scene.add(beacon);
+    const hex = hexTube(70, 40, 12, 2.2, RED, 2.6); hex.rotation.x = -Math.PI / 2; hex.position.y = 3; beacon.add(hex);
+    const hex2 = hexTube(110, 62, 18, 1.4, new THREE.Color(0xffffff), 1.2); hex2.rotation.x = -Math.PI / 2; hex2.position.y = 3; beacon.add(hex2);
+    const beam = new THREE.Mesh(new THREE.CylinderGeometry(2.5, 2.5, 180, 12, 1, true), new THREE.MeshBasicMaterial({ color: RED.clone().multiplyScalar(2), transparent: true, opacity: 0.55, toneMapped: false }));
+    beam.position.y = 90; beacon.add(beam);
+
+    // the whole gym street, in white
+    (d.alvo.rua || []).forEach((seg) => {
+      const pts = seg.map((p) => new THREE.Vector3(p[0] * S, 2.5, p[1] * S));
+      const cp = new THREE.CurvePath();
+      for (let i = 0; i < pts.length - 1; i++) cp.add(new THREE.LineCurve3(pts[i], pts[i + 1]));
+      scene.add(new THREE.Mesh(new THREE.TubeGeometry(cp, pts.length * 4, 4.2, 6, false), new THREE.MeshBasicMaterial({ color: 0xffffff })));
+    });
+
+    // labels for landmarks and the start/end
+    const marks = d.pois.map((p, i) => ({ n: i === 0 ? "Partida · " + p.n : p.n, v: new THREE.Vector3(p.p[0] * S, 6, p.p[1] * S), cls: i === 0 ? "is-inicio" : "" }));
+    marks.push({ n: "Elite Drako Gym · Rua Eraldo Lopes", v: new THREE.Vector3(tx, 120, tz), cls: "is-alvo" });
+    labelsEl.innerHTML = marks.map((m) => '<span class="mapa__lbl ' + m.cls + '">' + m.n + "</span>").join("");
+    const lblEls = Array.from(labelsEl.children);
+
+    const centre = new THREE.Vector3(tx / 2, 0, tz / 2);
+    function resize() {
+      const r = canvas.getBoundingClientRect();
+      renderer.setSize(Math.max(1, r.width), Math.max(1, r.height), false);
+      camera.aspect = r.width / Math.max(1, r.height); camera.updateProjectionMatrix();
+    }
+    resize(); window.addEventListener("resize", resize);
+
+    let ang = -0.6, drag = false, lx = 0, vel = 0, t0 = 0, started = false;
+    canvas.addEventListener("pointerdown", (e) => { drag = true; lx = e.clientX; canvas.setPointerCapture(e.pointerId); });
+    canvas.addEventListener("pointermove", (e) => { if (drag) { vel = (e.clientX - lx) * 0.004; lx = e.clientX; } });
+    const end = () => { drag = false; };
+    canvas.addEventListener("pointerup", end); canvas.addEventListener("pointercancel", end);
+    stage.querySelector("[data-mapa-replay]").addEventListener("click", () => { t0 = performance.now(); });
+
+    let raf = 0, on = false;
+    const v = new THREE.Vector3();
+    function frame(now) {
+      raf = requestAnimationFrame(frame);
+      if (!t0) t0 = now;
+      const k = reduce ? 1 : Math.min(1, (now - t0) / 4200);
+      tube.setDrawRange(0, Math.floor(totalIdx * k / 3) * 3);
+      if (!drag) { vel *= 0.94; if (!reduce) ang += 0.0007; }
+      ang += vel;
+      const narrow = camera.aspect < 0.9;
+      const R = narrow ? 1150 : 1050, H = narrow ? 980 : 760;
+      camera.position.set(centre.x + Math.cos(ang) * R, H, centre.z + Math.sin(ang) * R);
+      camera.lookAt(centre);
+      const pulse = 1 + Math.sin(now / 380) * 0.08;
+      hex.scale.setScalar(pulse); hex2.scale.setScalar(2 - pulse);
+      renderer.render(scene, camera);
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      const pos = marks.map((m, i) => {
+        v.copy(m.v).project(camera);
+        return { i, hide: v.z > 1, x: (v.x * 0.5 + 0.5) * w, y: (-v.y * 0.5 + 0.5) * h };
+      });
+      // keep labels from piling on each other: push the later one down
+      const vis = pos.filter((p) => !p.hide).sort((a, b) => a.y - b.y);
+      for (let a = 0; a < vis.length; a++) for (let b = 0; b < a; b++) {
+        const A = vis[a], B = vis[b], wa = lblEls[A.i].offsetWidth, wb = lblEls[B.i].offsetWidth;
+        if (Math.abs(A.x - B.x) < (wa + wb) / 2 && Math.abs(A.y - B.y) < 26) A.y = B.y + 26;
+      }
+      pos.forEach((p) => {
+        const el = lblEls[p.i];
+        if (p.hide) { el.style.opacity = 0; return; }
+        el.style.opacity = 1;
+        const hw = el.offsetWidth / 2 + 6;
+        p.x = Math.min(w - hw, Math.max(hw, p.x));
+        el.style.transform = "translate(" + p.x.toFixed(1) + "px," + p.y.toFixed(1) + "px) translate(-50%,-120%)";
+      });
+    }
+    new IntersectionObserver((en) => {
+      en.forEach((x) => {
+        if (x.isIntersecting && !on) { on = true; if (!started) { started = true; t0 = 0; } raf = requestAnimationFrame(frame); }
+        else if (!x.isIntersecting && on) { on = false; cancelAnimationFrame(raf); }
+      });
+    }, { threshold: 0.25 }).observe(stage);
+  }).catch(() => stage.classList.add("mapa--static"));
+}
+
 /* ============================================================ ANILHA */
 function initAnilha() {
   const canvas = document.querySelector("[data-anilha-canvas]");
@@ -450,3 +578,4 @@ function initAnilha() {
 initTour();
 initAnilha();
 initGiro();
+initMapa();

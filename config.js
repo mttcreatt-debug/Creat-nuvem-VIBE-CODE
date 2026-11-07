@@ -11,7 +11,7 @@ window.DRAKO_CONFIG = {
   instagram: "elite_drakogym",
 
   // Endereço completo (aparece no rodapé, na página de cadastro e no mapa).
-  endereco: "Valente, Bahia",
+  endereco: "Rua Eraldo Lopes, Valente, Bahia",
 
   // Supabase: crie o projeto em supabase.com, rode o arquivo supabase/schema.sql
   // no SQL Editor e cole aqui a URL e a chave "anon public" (Settings → API).
