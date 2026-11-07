@@ -50,7 +50,19 @@
     var c = supa();
     if (!c) return Promise.resolve({ salvo: false, motivo: "sem-supabase" });
     return c.from(tabela).insert(linha).then(function (r) {
-      return r.error ? { salvo: false, motivo: r.error.message } : { salvo: true };
+      if (!r.error) return { salvo: true };
+      // Banco com schema antigo, que ainda não aceita os tipos novos ("novembro-azul", "interesse"):
+      // grava como "visita" e anota o tipo real nas observações, para nenhum cadastro se perder.
+      var antigo = tabela === "cadastros" && linha.tipo && ["matricula", "visita", "drako30"].indexOf(linha.tipo) < 0 &&
+        (r.error.code === "23514" || /check/i.test(r.error.message || ""));
+      if (!antigo) return { salvo: false, motivo: r.error.message };
+      var copia = {};
+      for (var k in linha) copia[k] = linha[k];
+      copia.tipo = "visita";
+      copia.observacoes = ("[" + linha.tipo + "] " + (linha.observacoes || "")).trim().slice(0, 1000);
+      return c.from(tabela).insert(copia).then(function (r2) {
+        return r2.error ? { salvo: false, motivo: r2.error.message } : { salvo: true };
+      });
     }, function (e) { return { salvo: false, motivo: String(e) }; });
   }
 
